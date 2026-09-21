@@ -1,0 +1,146 @@
+@import './variables.css';
+
+/* ---------- Configs Gerais ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', Arial, sans-serif;
+  background: linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2));
+  color: var(--cor-texto-simples);
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+h1 {
+  font-size: var(--tamanho-fonte-1);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.logo-marca {
+  width: 112px;
+  height: auto;
+  margin: 0 -30px -12px -33px;
+}
+
+.logo-texto {
+  font-size: 1.50rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--cor-texto-simples);
+}
+
+/* ---------- Formulário ---------- */
+.formulario {
+  width: 100%;
+  max-width: 400px;
+  background: #f3f3f0;
+  border: 1px solid #d6d6f5;
+  border-radius: 24px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--sombra-1);
+}
+
+/* ---------- Inputs ---------- */
+input {
+  width: 100%;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  border: 1.5px solid var(--cor-tracado-1);
+  border-radius: 999px;
+  font-size: 1rem;
+  outline: none;
+  background: var(--cor-fundo-3);
+  box-shadow: var(--sombra-1);
+}
+
+::placeholder {
+    color: var(--cor-texto-suave);
+    font-size: var(--tamanho-fonte-3);
+}
+
+input:focus {
+    border-color:  var(--cor-escura-1);
+}
+
+.input-name {
+    display: block;
+    margin: 0 0 6px 18px;   
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--cor-escura-1);
+}
+
+/* ---------- Botões ---------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 28px;
+  font-family: var(--fonte-principal);
+  font-weight: 700;
+  font-size: var(--tamanho-fonte-3);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+
+/* ---------- Botão primário ---------- */
+.botao-primario {
+  background: var(--cor-escura-1);
+  color: var(--cor-fundo-1);
+  box-shadow: var(--sombra-1);
+}
+
+.botao-primario:hover{
+  background: linear-gradient(to bottom, var(--cor-escura-1), var(--cor-escura-2));
+}
+
+.botao-primario:active{
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Botão link ---------- */
+.botao-link {
+  background: none;
+  padding: 0;
+  color: var(--cor-escura-1);
+}
+
+.botao-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Linha de ações do formulário ---------- */
+.acoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
