@@ -1,16 +1,9 @@
-import { useState } from 'react'
-import '../../../styles/global.css'
-
 function Home() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <> 
-        <div className="proximos-eventos-container">
-
+    return (
+        <div className='container'>
+            <h1>Próximos eventos</h1>
         </div>
-    </>
-  )
+    )
 }
 
 export default Home
