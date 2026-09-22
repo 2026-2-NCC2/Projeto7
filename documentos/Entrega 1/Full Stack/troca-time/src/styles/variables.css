@@ -1,0 +1,28 @@
+:root {
+  --cor-tracado-1: #BBC0FF;
+  --cor-tracado-2: #D6D6F5;
+  --cor-erro: #D64545;
+  --cor-escura-1: #113BBB;
+  --cor-escura-2: #280699;
+  --cor-fundo-1: #FEFFF8;
+  --cor-fundo-2: #f3f5e4;
+  --cor-fundo-3: #F9F9F9;
+  --cor-fundo-4: #F3F3F0;
+  --cor-texto-simples: #1a1a1a;
+  --cor-texto-suave: #a2a2ad;
+
+  --cor-status-pendente: #FA8905;
+  --cor-status-aprovado: #1F9D55;
+  --cor-status-recusado: #D64545;
+
+  --fonte-principal: 'Space Grotesk', Arial, sans-serif;
+  --tamanho-fonte-1: 4rem;
+  --tamanho-fonte-2: 2rem;
+  --tamanho-fonte-3: 1rem;
+  --tamanho-fonte-4: 0.9rem;
+  --tamanho-fonte-5: 1.5rem;
+  --tamanho-fonte-6: 1.25rem;
+
+  --sombra-1: 0 4px 4px rgba(0, 0, 0, 0.25);
+  --sombra-2: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
