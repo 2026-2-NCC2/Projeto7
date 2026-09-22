@@ -52,6 +52,14 @@ h1 {
   margin-bottom: 12px;
 }
 
+.texto-input-mensagem-erro {
+    font-size: var(--tamanho-fonte-4);
+    text-align: center;
+    padding: 15px 24px;
+    color: var(--cor-erro);
+    padding-top: 5px;
+}
+
 /* ---------- Logo ---------- */
 .logo {
   display: flex;
@@ -97,7 +105,7 @@ h1 {
 input {
   width: 100%;
   padding: 12px 18px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   border: 1.5px solid var(--cor-tracado-1);
   border-radius: 999px;
   font-family: var(--fonte-principal);
@@ -116,12 +124,20 @@ input:focus {
   border-color: var(--cor-escura-1);
 }
 
+.input-campo {
+    margin-bottom: 20px;
+}
+
 .input-name {
   display: block;
   margin: 0 0 6px 18px;
   font-weight: bold;
   font-size: var(--tamanho-fonte-3);
   color: var(--cor-escura-1);
+}
+
+.input-invalido {
+    border: 1.5px solid var(--cor-erro);
 }
 
 /* ---------- Opções ---------- */
