@@ -1,0 +1,430 @@
+/* =========================================================
+   PERFIL DO ORGANIZADOR (visão do ADM)
+   Todas as classes começam com "org-" para não conflitar
+   com o global.css
+========================================================= */
+.org-pagina {
+    --org-creme: #FCFDE9;
+    --org-rosa: #F0D9EA;
+    --org-lima: var(--cor-clara-verde, #C9E338);
+    --org-lima-claro: #DCEA8F;
+    --org-vinho: var(--cor-escura-vinho, #4A1830);
+    --org-azul: var(--cor-escura-azul, #113BBB);
+    --org-cartao: var(--cor-clara, #FEFFF3);
+    --org-texto: #1a1a1a;
+    --org-texto-suave: #55555c;
+
+    width: min(960px, calc(100% - 48px));
+    margin: 0 auto 140px;
+    color: var(--org-texto);
+}
+
+.org-pagina button:focus-visible,
+.org-pagina a:focus-visible {
+    outline: 2px solid var(--org-azul);
+    outline-offset: 2px;
+}
+
+/* ---------- Botões ---------- */
+.org-botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.1s, filter 0.15s;
+}
+
+.org-botao:hover:not(:disabled) {
+    filter: brightness(0.95);
+}
+
+.org-botao:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.org-botao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.org-botao-lima {
+    background: var(--org-lima);
+    color: var(--org-texto);
+}
+
+.org-botao-vinho {
+    background: var(--org-vinho);
+    color: #fff;
+}
+
+.org-botao-contorno {
+    background: transparent;
+    color: var(--org-texto);
+    border: 1px solid var(--org-texto);
+}
+
+.org-seta {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--org-vinho);
+    background: transparent;
+    color: var(--org-vinho);
+    cursor: pointer;
+}
+
+.org-seta:hover {
+    background: rgba(74, 24, 48, 0.08);
+}
+
+.org-seta-pequena {
+    width: 32px;
+    height: 32px;
+    margin: 12px auto 0;
+    border-color: var(--org-azul);
+    color: var(--org-azul);
+}
+
+/* ---------- Estados ---------- */
+.org-estado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 60px 20px;
+    color: var(--org-texto-suave);
+}
+
+.org-estado-erro {
+    color: var(--cor-erro, #D64545);
+}
+
+.org-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ddd;
+    border-top-color: var(--org-texto);
+    border-radius: 50%;
+    animation: org-girar 0.8s linear infinite;
+}
+
+@keyframes org-girar {
+    to { transform: rotate(360deg); }
+}
+
+.org-vazio {
+    font-size: 0.85rem;
+    color: var(--org-texto-suave);
+    padding: 16px 4px;
+}
+
+/* ---------- Dados do organizador ---------- */
+.org-dados {
+    background: var(--org-creme);
+    border-radius: 20px;
+    padding: 20px 28px 32px;
+    margin-bottom: 28px;
+}
+
+.org-nome {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: left;
+    margin: 0 0 20px;
+}
+
+.org-dados-corpo {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.org-foto {
+    flex: none;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #D0D0D0;
+    overflow: hidden;
+}
+
+.org-foto svg {
+    width: 100%;
+    height: 100%;
+    fill: #9A9A9A;
+}
+
+.org-info {
+    display: grid;
+    gap: 6px;
+    font-size: 0.85rem;
+    max-width: 62ch;
+}
+
+.org-info div {
+    display: flex;
+    gap: 6px;
+}
+
+.org-info dt {
+    font-weight: 600;
+}
+
+.org-descricao {
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.org-descricao dd {
+    line-height: 1.5;
+    color: var(--org-texto-suave);
+}
+
+/* ---------- Próximos eventos ---------- */
+.org-eventos {
+    background: var(--org-rosa);
+    border-radius: 28px;
+    padding: 18px 24px 26px;
+    margin-bottom: 28px;
+}
+
+.org-selo {
+    display: inline-block;
+    background: var(--org-vinho);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 26px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+}
+
+.org-carrossel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.org-carrossel-trilho {
+    flex: 1;
+    min-width: 0;
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - 32px) / 3);
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.org-carrossel-trilho::-webkit-scrollbar {
+    display: none;
+}
+
+.org-evento {
+    scroll-snap-align: start;
+    background: var(--org-cartao);
+    border-radius: 18px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.org-evento h3 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.org-evento p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.org-evento .org-botao {
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 7px 18px;
+    font-size: 0.75rem;
+}
+
+.org-evento p:last-of-type {
+    margin-bottom: 10px;
+}
+
+/* ---------- Avaliações e status ---------- */
+.org-rodape {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.org-avaliacoes {
+    background: var(--org-lima-claro);
+    border-radius: 16px;
+    padding: 12px 18px 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.org-avaliacoes h2 {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.org-avaliacoes ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.org-avaliacao {
+    background: var(--org-cartao);
+    border-radius: 16px;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    display: grid;
+    gap: 4px;
+}
+
+.org-avaliacao-nome {
+    font-weight: 700;
+}
+
+.org-estrelas {
+    letter-spacing: 2px;
+    color: #CFCFC4;
+}
+
+.org-estrelas .cheia {
+    color: #F2A900;
+}
+
+.org-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding-top: 10px;
+}
+
+.org-status h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.org-status .org-botao {
+    width: min(100%, 240px);
+}
+
+.org-status-atual {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.org-status-selo {
+    padding: 6px 20px;
+    border-radius: 999px;
+    color: #fff;
+    font-size: 0.85rem;
+}
+
+.org-status-aprovado  { background: var(--org-azul); }
+.org-status-pendente  { background: var(--cor-status-pendente, #FA8905); }
+.org-status-rejeitado { background: var(--cor-erro, #D64545); }
+
+.org-mensagem {
+    font-size: 0.85rem;
+    min-height: 1.2em;
+}
+
+/* ---------- Modal ---------- */
+.org-modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.org-modal {
+    width: min(380px, 100%);
+    background: #fff;
+    border-radius: 18px;
+    padding: 26px;
+    display: grid;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.org-modal h2 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.org-modal .org-botao {
+    margin-top: 12px;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 820px) {
+    .org-carrossel-trilho {
+        grid-auto-columns: calc((100% - 16px) / 2);
+    }
+
+    .org-rodape {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 560px) {
+    .org-pagina {
+        width: min(100% - 30px, 560px);
+    }
+
+    .org-dados {
+        padding: 18px 18px 24px;
+    }
+
+    .org-dados-corpo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .org-foto {
+        width: 84px;
+        height: 84px;
+    }
+
+    .org-eventos {
+        padding: 16px;
+    }
+
+    .org-carrossel-trilho {
+        grid-auto-columns: 85%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .org-spinner { animation-duration: 2s; }
+}

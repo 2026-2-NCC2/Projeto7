@@ -7,8 +7,8 @@ import DetalheEvento from './pages/adm/eventos/DetalheEvento.jsx'
 import Evento from './pages/adm/eventos/Evento.jsx'
 import PaginaVazia from './pages/adm/eventos/PaginaVazia.jsx'
 import Home from './pages/adm/Home/index.jsx'
-import AdmHome from './pages/adm/Home/index.jsx' 
-
+import PerfilOrganizador from './pages/adm/organizadores/PerfilOrganizador.jsx'
+import AdmHome from './pages/adm/Home/index.jsx'
 import Login from './pages/auth/Login'
 import CadastroFormulario from './pages/auth/Cadastro/CadastroFormulario'
 import CadastroAgradecimento from './pages/auth/Cadastro/CadastroAgradecimento'
@@ -37,6 +37,7 @@ export default function App() {
           <Route path="/eventos/:id" element={<DetalheEvento />} />
           <Route path="/fornecedores" element={<PaginaVazia titulo="Fornecedores" />} />
           <Route path="/organizadores" element={<PaginaVazia titulo="Organizadores" />} />
+            <Route path="/organizadores/:id" element={<PerfilOrganizador />} />
           <Route path="/perfil" element={<PaginaVazia titulo="Perfil" />} />
           <Route path="/adm" element={<AdmHome />} />
         </Route>
