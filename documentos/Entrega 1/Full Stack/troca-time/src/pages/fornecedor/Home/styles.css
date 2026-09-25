@@ -6,7 +6,7 @@
   }
   
   .tt-app {
-    --bg-page: #f7f4ec;
+    --bg-page: #FEFFF3;
     --color-text: #1a1a1a;
     --color-text-soft: #4a4a4a;
   
@@ -29,7 +29,6 @@
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg-page);
     color: var(--color-text);
-    border: 3px solid #2f6fed;
     min-height: 100vh;
     position: relative;
   }
@@ -37,7 +36,7 @@
   /* =========================================================
      HEADER
   ========================================================= */
-  .tt-header {
+  /*.tt-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -116,7 +115,7 @@
 
 .tt-dropdown button:hover {
   background: #f2f2f2;
-}
+}*/
 
 /* =========================================================
     PAGE / GREETING
@@ -427,7 +426,7 @@
 /* =========================================================
     SIDE PANELS (chat / IA)
 ========================================================= */
-.tt-panel {
+/*.tt-panel {
   position: fixed;
   bottom: 80px;
   width: 300px;
@@ -462,17 +461,17 @@
   padding: 18px;
   font-size: 13px;
   color: var(--color-text-soft);
-}
+}*/
 
 /* =========================================================
     RESPONSIVE
 ========================================================= */
 @media (max-width: 900px) {
-  .tt-header {
+  /*.tt-header {
     flex-wrap: wrap;
     gap: 12px;
     padding: 18px 20px;
-  }
+  }*/
 
   .tt-page {
     padding: 10px 20px 140px;

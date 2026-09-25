@@ -30,6 +30,7 @@ visualizarão oportunidades e enviarão propostas; e o Administrador realizará 
 acompanhamento e consultas gerenciais. 
 
 O foco do MVP é criar um Web Site responsivo, intuitivo e que ajude no planejamento de eventos, obtenção e comparação de propostas para os organizadores, a consolidação dos custos e o cálculo do ticket médio estimado com base no público, nos custos e na margem de lucro definida. 
+
 <br><br>
 
 ## 🛠 Estrutura de pastas

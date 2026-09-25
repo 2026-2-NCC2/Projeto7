@@ -1,0 +1,625 @@
+/* =========================================================
+   HOME ADM - Painel de indicadores
+   Todas as classes começam com "adm-" para não conflitar
+   com o global.css
+========================================================= */
+.adm-painel {
+    --adm-superficie: #EFEFE7;
+    --adm-superficie-escura: #E2E2D8;
+    --adm-branco: #FFFFFF;
+    --adm-texto: #1a1a1a;
+    --adm-texto-suave: #5f5f66;
+    --adm-numero: #4a4a4f;
+    --adm-cinza: #D6D6CC;
+    --adm-laranja: #FFB866;
+    --adm-lilas: #8F97F0;
+    --adm-rosa: #F27FAF;
+    --adm-verde: #1F9D55;
+    --adm-vermelho: #D64545;
+    --adm-azul: #113BBB;
+    --adm-raio: 22px;
+
+    width: min(1100px, calc(100% - 48px));
+    margin: 0 auto 140px;
+    color: var(--adm-texto);
+}
+
+/* ---------- Topo ---------- */
+.adm-topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 24px;
+    margin-bottom: 24px;
+}
+
+.adm-subtitulo {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.adm-titulo {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    text-align: left;
+    margin: 2px 0 0;
+    line-height: 1.1;
+}
+
+.adm-controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.adm-periodos {
+    display: flex;
+    background: var(--adm-superficie);
+    border-radius: 999px;
+    padding: 4px;
+}
+
+.adm-periodo {
+    border: none;
+    background: transparent;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--adm-texto);
+}
+
+.adm-periodo.ativo {
+    background: #C9C9C0;
+    font-weight: 600;
+}
+
+/* ---------- Botões ---------- */
+.adm-botao {
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.1s, background 0.15s;
+}
+
+.adm-botao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.adm-botao:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.adm-botao-escuro {
+    background: var(--cor-primaria, #080808);
+    color: #fff;
+    border: 1px solid var(--cor-primaria, #080808);
+}
+
+.adm-botao-contorno {
+    background: var(--adm-branco);
+    color: var(--adm-texto);
+    border: 1px solid var(--adm-texto);
+}
+
+.adm-botao-contorno:hover:not(:disabled) {
+    background: var(--adm-superficie);
+}
+
+.adm-link {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: underline;
+    color: var(--adm-texto);
+    cursor: pointer;
+}
+
+.adm-painel button:focus-visible,
+.adm-painel a:focus-visible {
+    outline: 2px solid var(--adm-azul);
+    outline-offset: 2px;
+}
+
+/* ---------- Estados (carregando / erro / vazio) ---------- */
+.adm-estado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px 20px;
+    color: var(--adm-texto-suave);
+    font-size: 0.9rem;
+}
+
+.adm-estado-erro {
+    flex-direction: column;
+    color: var(--adm-vermelho);
+    background: var(--adm-superficie);
+    border-radius: var(--adm-raio);
+    margin-bottom: 16px;
+}
+
+.adm-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--adm-cinza);
+    border-top-color: var(--adm-texto);
+    border-radius: 50%;
+    animation: adm-girar 0.8s linear infinite;
+}
+
+@keyframes adm-girar {
+    to { transform: rotate(360deg); }
+}
+
+.adm-vazio {
+    background: var(--adm-branco);
+    border-radius: 12px;
+    padding: 32px 16px;
+    text-align: center;
+    color: var(--adm-texto-suave);
+    font-size: 0.9rem;
+}
+
+.adm-aviso:empty {
+    display: none;
+}
+
+.adm-aviso {
+    font-size: 0.85rem;
+    text-align: center;
+    margin: -6px 0 12px;
+}
+
+.adm-bloco {
+    transition: opacity 0.2s;
+}
+
+.adm-bloco.atualizando {
+    opacity: 0.5;
+}
+
+/* ---------- Cards de indicadores ---------- */
+.adm-indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.adm-indicador {
+    background: var(--adm-superficie);
+    border-radius: var(--adm-raio);
+    padding: 18px 20px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.adm-indicador h2 {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--adm-texto-suave);
+}
+
+.adm-indicador strong {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 600;
+    color: var(--adm-numero);
+    line-height: 1;
+    padding: 12px 0;
+}
+
+.adm-indicador p {
+    font-size: 0.8rem;
+    color: var(--adm-texto-suave);
+}
+
+/* ---------- Linhas de blocos ---------- */
+.adm-linha {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.adm-linha-graficos {
+    grid-template-columns: 1fr 1fr;
+}
+
+.adm-linha-listas {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+}
+
+.adm-linha-graficos .adm-painel-bloco {
+    display: flex;
+    flex-direction: column;
+}
+
+.adm-linha-graficos .adm-etapas {
+    flex: 1;
+    align-content: center;
+}
+
+.adm-painel-bloco {
+    background: var(--adm-superficie);
+    border-radius: var(--adm-raio);
+    padding: 18px 20px 22px;
+    min-width: 0;
+}
+
+.adm-bloco-escuro {
+    background: var(--adm-superficie-escura);
+}
+
+.adm-bloco-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+/* ---------- Etapas do planejamento ---------- */
+.adm-etapas {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+    padding: 10px 0;
+}
+
+.adm-etapas li {
+    display: grid;
+    grid-template-columns: 90px 1fr 28px;
+    align-items: center;
+    gap: 12px;
+}
+
+.adm-etapa-nome {
+    font-size: 0.78rem;
+    line-height: 1.2;
+}
+
+.adm-etapa-trilha {
+    height: 16px;
+    background: #F7F7F2;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.adm-etapa-barra {
+    display: block;
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.4s ease;
+}
+
+.adm-etapa-total {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.adm-cor-cinza   { background: var(--adm-cinza); }
+.adm-cor-laranja { background: var(--adm-laranja); }
+.adm-cor-lilas   { background: var(--adm-lilas); }
+.adm-cor-rosa    { background: var(--adm-rosa); }
+
+/* ---------- Gráfico de ticket ---------- */
+.adm-grafico {
+    background: var(--adm-branco);
+    border-radius: 12px;
+    padding: 12px 12px 8px;
+}
+
+.adm-legenda {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    font-size: 0.72rem;
+    color: var(--adm-texto-suave);
+    margin-bottom: 8px;
+}
+
+.adm-legenda span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.adm-legenda i {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+.adm-grafico-area {
+    display: flex;
+    justify-content: space-around;
+    gap: 6px;
+    border-bottom: 1px solid var(--adm-cinza);
+    padding-top: 18px;
+}
+
+.adm-grafico-grupo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+}
+
+.adm-grafico-colunas {
+    height: 160px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.adm-coluna {
+    position: relative;
+    width: 18px;
+    border-radius: 5px 5px 0 0;
+    transition: height 0.4s ease;
+}
+
+.adm-coluna-valor {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-bottom: 3px;
+    font-size: 0.65rem;
+    color: var(--adm-texto-suave);
+}
+
+.adm-grafico-rotulo {
+    font-size: 0.68rem;
+    color: var(--adm-texto-suave);
+    text-align: center;
+    padding: 8px 0 2px;
+    line-height: 1.2;
+}
+
+/* ---------- Tabela de cadastros ---------- */
+.adm-tabela-rolagem {
+    background: var(--adm-branco);
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.adm-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.adm-tabela th {
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--adm-texto-suave);
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid var(--adm-superficie);
+}
+
+.adm-tabela td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--adm-superficie);
+    vertical-align: middle;
+}
+
+.adm-tabela tr:last-child td {
+    border-bottom: none;
+}
+
+.adm-col-acoes {
+    text-align: right;
+}
+
+.adm-tabela th.adm-col-acoes {
+    text-align: right;
+}
+
+.adm-acoes-linha {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.adm-pessoa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 170px;
+}
+
+.adm-avatar {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--adm-superficie);
+    display: grid;
+    place-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.adm-pessoa-nome {
+    display: block;
+    font-weight: 600;
+    color: var(--adm-texto);
+}
+
+a.adm-pessoa-nome:hover {
+    text-decoration: underline;
+}
+
+a.adm-pessoa-nome {
+    text-decoration: none;
+}
+
+.adm-pessoa-atuacao {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--adm-texto-suave);
+}
+
+.adm-tipo {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.adm-tipo-fornecedor {
+    background: #E4E6FF;
+    color: #343DB0;
+}
+
+.adm-tipo-organizador {
+    background: #FDE3EE;
+    color: #A1245B;
+}
+
+/* ---------- Ações recentes ---------- */
+.adm-acoes-recentes {
+    background: var(--adm-branco);
+    border-radius: 12px;
+    padding: 14px 16px 16px;
+}
+
+.adm-acoes-recentes ul {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.adm-acoes-recentes li {
+    display: flex;
+    gap: 10px;
+}
+
+.adm-acoes-recentes p {
+    font-size: 0.78rem;
+    line-height: 1.3;
+}
+
+.adm-acoes-recentes time {
+    font-size: 0.68rem;
+    color: var(--adm-texto-suave);
+}
+
+.adm-ponto {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+.adm-ponto-aprovado  { background: var(--adm-verde); }
+.adm-ponto-rejeitado { background: var(--adm-vermelho); }
+.adm-ponto-movido    { background: var(--adm-azul); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+    .adm-indicadores {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .adm-linha-graficos,
+    .adm-linha-listas {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .adm-painel {
+        width: min(100% - 30px, 560px);
+    }
+
+    .adm-indicador {
+        min-height: 120px;
+        padding: 14px 16px;
+    }
+
+    .adm-coluna {
+        width: 12px;
+    }
+
+    .adm-coluna-valor {
+        font-size: 0.58rem;
+    }
+
+    /* Tabela vira lista de cartões no celular */
+    .adm-tabela thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    .adm-tabela,
+    .adm-tabela tbody,
+    .adm-tabela td {
+        display: block;
+    }
+
+    .adm-tabela tr {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 10px 12px;
+        padding: 14px;
+        border-bottom: 1px solid var(--adm-superficie);
+    }
+
+    .adm-tabela tr:last-child {
+        border-bottom: none;
+    }
+
+    .adm-tabela td {
+        padding: 0;
+        border: none;
+    }
+
+    .adm-tabela td:first-child,
+    .adm-tabela td.adm-col-acoes {
+        grid-column: 1 / -1;
+    }
+
+    .adm-tabela td:nth-child(3) {
+        text-align: right;
+        color: var(--adm-texto-suave);
+    }
+
+    .adm-acoes-linha {
+        display: flex;
+        width: 100%;
+    }
+
+    .adm-acoes-linha .adm-botao {
+        flex: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .adm-spinner { animation-duration: 2s; }
+    .adm-etapa-barra,
+    .adm-coluna,
+    .adm-bloco { transition: none; }
+}

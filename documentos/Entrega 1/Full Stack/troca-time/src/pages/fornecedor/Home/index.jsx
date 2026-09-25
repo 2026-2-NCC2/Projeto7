@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./styles.css";
 
-const NAV_ITEMS = ["Home", "Eventos", "Propostas", "Organizadores"];
-
 // Defina quantos cards aparecem por vez na tela
 const VISIBLE_EVENTS = 3;
 
@@ -38,7 +36,6 @@ const COLUMN_LABELS = {
 };
 
 function Home() {
-  const [activeNav, setActiveNav] = useState("Home");
   const [profileOpen, setProfileOpen] = useState(false);
 
   const [eventIndex, setEventIndex] = useState(0);
@@ -49,9 +46,7 @@ function Home() {
   const [evaluating, setEvaluating] = useState(null);
 
   const [chatOpen, setChatOpen] = useState(false);
-  const [aiOpen, setAiOpen] = useState(false);
 
-  // MAX_EVENT_INDEX dentro do componente usando VISIBLE_EVENTS definida
   const maxEventIndex = Math.max(0, INITIAL_EVENTS.length - VISIBLE_EVENTS);
   const isAtEnd = eventIndex >= maxEventIndex;
   const hasMoreThanOnePage = maxEventIndex > 0;
@@ -72,7 +67,6 @@ function Home() {
     if (!evaluating) return;
     const { proposal, fromColumn } = evaluating;
 
-    // Se a decisão for para a mesma coluna onde a proposta já está, apenas fecha o modal
     if (fromColumn === decision) {
       setEvaluating(null);
       return;
@@ -89,28 +83,15 @@ function Home() {
 
   return (
     <div className="tt-app">
-      {/* ===================== HEADER ===================== */}
+      { /*===================== HEADER ===================== */}
       <header className="tt-header">
         <div className="tt-logo">
-          <span className="tt-logo-icon">✦</span>
-          <span className="tt-logo-text">TROCA TICKET</span>
+          <span className="tt-logo-icon"></span>
+          <span className="tt-logo-text"></span>
         </div>
-
-        <nav className="tt-nav">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item}
-              className={`tt-nav-link ${activeNav === item ? "tt-nav-link--active" : ""}`}
-              onClick={() => setActiveNav(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </nav>
 
         <div className="tt-profile-wrap">
           <button className="tt-btn-profile" onClick={() => setProfileOpen((v) => !v)}>
-            Perfil
           </button>
 
           {profileOpen && (
@@ -235,9 +216,6 @@ function Home() {
         <button className="tt-btn-float" onClick={() => setChatOpen((v) => !v)}>
           💬 Chats de Conversa
         </button>
-        <button className="tt-btn-float" onClick={() => setAiOpen((v) => !v)}>
-          TrocaTicket IA ✎
-        </button>
       </div>
 
       {/* ===================== MODAL: DETALHES DO EVENTO ===================== */}
@@ -284,17 +262,6 @@ function Home() {
             <button onClick={() => setChatOpen(false)}>✕</button>
           </div>
           <p className="tt-panel__body">Nenhuma conversa aberta ainda.</p>
-        </div>
-      )}
-
-      {/* ===================== PAINEL: IA ===================== */}
-      {aiOpen && (
-        <div className="tt-panel tt-panel--right">
-          <div className="tt-panel__header">
-            <strong>TrocaTicket IA</strong>
-            <button onClick={() => setAiOpen(false)}>✕</button>
-          </div>
-          <p className="tt-panel__body">Como posso ajudar hoje?</p>
         </div>
       )}
     </div>

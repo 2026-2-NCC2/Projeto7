@@ -4,7 +4,7 @@ import logo from '../assets/logo_navbar_web.png';
 
 export default function Cabecalho() {
   const navItems = [
-    ['Home', '/home'], ['Eventos', '/eventos'], ['Fornecedores', '/fornecedores'], ['Organizadores', '/organizadores'],
+    ['Home', '/home'], ['Eventos', '/eventos'], ['Fornecedores', '/fornecedores'], ['Organizadores', '/organizadores/1'],
   ]
 
   return (
