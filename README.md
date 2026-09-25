@@ -22,16 +22,22 @@
 O projeto constitui em desenvolver uma plataforma Web para apoiar a TrocaTicket e os organizadores de eventos no
 planejamento financeiro e operacional, possibilitando o cadastro de eventos e custos, a interação com
 fornecedores por meio de propostas e o cálculo do valor estimado do ingresso a partir dos custos
-consolidados, do público e da margem de lucro. 
+consolidados, do público e da margem de lucro.
 Isso será feito por meio de uma aplicação Web com
 três módulos integrados: Administrador (TrocaTicket), Organizador e Fornecedor. O Organizador criará
 eventos, cadastrará itens de composição de custo e parâmetros financeiros; os Fornecedores
 visualizarão oportunidades e enviarão propostas; e o Administrador realizará aprovações,
-acompanhamento e consultas gerenciais. 
+acompanhamento e consultas gerenciais.<br>
+O foco do MVP é criar um Web Site responsivo, intuitivo e que ajude no planejamento de eventos, obtenção e comparação de propostas para os organizadores, a consolidação dos custos e o cálculo do ticket médio estimado com base no público, nos custos e na margem de lucro definida.<br>
+Para vistas do objetivo da primeira entrega deste projeto, que visa uma ideia inicial do Front end, foram utilizados dados mokados assim como houve uma adaptação nas telas. Enquanto não temos um Banco de Dados estruturado e conectado com o Back end estruturamos as páginas da seguinte maneira:
 
-O foco do MVP é criar um Web Site responsivo, intuitivo e que ajude no planejamento de eventos, obtenção e comparação de propostas para os organizadores, a consolidação dos custos e o cálculo do ticket médio estimado com base no público, nos custos e na margem de lucro definida. 
 
-<br><br>
+- Páginas de login: estão indo diretamente para o caminho que seria o acesso do ADM;<br>
+- Página de home: a primeira versão da página de home do ADM;<br>
+- Página de eventos: a primeira versão da lista de eventos para o ADM;<br>
+- Página de fornecedores: para melhorar o entendimento do escopo do projeto essa página mostra como seria a home do FORNECEDOR;<br>
+- Página de organizadores: mostra como seria a página de detalhes do organizador para o ADM.
+<br>
 
 ## 🛠 Estrutura de pastas
 
