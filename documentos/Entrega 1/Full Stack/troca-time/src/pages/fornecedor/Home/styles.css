@@ -1,0 +1,510 @@
+/* =========================================================
+   RESET & BASE
+========================================================= */
+.tt-app * {
+    box-sizing: border-box;
+  }
+  
+  .tt-app {
+    --bg-page: #f7f4ec;
+    --color-text: #1a1a1a;
+    --color-text-soft: #4a4a4a;
+  
+    --pink-panel: #f0d9ea;
+    --pink-badge: #3d1730;
+  
+    --lime: #d4e157;
+    --lime-column: #dbe870;
+  
+    --lavender-column: #93a6e0;
+    --mauve-column: #97767c;
+  
+    --card-bg: #fdfaf2;
+    --blue-btn: #1c2b6b;
+  
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-pill: 999px;
+  
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-page);
+    color: var(--color-text);
+    border: 3px solid #2f6fed;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* =========================================================
+     HEADER
+  ========================================================= */
+  .tt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 40px;
+  }
+  
+.tt-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.tt-nav {
+  display: flex;
+  gap: 6px;
+  background: #fdfaf2;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+}
+
+.tt-nav-link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+}
+
+.tt-nav-link--active {
+  background: #17181a;
+  color: #fff;
+}
+
+.tt-profile-wrap {
+  position: relative;
+}
+
+.tt-btn-profile {
+  border: 1px solid #1a1a1a;
+  background: transparent;
+  padding: 8px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tt-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.tt-dropdown button {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tt-dropdown button:hover {
+  background: #f2f2f2;
+}
+
+/* =========================================================
+    PAGE / GREETING
+========================================================= */
+.tt-page {
+  padding: 10px 40px 120px;
+}
+
+.tt-greeting h1 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.tt-greeting p {
+  font-size: 12px;
+  color: var(--color-text-soft);
+  margin-top: 2px;
+}
+
+/* =========================================================
+    EVENTS PANEL
+========================================================= */
+.tt-events-panel {
+  margin-top: 20px;
+  background: var(--pink-panel);
+  border-radius: var(--radius-lg);
+  padding: 18px 26px 26px;
+}
+
+.tt-events-panel__title {
+  display: inline-block;
+  background: var(--pink-badge);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+}
+
+.tt-events-panel__body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.tt-event-cards-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+
+.tt-event-cards-track {
+  display: flex;
+  will-change: transform;
+  transition: transform 0.45s ease;
+}
+
+.tt-event-slot {
+  flex: 0 0 33.3333%;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.tt-event-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 16px 18px 20px;
+  height: 100%;
+}
+
+.tt-event-card h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.tt-event-card p {
+  font-size: 10.5px;
+  color: var(--color-text-soft);
+  line-height: 1.5;
+}
+
+.tt-btn-pill {
+  display: block;
+  margin-top: 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 8px 0;
+  width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tt-btn-pill--lime {
+  background: var(--lime);
+  color: #1a1a1a;
+}
+
+.tt-events-panel__next {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #1a1a1a;
+  background: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tt-events-panel__next--reset {
+  background: var(--blue-btn);
+  border-color: var(--blue-btn);
+  color: #fff;
+}
+
+/* =========================================================
+    PROPOSALS TOGGLE
+========================================================= */
+.tt-section-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 34px 0 26px;
+}
+
+.tt-btn-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--lime);
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 26px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tt-btn-toggle__arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.tt-btn-toggle__arrow--down {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+    PROPOSALS COLUMNS
+========================================================= */
+.tt-proposals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.tt-proposal-column {
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-proposal-column--aprovadas { background: var(--lime-column); }
+.tt-proposal-column--pendentes { background: var(--lavender-column); }
+.tt-proposal-column--reprovados { background: var(--mauve-column); }
+
+.tt-proposal-column__label {
+  display: flex;
+  justify-content: center;
+}
+
+.tt-proposal-column__label span {
+  background: var(--card-bg);
+  padding: 8px 26px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tt-proposal-column__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-proposal-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 16px 18px 18px;
+}
+
+.tt-proposal-card h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.tt-proposal-card p {
+  font-size: 11px;
+  color: var(--color-text-soft);
+  line-height: 1.5;
+}
+
+.tt-btn-avaliar {
+  display: block;
+  margin-top: 12px;
+  margin-left: auto;
+  background: var(--blue-btn);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 8px 24px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tt-btn-avaliar--reject {
+  background: #7a2f2f;
+}
+
+.tt-empty {
+  font-size: 12px;
+  color: var(--color-text-soft);
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* =========================================================
+    FLOATING BOTTOM BAR
+========================================================= */
+.tt-floating-bar {
+  position: fixed;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  pointer-events: none;
+}
+
+.tt-btn-float {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #17181a;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================================
+    MODAL
+========================================================= */
+.tt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+}
+
+.tt-modal {
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 28px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.tt-modal h2 {
+  font-size: 17px;
+  margin-bottom: 14px;
+}
+
+.tt-modal p {
+  font-size: 13px;
+  margin-bottom: 8px;
+  color: var(--color-text-soft);
+}
+
+.tt-modal .tt-btn-pill {
+  margin-top: 18px;
+}
+
+.tt-modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.tt-modal-actions .tt-btn-avaliar {
+  flex: 1;
+  margin: 0;
+}
+
+/* =========================================================
+    SIDE PANELS (chat / IA)
+========================================================= */
+.tt-panel {
+  position: fixed;
+  bottom: 80px;
+  width: 300px;
+  background: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  z-index: 40;
+  overflow: hidden;
+}
+
+.tt-panel--left { left: 40px; }
+.tt-panel--right { right: 40px; }
+
+.tt-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #17181a;
+  color: #fff;
+}
+
+.tt-panel__header button {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tt-panel__body {
+  padding: 18px;
+  font-size: 13px;
+  color: var(--color-text-soft);
+}
+
+/* =========================================================
+    RESPONSIVE
+========================================================= */
+@media (max-width: 900px) {
+  .tt-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 18px 20px;
+  }
+
+  .tt-page {
+    padding: 10px 20px 140px;
+  }
+
+  .tt-event-slot {
+    flex-basis: 100%;
+  }
+
+  .tt-events-panel__body {
+    flex-direction: column;
+  }
+
+  .tt-events-panel__next {
+    align-self: center;
+  }
+
+  .tt-proposals {
+    grid-template-columns: 1fr;
+  }
+
+  .tt-floating-bar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 0 20px;
+  }
+
+  .tt-panel--left,
+  .tt-panel--right {
+    left: 20px;
+    right: 20px;
+    width: auto;
+  }
+}
