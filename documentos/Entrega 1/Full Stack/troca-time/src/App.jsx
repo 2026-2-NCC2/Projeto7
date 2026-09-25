@@ -12,6 +12,8 @@ import AdmHome from './pages/adm/Home/index.jsx'
 import Login from './pages/auth/Login'
 import CadastroFormulario from './pages/auth/Cadastro/CadastroFormulario'
 import CadastroAgradecimento from './pages/auth/Cadastro/CadastroAgradecimento'
+import HomeFornecedor from './pages/fornecedor/Home/index.jsx'
+import HomeOrganizador from './pages/adm/organizadores/PerfilOrganizador.jsx'
 
 function LayoutAutenticado() {
   return (
@@ -35,8 +37,8 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/eventos" element={<Evento />} />
           <Route path="/eventos/:id" element={<DetalheEvento />} />
-          <Route path="/fornecedores" element={<PaginaVazia titulo="Fornecedores" />} />
-          <Route path="/organizadores" element={<PaginaVazia titulo="Organizadores" />} />
+          <Route path="/fornecedores" element={<HomeFornecedor titulo="Fornecedores" />} />
+          <Route path="/organizadores" element={<HomeOrganizador titulo="Organizadores" />} />
             <Route path="/organizadores/:id" element={<PerfilOrganizador />} />
           <Route path="/perfil" element={<PaginaVazia titulo="Perfil" />} />
           <Route path="/adm" element={<AdmHome />} />
