@@ -15,21 +15,7 @@
   --cor-escura-azul: #113BBB;
   --cor-clara-verde: #C9E338;
   --cor-escura-vinho: #4A1830;
+  --cor-clara-vinho: #EDDAE3;
   --azul-claro: #B3C0E0;
   --cinza-claro: #cacacb;
-
-  --cor-status-pendente: #FA8905;
-  --cor-status-aprovado: #1F9D55;
-  --cor-status-recusado: #D64545;
-
-  --fonte-principal: 'Space Grotesk', Arial, sans-serif;
-  --tamanho-fonte-1: 4rem;
-  --tamanho-fonte-2: 2rem;
-  --tamanho-fonte-3: 1rem;
-  --tamanho-fonte-4: 0.9rem;
-  --tamanho-fonte-5: 1.5rem;
-  --tamanho-fonte-6: 1.25rem;
-
-  --sombra-1: 0 4px 4px rgba(0, 0, 0, 0.25);
-  --sombra-2: 0 1px 2px rgba(0, 0, 0, 0.25);
 }

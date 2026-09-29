@@ -1,8 +1,9 @@
 import { Link, NavLink } from 'react-router-dom'
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo_navbar_web.png';
 
 export default function Cabecalho() {
+  const [profileOpen, setProfileOpen] = useState(false)
   const navItems = [
     ['Home', '/home'], ['Eventos', '/eventos'], ['Fornecedores', '/fornecedores'], ['Organizadores', '/organizadores/1'],
   ]
@@ -22,7 +23,16 @@ export default function Cabecalho() {
           </NavLink>
         ))}
       </nav>
-      <Link className="profile-link" to="/perfil">Perfil</Link>
+      <div className="profile-menu">
+        <button className="profile-link" type="button" aria-expanded={profileOpen} onClick={() => setProfileOpen((open) => !open)}>Perfil</button>
+        {profileOpen && (
+          <div className="profile-dropdown">
+            <Link to="/perfil" onClick={() => setProfileOpen(false)}>Minha conta</Link>
+            <Link to="/perfil" onClick={() => setProfileOpen(false)}>Configurações</Link>
+            <Link to="/" onClick={() => setProfileOpen(false)}>Sair</Link>
+          </div>
+        )}
+      </div>
     </header>
   )
 }

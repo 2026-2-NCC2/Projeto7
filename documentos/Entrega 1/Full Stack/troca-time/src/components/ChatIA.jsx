@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-export default function ChatIA() {
+export default function ChatIA({ titulo = 'TrocaTicket IA', mensagemInicial = 'Olá! Como posso ajudar com seu evento?', lado = 'right' }) {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState([{ from: 'bot', text: 'Olá! Como posso ajudar com seu evento?' }])
+  const [messages, setMessages] = useState([{ from: 'bot', text: mensagemInicial }])
   const [text, setText] = useState('')
 
   function sendMessage(event) {
@@ -13,10 +13,10 @@ export default function ChatIA() {
   }
 
   return (
-    <aside className="chat-widget" aria-label="Chat TrocaTicket IA">
+    <aside className={`chat-widget chat-widget--${lado}`} aria-label={titulo}>
       {open && (
         <section className="chat-panel">
-          <div className="chat-title"><span>TrocaTicket IA</span><button onClick={() => setOpen(false)} aria-label="Fechar chat">×</button></div>
+          <div className="chat-title"><span>{titulo}</span><button onClick={() => setOpen(false)} aria-label="Fechar chat">×</button></div>
           <div className="chat-messages">
             {messages.map((message, index) => <p key={index} className={message.from}>{message.text}</p>)}
           </div>
@@ -27,7 +27,7 @@ export default function ChatIA() {
         </section>
       )}
       <button className="chat-toggle" onClick={() => setOpen(!open)} aria-expanded={open}>
-        <span>TrocaTicket IA</span>
+        <span>{titulo}</span>
       </button>
     </aside>
   )

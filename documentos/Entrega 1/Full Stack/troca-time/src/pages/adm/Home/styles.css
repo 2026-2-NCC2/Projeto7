@@ -4,24 +4,9 @@
    com o global.css
 ========================================================= */
 .adm-painel {
-    --adm-superficie: #EFEFE7;
-    --adm-superficie-escura: #E2E2D8;
-    --adm-branco: #FFFFFF;
-    --adm-texto: #1a1a1a;
-    --adm-texto-suave: #5f5f66;
-    --adm-numero: #4a4a4f;
-    --adm-cinza: #D6D6CC;
-    --adm-laranja: #FFB866;
-    --adm-lilas: #8F97F0;
-    --adm-rosa: #F27FAF;
-    --adm-verde: #1F9D55;
-    --adm-vermelho: #D64545;
-    --adm-azul: #113BBB;
-    --adm-raio: 22px;
-
     width: min(1100px, calc(100% - 48px));
     margin: 0 auto 140px;
-    color: var(--adm-texto);
+    color: var(--cor-texto-simples);
 }
 
 /* ---------- Topo ---------- */
@@ -55,7 +40,7 @@
 
 .adm-periodos {
     display: flex;
-    background: var(--adm-superficie);
+    background: var(--cor-fundo-4);
     border-radius: 999px;
     padding: 4px;
 }
@@ -67,11 +52,11 @@
     border-radius: 999px;
     font-size: 0.85rem;
     cursor: pointer;
-    color: var(--adm-texto);
+    color: var(--cor-texto-simples);
 }
 
 .adm-periodo.ativo {
-    background: #C9C9C0;
+    background: var(--cinza-claro);
     font-weight: 600;
 }
 
@@ -96,19 +81,19 @@
 }
 
 .adm-botao-escuro {
-    background: var(--cor-primaria, #080808);
-    color: #fff;
-    border: 1px solid var(--cor-primaria, #080808);
+    background: var(--cor-primaria);
+    color: var(--cor-clara);
+    border: 1px solid var(--cor-primaria);
 }
 
 .adm-botao-contorno {
-    background: var(--adm-branco);
-    color: var(--adm-texto);
-    border: 1px solid var(--adm-texto);
+    background: var(--cor-clara);
+    color: var(--cor-texto-simples);
+    border: 1px solid var(--cor-texto-simples);
 }
 
 .adm-botao-contorno:hover:not(:disabled) {
-    background: var(--adm-superficie);
+    background: var(--cor-fundo-4);
 }
 
 .adm-link {
@@ -118,13 +103,13 @@
     font-size: 0.8rem;
     font-weight: 600;
     text-decoration: underline;
-    color: var(--adm-texto);
+    color: var(--cor-texto-simples);
     cursor: pointer;
 }
 
 .adm-painel button:focus-visible,
 .adm-painel a:focus-visible {
-    outline: 2px solid var(--adm-azul);
+    outline: 2px solid var(--cor-escura-azul);
     outline-offset: 2px;
 }
 
@@ -135,23 +120,23 @@
     justify-content: center;
     gap: 12px;
     padding: 40px 20px;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
     font-size: 0.9rem;
 }
 
 .adm-estado-erro {
     flex-direction: column;
-    color: var(--adm-vermelho);
-    background: var(--adm-superficie);
-    border-radius: var(--adm-raio);
+    color: var(--cor-erro);
+    background: var(--cor-fundo-4);
+    border-radius: 22px;
     margin-bottom: 16px;
 }
 
 .adm-spinner {
     width: 18px;
     height: 18px;
-    border: 2px solid var(--adm-cinza);
-    border-top-color: var(--adm-texto);
+    border: 2px solid var(--cinza-claro);
+    border-top-color: var(--cor-texto-simples);
     border-radius: 50%;
     animation: adm-girar 0.8s linear infinite;
 }
@@ -161,11 +146,11 @@
 }
 
 .adm-vazio {
-    background: var(--adm-branco);
+    background: var(--cor-clara);
     border-radius: 12px;
     padding: 32px 16px;
     text-align: center;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
     font-size: 0.9rem;
 }
 
@@ -196,8 +181,8 @@
 }
 
 .adm-indicador {
-    background: var(--adm-superficie);
-    border-radius: var(--adm-raio);
+    background: var(--cor-fundo-4);
+    border-radius: 22px;
     padding: 18px 20px;
     min-height: 150px;
     display: flex;
@@ -207,7 +192,7 @@
 .adm-indicador h2 {
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 .adm-indicador strong {
@@ -216,14 +201,14 @@
     align-items: center;
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 600;
-    color: var(--adm-numero);
+    color: var(--cor-texto-simples);
     line-height: 1;
     padding: 12px 0;
 }
 
 .adm-indicador p {
     font-size: 0.8rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 /* ---------- Linhas de blocos ---------- */
@@ -253,14 +238,14 @@
 }
 
 .adm-painel-bloco {
-    background: var(--adm-superficie);
-    border-radius: var(--adm-raio);
+    background: var(--cor-fundo-4);
+    border-radius: 22px;
     padding: 18px 20px 22px;
     min-width: 0;
 }
 
 .adm-bloco-escuro {
-    background: var(--adm-superficie-escura);
+    background: var(--cinza-claro);
 }
 
 .adm-bloco-titulo {
@@ -292,7 +277,7 @@
 
 .adm-etapa-trilha {
     height: 16px;
-    background: #F7F7F2;
+    background: var(--cor-clara);
     border-radius: 6px;
     overflow: hidden;
 }
@@ -310,14 +295,14 @@
     text-align: right;
 }
 
-.adm-cor-cinza   { background: var(--adm-cinza); }
-.adm-cor-laranja { background: var(--adm-laranja); }
-.adm-cor-lilas   { background: var(--adm-lilas); }
-.adm-cor-rosa    { background: var(--adm-rosa); }
+.adm-cor-cinza   { background: var(--cinza-claro); }
+.adm-cor-laranja { background: var(--cor-clara-verde); }
+.adm-cor-lilas   { background: var(--azul-claro); }
+.adm-cor-rosa    { background: var(--cor-escura-vinho); }
 
 /* ---------- Gráfico de ticket ---------- */
 .adm-grafico {
-    background: var(--adm-branco);
+    background: var(--cor-clara);
     border-radius: 12px;
     padding: 12px 12px 8px;
 }
@@ -327,7 +312,7 @@
     justify-content: flex-end;
     gap: 14px;
     font-size: 0.72rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
     margin-bottom: 8px;
 }
 
@@ -347,7 +332,7 @@
     display: flex;
     justify-content: space-around;
     gap: 6px;
-    border-bottom: 1px solid var(--adm-cinza);
+    border-bottom: 1px solid var(--cinza-claro);
     padding-top: 18px;
 }
 
@@ -380,12 +365,12 @@
     transform: translateX(-50%);
     padding-bottom: 3px;
     font-size: 0.65rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 .adm-grafico-rotulo {
     font-size: 0.68rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
     text-align: center;
     padding: 8px 0 2px;
     line-height: 1.2;
@@ -393,7 +378,7 @@
 
 /* ---------- Tabela de cadastros ---------- */
 .adm-tabela-rolagem {
-    background: var(--adm-branco);
+    background: var(--cor-clara);
     border-radius: 12px;
     overflow-x: auto;
 }
@@ -408,14 +393,14 @@
     text-align: left;
     font-size: 0.7rem;
     font-weight: 500;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
     padding: 12px 14px 8px;
-    border-bottom: 1px solid var(--adm-superficie);
+    border-bottom: 1px solid var(--cor-fundo-4);
 }
 
 .adm-tabela td {
     padding: 10px 14px;
-    border-bottom: 1px solid var(--adm-superficie);
+    border-bottom: 1px solid var(--cor-fundo-4);
     vertical-align: middle;
 }
 
@@ -448,7 +433,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--adm-superficie);
+    background: var(--cor-fundo-4);
     display: grid;
     place-items: center;
     font-size: 0.7rem;
@@ -458,7 +443,7 @@
 .adm-pessoa-nome {
     display: block;
     font-weight: 600;
-    color: var(--adm-texto);
+    color: var(--cor-texto-simples);
 }
 
 a.adm-pessoa-nome:hover {
@@ -472,7 +457,7 @@ a.adm-pessoa-nome {
 .adm-pessoa-atuacao {
     display: block;
     font-size: 0.72rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 .adm-tipo {
@@ -484,18 +469,18 @@ a.adm-pessoa-nome {
 }
 
 .adm-tipo-fornecedor {
-    background: #E4E6FF;
-    color: #343DB0;
+    background: var(--azul-claro);
+    color: var(--cor-escura-azul);
 }
 
 .adm-tipo-organizador {
-    background: #FDE3EE;
-    color: #A1245B;
+    background: var(--cor-clara);
+    color: var(--cor-escura-vinho);
 }
 
 /* ---------- Ações recentes ---------- */
 .adm-acoes-recentes {
-    background: var(--adm-branco);
+    background: var(--cor-clara);
     border-radius: 12px;
     padding: 14px 16px 16px;
 }
@@ -519,7 +504,7 @@ a.adm-pessoa-nome {
 
 .adm-acoes-recentes time {
     font-size: 0.68rem;
-    color: var(--adm-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 .adm-ponto {
@@ -530,9 +515,9 @@ a.adm-pessoa-nome {
     margin-top: 5px;
 }
 
-.adm-ponto-aprovado  { background: var(--adm-verde); }
-.adm-ponto-rejeitado { background: var(--adm-vermelho); }
-.adm-ponto-movido    { background: var(--adm-azul); }
+.adm-ponto-aprovado  { background: var(--cor-escura-azul); }
+.adm-ponto-rejeitado { background: var(--cor-erro); }
+.adm-ponto-movido    { background: var(--cor-escura-azul); }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 900px) {
@@ -585,7 +570,7 @@ a.adm-pessoa-nome {
         align-items: center;
         gap: 10px 12px;
         padding: 14px;
-        border-bottom: 1px solid var(--adm-superficie);
+        border-bottom: 1px solid var(--cor-fundo-4);
     }
 
     .adm-tabela tr:last-child {
@@ -604,7 +589,7 @@ a.adm-pessoa-nome {
 
     .adm-tabela td:nth-child(3) {
         text-align: right;
-        color: var(--adm-texto-suave);
+        color: var(--cor-texto-suave);
     }
 
     .adm-acoes-linha {
