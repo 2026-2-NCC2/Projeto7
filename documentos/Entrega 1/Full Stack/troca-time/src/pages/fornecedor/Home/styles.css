@@ -1,137 +1,33 @@
-/* =========================================================
-   RESET & BASE
-========================================================= */
+
 .tt-app * {
     box-sizing: border-box;
   }
   
   .tt-app {
-    --bg-page: #FEFFF3;
-    --color-text: #1a1a1a;
-    --color-text-soft: #4a4a4a;
-  
-    --pink-panel: #f0d9ea;
-    --pink-badge: #3d1730;
-  
-    --lime: #d4e157;
-    --lime-column: #dbe870;
-  
-    --lavender-column: #93a6e0;
-    --mauve-column: #97767c;
-  
-    --card-bg: #fdfaf2;
-    --blue-btn: #1c2b6b;
-  
-    --radius-lg: 24px;
-    --radius-md: 16px;
-    --radius-pill: 999px;
-  
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg-page);
-    color: var(--color-text);
+    background: linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2)), var(--cor-clara);
+    color: var(--cor-texto-simples);
     min-height: 100vh;
     position: relative;
   }
-  
-  /* =========================================================
-     HEADER
-  ========================================================= */
-  /*.tt-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px 40px;
-  }
-  
-.tt-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.5px;
-}
-
-.tt-nav {
-  display: flex;
-  gap: 6px;
-  background: #fdfaf2;
-  padding: 6px;
-  border-radius: var(--radius-pill);
-}
-
-.tt-nav-link {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: var(--color-text);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: var(--radius-pill);
-}
-
-.tt-nav-link--active {
-  background: #17181a;
-  color: #fff;
-}
-
-.tt-profile-wrap {
-  position: relative;
-}
-
-.tt-btn-profile {
-  border: 1px solid #1a1a1a;
-  background: transparent;
-  padding: 8px 22px;
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.tt-dropdown {
-  position: absolute;
-  right: 0;
-  top: calc(100% + 8px);
-  background: #fff;
-  border-radius: var(--radius-md);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-  overflow: hidden;
-  z-index: 20;
-}
-
-.tt-dropdown button {
-  border: none;
-  background: transparent;
-  text-align: left;
-  padding: 10px 16px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.tt-dropdown button:hover {
-  background: #f2f2f2;
-}*/
 
 /* =========================================================
     PAGE / GREETING
 ========================================================= */
 .tt-page {
   padding: 10px 40px 120px;
+  
 }
 
 .tt-greeting h1 {
   font-size: 24px;
   font-weight: 700;
+  
 }
 
 .tt-greeting p {
   font-size: 12px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
   margin-top: 2px;
 }
 
@@ -140,19 +36,19 @@
 ========================================================= */
 .tt-events-panel {
   margin-top: 20px;
-  background: var(--pink-panel);
-  border-radius: var(--radius-lg);
+  background: var(--cor-clara-vinho);
+  border-radius: 24px;
   padding: 18px 26px 26px;
 }
 
 .tt-events-panel__title {
   display: inline-block;
-  background: var(--pink-badge);
-  color: #fff;
+  background: var(--cor-escura-vinho);
+  color: var(--cor-clara);
   font-size: 13px;
   font-weight: 600;
   padding: 10px 22px;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
 }
 
 .tt-events-panel__body {
@@ -180,8 +76,8 @@
 }
 
 .tt-event-card {
-  background: var(--card-bg);
-  border-radius: var(--radius-md);
+  background: var(--cor-clara);
+  border-radius: 16px;
   padding: 16px 18px 20px;
   height: 100%;
 }
@@ -194,7 +90,7 @@
 
 .tt-event-card p {
   font-size: 10.5px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
   line-height: 1.5;
 }
 
@@ -202,7 +98,7 @@
   display: block;
   margin-top: 12px;
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
   padding: 8px 0;
   width: 100%;
   font-size: 11px;
@@ -211,8 +107,8 @@
 }
 
 .tt-btn-pill--lime {
-  background: var(--lime);
-  color: #1a1a1a;
+  background: var(--cor-clara-verde);
+  color: var(--cor-primaria);
 }
 
 .tt-events-panel__next {
@@ -220,16 +116,16 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid #1a1a1a;
+  border: 1px solid var(--cor-primaria);
   background: transparent;
   font-size: 16px;
   cursor: pointer;
 }
 
 .tt-events-panel__next--reset {
-  background: var(--blue-btn);
-  border-color: var(--blue-btn);
-  color: #fff;
+  background: var(--cor-escura-azul);
+  border-color: var(--cor-escura-azul);
+  color: var(--cor-clara);
 }
 
 /* =========================================================
@@ -245,9 +141,9 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--lime);
+  background: var(--cor-clara-verde);
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
   padding: 12px 26px;
   font-size: 14px;
   font-weight: 700;
@@ -273,16 +169,16 @@
 }
 
 .tt-proposal-column {
-  border-radius: var(--radius-lg);
+  border-radius: 24px;
   padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.tt-proposal-column--aprovadas { background: var(--lime-column); }
-.tt-proposal-column--pendentes { background: var(--lavender-column); }
-.tt-proposal-column--reprovados { background: var(--mauve-column); }
+.tt-proposal-column--aprovadas { background: rgb(from var(--cor-clara-verde) r g b / 0.6);}
+.tt-proposal-column--pendentes { background: var(--azul-claro);}
+.tt-proposal-column--reprovados { background: rgb(from var(--cor-escura-vinho) r g b /0.6);}
 
 .tt-proposal-column__label {
   display: flex;
@@ -290,9 +186,9 @@
 }
 
 .tt-proposal-column__label span {
-  background: var(--card-bg);
+  background: var(--cor-clara);
   padding: 8px 26px;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 700;
 }
@@ -304,8 +200,8 @@
 }
 
 .tt-proposal-card {
-  background: var(--card-bg);
-  border-radius: var(--radius-md);
+  background: var(--cor-clara);
+  border-radius: 16px;
   padding: 16px 18px 18px;
 }
 
@@ -317,7 +213,7 @@
 
 .tt-proposal-card p {
   font-size: 11px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
   line-height: 1.5;
 }
 
@@ -325,10 +221,10 @@
   display: block;
   margin-top: 12px;
   margin-left: auto;
-  background: var(--blue-btn);
-  color: #fff;
+  background: var(--cor-escura-azul);
+  color: var(--cor-clara);
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
   padding: 8px 24px;
   font-size: 11px;
   font-weight: 700;
@@ -336,12 +232,12 @@
 }
 
 .tt-btn-avaliar--reject {
-  background: #7a2f2f;
+  background: var(--cor-escura-vinho);
 }
 
 .tt-empty {
   font-size: 12px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
   text-align: center;
   padding: 10px 0;
 }
@@ -365,10 +261,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #17181a;
-  color: #fff;
+  background: var(--cor-primaria);
+  color: var(--cor-clara);
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: 999px;
   padding: 12px 22px;
   font-size: 13px;
   font-weight: 600;
@@ -390,8 +286,8 @@
 }
 
 .tt-modal {
-  background: #fff;
-  border-radius: var(--radius-md);
+  background: var(--cor-clara);
+  border-radius: 16px;
   padding: 28px;
   max-width: 380px;
   width: 100%;
@@ -405,7 +301,7 @@
 .tt-modal p {
   font-size: 13px;
   margin-bottom: 8px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
 }
 
 .tt-modal .tt-btn-pill {
@@ -430,8 +326,8 @@
   position: fixed;
   bottom: 80px;
   width: 300px;
-  background: #fff;
-  border-radius: var(--radius-md);
+  background: var(--cor-clara);
+  border-radius: 16px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
   z-index: 40;
   overflow: hidden;
@@ -445,14 +341,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 18px;
-  background: #17181a;
-  color: #fff;
+  background: var(--cor-primaria);
+  color: var(--cor-clara);
 }
 
 .tt-panel__header button {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--cor-clara);
   cursor: pointer;
   font-size: 14px;
 }
@@ -460,18 +356,14 @@
 .tt-panel__body {
   padding: 18px;
   font-size: 13px;
-  color: var(--color-text-soft);
+  color: var(--cor-texto-suave);
 }*/
 
 /* =========================================================
     RESPONSIVE
 ========================================================= */
 @media (max-width: 900px) {
-  /*.tt-header {
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 18px 20px;
-  }*/
+  
 
   .tt-page {
     padding: 10px 20px 140px;

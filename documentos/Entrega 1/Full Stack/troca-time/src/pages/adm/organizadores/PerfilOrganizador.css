@@ -1,27 +1,15 @@
 /* =========================================================
    PERFIL DO ORGANIZADOR (visão do ADM)
-   Todas as classes começam com "org-" para não conflitar
-   com o global.css
 ========================================================= */
 .org-pagina {
-    --org-creme: #FCFDE9;
-    --org-rosa: #F0D9EA;
-    --org-lima: var(--cor-clara-verde, #C9E338);
-    --org-lima-claro: #DCEA8F;
-    --org-vinho: var(--cor-escura-vinho, #4A1830);
-    --org-azul: var(--cor-escura-azul, #113BBB);
-    --org-cartao: var(--cor-clara, #FEFFF3);
-    --org-texto: #1a1a1a;
-    --org-texto-suave: #55555c;
-
     width: min(960px, calc(100% - 48px));
     margin: 0 auto 140px;
-    color: var(--org-texto);
+    color: var(--cor-texto-simples);
 }
 
 .org-pagina button:focus-visible,
 .org-pagina a:focus-visible {
-    outline: 2px solid var(--org-azul);
+    outline: 2px solid var(--cor-escura-azul);
     outline-offset: 2px;
 }
 
@@ -54,19 +42,19 @@
 }
 
 .org-botao-lima {
-    background: var(--org-lima);
-    color: var(--org-texto);
+    background: var(--cor-clara-verde);
+    color: var(--cor-texto-simples);
 }
 
 .org-botao-vinho {
-    background: var(--org-vinho);
-    color: #fff;
+    background: var(--cor-escura-vinho);
+    color: var(--cor-clara);
 }
 
 .org-botao-contorno {
     background: transparent;
-    color: var(--org-texto);
-    border: 1px solid var(--org-texto);
+    color: var(--cor-texto-simples);
+    border: 1px solid var(--cor-texto-simples);
 }
 
 .org-seta {
@@ -76,9 +64,9 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1.5px solid var(--org-vinho);
+    border: 1.5px solid var(--cor-escura-vinho);
     background: transparent;
-    color: var(--org-vinho);
+    color: var(--cor-escura-vinho);
     cursor: pointer;
 }
 
@@ -90,8 +78,8 @@
     width: 32px;
     height: 32px;
     margin: 12px auto 0;
-    border-color: var(--org-azul);
-    color: var(--org-azul);
+    border-color: var(--cor-escura-azul);
+    color: var(--cor-escura-azul);
 }
 
 /* ---------- Estados ---------- */
@@ -101,18 +89,18 @@
     align-items: center;
     gap: 14px;
     padding: 60px 20px;
-    color: var(--org-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 .org-estado-erro {
-    color: var(--cor-erro, #D64545);
+    color: var(--cor-erro);
 }
 
 .org-spinner {
     width: 20px;
     height: 20px;
-    border: 2px solid #ddd;
-    border-top-color: var(--org-texto);
+    border: 2px solid var(--cinza-claro);
+    border-top-color: var(--cor-texto-simples);
     border-radius: 50%;
     animation: org-girar 0.8s linear infinite;
 }
@@ -123,13 +111,13 @@
 
 .org-vazio {
     font-size: 0.85rem;
-    color: var(--org-texto-suave);
+    color: var(--cor-texto-suave);
     padding: 16px 4px;
 }
 
 /* ---------- Dados do organizador ---------- */
 .org-dados {
-    background: var(--org-creme);
+    background: var(--cor-fundo-1);
     border-radius: 20px;
     padding: 20px 28px 32px;
     margin-bottom: 28px;
@@ -153,14 +141,14 @@
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    background: #D0D0D0;
+    background: var(--cinza-claro);
     overflow: hidden;
 }
 
 .org-foto svg {
     width: 100%;
     height: 100%;
-    fill: #9A9A9A;
+    fill: var(--cor-texto-suave);
 }
 
 .org-info {
@@ -186,12 +174,12 @@
 
 .org-descricao dd {
     line-height: 1.5;
-    color: var(--org-texto-suave);
+    color: var(--cor-texto-suave);
 }
 
 /* ---------- Próximos eventos ---------- */
 .org-eventos {
-    background: var(--org-rosa);
+    background: var(--cor-clara-vinho);
     border-radius: 28px;
     padding: 18px 24px 26px;
     margin-bottom: 28px;
@@ -199,8 +187,8 @@
 
 .org-selo {
     display: inline-block;
-    background: var(--org-vinho);
-    color: #fff;
+    background: var(--cor-escura-vinho);
+    color: var(--cor-clara);
     font-size: 0.9rem;
     font-weight: 600;
     padding: 10px 26px;
@@ -233,7 +221,7 @@
 
 .org-evento {
     scroll-snap-align: start;
-    background: var(--org-cartao);
+    background: var(--cor-clara);
     border-radius: 18px;
     padding: 16px 18px;
     display: flex;
@@ -271,7 +259,7 @@
 }
 
 .org-avaliacoes {
-    background: var(--org-lima-claro);
+    background: rgb(from var(--cor-clara-verde) r g b/ 0.5);
     border-radius: 16px;
     padding: 12px 18px 16px;
     display: flex;
@@ -291,7 +279,7 @@
 }
 
 .org-avaliacao {
-    background: var(--org-cartao);
+    background: var(--cor-clara);
     border-radius: 16px;
     padding: 12px 16px;
     font-size: 0.75rem;
@@ -305,11 +293,11 @@
 
 .org-estrelas {
     letter-spacing: 2px;
-    color: #CFCFC4;
+    color: var(--cinza-claro);
 }
 
 .org-estrelas .cheia {
-    color: #F2A900;
+    color: var(--cor-clara-verde);
 }
 
 .org-status {
@@ -341,13 +329,13 @@
 .org-status-selo {
     padding: 6px 20px;
     border-radius: 999px;
-    color: #fff;
+    color: var(--cor-clara);
     font-size: 0.85rem;
 }
 
-.org-status-aprovado  { background: var(--org-azul); }
-.org-status-pendente  { background: var(--cor-status-pendente, #FA8905); }
-.org-status-rejeitado { background: var(--cor-erro, #D64545); }
+.org-status-aprovado  { background: var(--cor-escura-azul); }
+.org-status-pendente  { background: var(--cor-clara-verde); }
+.org-status-rejeitado { background: var(--cor-erro); }
 
 .org-mensagem {
     font-size: 0.85rem;
@@ -367,7 +355,7 @@
 
 .org-modal {
     width: min(380px, 100%);
-    background: #fff;
+    background: var(--cor-clara);
     border-radius: 18px;
     padding: 26px;
     display: grid;

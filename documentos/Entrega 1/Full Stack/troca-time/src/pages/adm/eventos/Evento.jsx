@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import ListaEventos from '../../../components/ListaEventos.jsx';
 import { eventos } from  '../../../dados/eventos.js';
+import './eventos.css'
 
 
 export default function Home() {

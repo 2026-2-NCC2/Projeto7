@@ -1,6 +1,7 @@
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import Cabecalho from './components/Cabecalho.jsx'
 import ChatIA from './components/ChatIA.jsx'
+import ChatConversa from './components/ChatConversa.jsx'
 
 // Importações de páginas
 import DetalheEvento from './pages/adm/eventos/DetalheEvento.jsx'
@@ -12,15 +13,17 @@ import AdmHome from './pages/adm/Home/index.jsx'
 import Login from './pages/auth/Login'
 import CadastroFormulario from './pages/auth/Cadastro/CadastroFormulario'
 import CadastroAgradecimento from './pages/auth/Cadastro/CadastroAgradecimento'
-import HomeFornecedor from './pages/fornecedor/Home/index.jsx'
+import HomeFornecedores from './pages/fornecedor/Home/HomeFornecedores.jsx'
 import HomeOrganizador from './pages/adm/organizadores/PerfilOrganizador.jsx'
 
 function LayoutAutenticado() {
+  const location = useLocation()
   return (
     <>
       <Cabecalho />
       <Outlet />
       <ChatIA />
+      {location.pathname === '/fornecedores' && <ChatConversa />}
     </>
   )
 }
@@ -37,7 +40,7 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/eventos" element={<Evento />} />
           <Route path="/eventos/:id" element={<DetalheEvento />} />
-          <Route path="/fornecedores" element={<HomeFornecedor titulo="Fornecedores" />} />
+          <Route path="/fornecedores" element={<HomeFornecedores />} />
           <Route path="/organizadores" element={<HomeOrganizador titulo="Organizadores" />} />
             <Route path="/organizadores/:id" element={<PerfilOrganizador />} />
           <Route path="/perfil" element={<PaginaVazia titulo="Perfil" />} />
