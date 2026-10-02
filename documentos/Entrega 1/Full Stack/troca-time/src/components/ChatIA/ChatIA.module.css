@@ -1,0 +1,133 @@
+.chat {
+    position: fixed;
+    z-index: 10;
+    bottom: 28px;
+}
+
+.direita {
+    left: auto;
+    right: max(28px, calc((100vw - 1100px) / 2));
+}
+
+.esquerda {
+    right: auto;
+    left: max(28px, calc((100vw - 1100px) / 2));
+}
+
+/* ---------- Botão de abrir ---------- */
+.abrir {
+    border: 0;
+    border-radius: 25px;
+    padding: 11px 14px 11px 18px;
+    background: var(--cor-primaria);
+    color: var(--cor-clara);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    box-shadow: 0 5px 18px var(--cor-primaria);
+    transition: transform 0.15s;
+}
+
+/* ---------- Painel ---------- */
+.painel {
+    width: min(340px, calc(100vw - 32px));
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: var(--cor-clara);
+    border-radius: 16px;
+    box-shadow: 0 12px 35px var(--cor-primaria);
+}
+
+.titulo {
+    padding: 14px 16px;
+    background: var(--cor-primaria);
+    color: var(--cor-clara);
+    display: flex;
+    justify-content: space-between;
+}
+
+.titulo button {
+    border: 0;
+    color: var(--cor-clara);
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ---------- Mensagens ---------- */
+.mensagens {
+    height: 210px;
+    overflow: auto;
+    padding: 15px;
+    background: var(--cor-clara);
+}
+
+.mensagens p {
+    max-width: 80%;
+    width: fit-content;
+    margin: 0 0 10px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+.mensagens .bot {
+    background: var(--cinza-claro);
+}
+
+.mensagens .usuario {
+    margin-left: auto;
+    background: var(--cinza-claro);
+}
+
+/* ---------- Formulário ---------- */
+.formulario {
+    display: flex;
+    padding: 10px;
+    gap: 8px;
+}
+
+.formulario input {
+    min-width: 0;
+    width: 100%;
+    flex: 1;
+    padding: 9px;
+    margin-bottom: 12px;
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    outline: none;
+    background: var(--cor-fundo-3);
+    box-shadow: var(--sombra-1);
+}
+
+.formulario input::placeholder {
+    color: var(--cor-texto-suave);
+    font-size: 1rem;
+}
+
+.formulario input:focus {
+    border-color: var(--cor-escura-1);
+}
+
+.formulario button {
+    border: 0;
+    border-radius: 8px;
+    background: var(--cor-escura-azul);
+    color: var(--cinza-claro);
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 720px) {
+    .esquerda {
+        left: 16px;
+    }
+
+    .direita {
+        right: 16px;
+    }
+}
