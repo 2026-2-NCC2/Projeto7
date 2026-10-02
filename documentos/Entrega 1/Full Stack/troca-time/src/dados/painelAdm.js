@@ -65,23 +65,96 @@ const INDICADORES = {
 // tipo: 'fornecedor' | 'organizador'
 // organizadorId liga o cadastro ao perfil em /organizadores/:id
 let cadastrosPendentes = [
-    { id: 1, nome: 'Luz & Som Produções', atuacao: 'Iluminação e som', tipo: 'fornecedor', pedido: '2026-09-19' },
-    { id: 2, nome: 'Coletivo Rolê', atuacao: 'Festas e shows', tipo: 'organizador', pedido: '2026-09-18', organizadorId: 2 },
-    { id: 3, nome: 'Sabor de Festa Buffet', atuacao: 'Alimentação e bebidas', tipo: 'fornecedor', pedido: '2026-09-18' },
-    { id: 4, nome: 'Segura Eventos', atuacao: 'Segurança', tipo: 'fornecedor', pedido: '2026-09-17' },
-    { id: 5, nome: 'Formaturas 360', atuacao: 'Formaturas', tipo: 'organizador', pedido: '2026-09-17', organizadorId: 5 },
-    { id: 6, nome: 'Atlética Unida', atuacao: 'Jogos universitários', tipo: 'organizador', pedido: '2026-09-16' },
+    {
+        id: 1,
+        nome: 'Luz & Som Produções',
+        atuacao: 'Iluminação e som',
+        tipo: 'fornecedor',
+        pedido: '2026-09-19',
+    },
+    {
+        id: 2,
+        nome: 'Coletivo Rolê',
+        atuacao: 'Festas e shows',
+        tipo: 'organizador',
+        pedido: '2026-09-18',
+        organizadorId: 2,
+    },
+    {
+        id: 3,
+        nome: 'Sabor de Festa Buffet',
+        atuacao: 'Alimentação e bebidas',
+        tipo: 'fornecedor',
+        pedido: '2026-09-18',
+    },
+    {
+        id: 4,
+        nome: 'Segura Eventos',
+        atuacao: 'Segurança',
+        tipo: 'fornecedor',
+        pedido: '2026-09-17',
+    },
+    {
+        id: 5,
+        nome: 'Formaturas 360',
+        atuacao: 'Formaturas',
+        tipo: 'organizador',
+        pedido: '2026-09-17',
+        organizadorId: 5,
+    },
+    {
+        id: 6,
+        nome: 'Atlética Unida',
+        atuacao: 'Jogos universitários',
+        tipo: 'organizador',
+        pedido: '2026-09-16',
+    },
 ]
 
 // tipo: 'aprovado' | 'rejeitado' | 'movido'
 let acoesRecentes = [
-    { id: 'a1', tipo: 'aprovado', texto: 'Fornecedor aprovado: Estrutura Palco Forte', quando: 'Hoje, 14:20' },
-    { id: 'a2', tipo: 'rejeitado', texto: 'Organizador rejeitado: dados incompletos', quando: 'Hoje, 11:05' },
-    { id: 'a3', tipo: 'movido', texto: 'Evento Calourada movido para Em cotação', quando: 'Ontem, 17:42' },
-    { id: 'a4', tipo: 'aprovado', texto: 'Organizador aprovado: Festas Unificadas', quando: 'Ontem, 09:30' },
-    { id: 'a5', tipo: 'rejeitado', texto: 'Fornecedor rejeitado: cadastro duplicado', quando: '18/09, 16:10' },
-    { id: 'a6', tipo: 'movido', texto: 'Evento Baile de Gala movido para Ticket calculado', quando: '17/09, 10:15' },
-    { id: 'a7', tipo: 'aprovado', texto: 'Fornecedor aprovado: Expo Estruturas', quando: '16/09, 15:48' },
+    {
+        id: 'a1',
+        tipo: 'aprovado',
+        texto: 'Fornecedor aprovado: Estrutura Palco Forte',
+        quando: 'Hoje, 14:20',
+    },
+    {
+        id: 'a2',
+        tipo: 'rejeitado',
+        texto: 'Organizador rejeitado: dados incompletos',
+        quando: 'Hoje, 11:05',
+    },
+    {
+        id: 'a3',
+        tipo: 'movido',
+        texto: 'Evento Calourada movido para Em cotação',
+        quando: 'Ontem, 17:42',
+    },
+    {
+        id: 'a4',
+        tipo: 'aprovado',
+        texto: 'Organizador aprovado: Festas Unificadas',
+        quando: 'Ontem, 09:30',
+    },
+    {
+        id: 'a5',
+        tipo: 'rejeitado',
+        texto: 'Fornecedor rejeitado: cadastro duplicado',
+        quando: '18/09, 16:10',
+    },
+    {
+        id: 'a6',
+        tipo: 'movido',
+        texto: 'Evento Baile de Gala movido para Ticket calculado',
+        quando: '17/09, 10:15',
+    },
+    {
+        id: 'a7',
+        tipo: 'aprovado',
+        texto: 'Fornecedor aprovado: Expo Estruturas',
+        quando: '16/09, 15:48',
+    },
 ]
 
 export function buscarIndicadores(periodo) {
