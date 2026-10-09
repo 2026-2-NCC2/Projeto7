@@ -1,0 +1,49 @@
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 999px;
+    padding: 11px 28px;
+    font-family: var(--fonte-principal);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        transform 0.1s,
+        box-shadow 0.1s;
+}
+
+.botao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ---------- Variante: primario ---------- */
+.primario {
+    background: var(--cor-escura-1);
+    color: var(--cor-fundo-1);
+    box-shadow: var(--sombra-1);
+}
+
+.primario:hover:not(:disabled) {
+    background: linear-gradient(to bottom, var(--cor-escura-1), var(--cor-escura-2));
+}
+
+.primario:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: var(--sombra-2);
+}
+
+/* ---------- Variante: link ---------- */
+.link {
+    background: none;
+    padding: 0;
+    color: var(--cor-escura-1);
+}
+
+.link:hover:not(:disabled) {
+    text-decoration: underline;
+}
