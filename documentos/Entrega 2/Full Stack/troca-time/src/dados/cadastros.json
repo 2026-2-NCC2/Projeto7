@@ -1,0 +1,18 @@
+{
+  "fornecedores": [
+    { "id": 1, "nome": "Palco & Som", "documento": "12.345.678/0001-90", "cidade": "São Paulo", "estado": "SP", "descricao": "Estrutura completa de palco, sonorização e iluminação para shows e eventos corporativos.", "status": "aprovado", "servico": "Som, palco e iluminação", "eventos": [1, 3] },
+    { "id": 2, "nome": "Música Viva", "documento": "23.456.789/0001-01", "cidade": "Campinas", "estado": "SP", "descricao": "Locação de equipamentos de áudio e suporte técnico durante apresentações.", "status": "pendente", "servico": "Equipamentos de áudio", "eventos": [2] },
+    { "id": 3, "nome": "Luzes Pro", "documento": "34.567.890/0001-12", "cidade": "Santo André", "estado": "SP", "descricao": "Iluminação cênica e efeitos especiais para eventos de todos os portes.", "status": "rejeitado", "servico": "Iluminação cênica", "eventos": [3] },
+    { "id": 4, "nome": "Expo Estruturas", "documento": "45.678.901/0001-23", "cidade": "São Bernardo do Campo", "estado": "SP", "descricao": "Montagem de estandes, tendas e estruturas modulares para feiras.", "status": "aprovado", "servico": "Estruturas e estandes", "eventos": [4] },
+    { "id": 5, "nome": "Sound Lab", "documento": "56.789.012/0001-34", "cidade": "São Paulo", "estado": "SP", "descricao": "Produção técnica de áudio, DJs e sonorização para festas e festivais.", "status": "pendente", "servico": "Áudio e produção musical", "eventos": [5] },
+    { "id": 6, "nome": "Mega Palco", "documento": "67.890.123/0001-45", "cidade": "Santos", "estado": "SP", "descricao": "Palcos, praticáveis e coberturas com equipe de montagem especializada.", "status": "aprovado", "servico": "Palco e cobertura", "eventos": [6] }
+  ],
+  "organizadores": [
+    { "id": 1, "nome": "Eventos Brasil", "documento": "12.345.678/0001-90", "cidade": "São Paulo", "estado": "SP", "descricao": "Produtora de festas universitárias e shows de médio porte. Organiza calouradas, festas de atléticas e formaturas na Grande São Paulo desde 2019.", "status": "aprovado", "eventos": [1, 6] },
+    { "id": 2, "nome": "Viva Cultura", "documento": "123.456.789-00", "cidade": "Campinas", "estado": "SP", "descricao": "Organização de shows, festivais e projetos culturais para públicos diversos.", "status": "pendente", "eventos": [2] },
+    { "id": 3, "nome": "Rock Produções", "documento": "98.765.432/0001-10", "cidade": "Santo André", "estado": "SP", "descricao": "Produção de festivais e apresentações de música ao vivo na região metropolitana.", "status": "aprovado", "eventos": [3] },
+    { "id": 4, "nome": "Ideia Livre", "documento": "45.678.901/0001-23", "cidade": "São Bernardo do Campo", "estado": "SP", "descricao": "Feiras criativas que aproximam artistas independentes, marcas locais e comunidade.", "status": "rejeitado", "eventos": [4] },
+    { "id": 5, "nome": "Wave Eventos", "documento": "56.789.012/0001-34", "cidade": "São Paulo", "estado": "SP", "descricao": "Experiências de música eletrônica e eventos noturnos com produção completa.", "status": "pendente", "eventos": [5] },
+    { "id": 6, "nome": "Sol Produções", "documento": "67.890.123/0001-45", "cidade": "Santos", "estado": "SP", "descricao": "Festivais ao ar livre, eventos de verão e experiências à beira-mar.", "status": "aprovado", "eventos": [6] }
+  ]
+}
