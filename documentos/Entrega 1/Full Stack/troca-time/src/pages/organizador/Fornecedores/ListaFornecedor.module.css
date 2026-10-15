@@ -1,5 +1,0 @@
-.pagina { width: min(920px, calc(100% - 48px)); min-height: 60vh; margin: 0 auto 150px; }
-.filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
-.lista { display: grid; gap: 14px; padding: 24px; border-radius: 28px; background: var(--azul-claro); }
-.vazio { padding: 28px; text-align: center; }
-@media (max-width: 720px) { .pagina { width: min(100% - 30px, 560px); } .lista { padding: 14px; } }

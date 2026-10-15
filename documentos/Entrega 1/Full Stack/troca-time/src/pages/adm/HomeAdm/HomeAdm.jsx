@@ -7,7 +7,6 @@ import {
     decidirCadastro,
 } from '@/dados/painelAdm'
 import styles from './HomeAdm.module.css'
-import avatarPadrao from '@/assets/avatar-padrao.png'
 
 const PERIODOS = [
     { valor: '7d', rotulo: '7 dias' },
@@ -383,11 +382,12 @@ function HomeAdm() {
                                         <tr key={cadastro.id}>
                                             <td>
                                                 <div className={styles.pessoa}>
-                                                    <img
+                                                    <span
                                                         className={styles.avatar}
-                                                        src={avatarPadrao}
-                                                        alt=''
-                                                    />
+                                                        aria-hidden='true'
+                                                    >
+                                                        {iniciais(cadastro.nome)}
+                                                    </span>
                                                     <div>
                                                         {cadastro.organizadorId ? (
                                                             <Link

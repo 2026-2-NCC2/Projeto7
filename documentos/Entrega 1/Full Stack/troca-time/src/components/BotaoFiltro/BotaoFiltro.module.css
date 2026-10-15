@@ -1,6 +1,0 @@
-.filtro { padding: 9px 18px; border: 1px solid transparent; border-radius: 22px; cursor: pointer; background: var(--cor-clara); }
-.pendente { color: var(--cor-clara); background: var(--cor-escura-azul); }
-.aprovado { background: var(--cor-clara-verde); }
-.rejeitado { color: var(--cor-clara); background: var(--cor-escura-vinho); }
-.todos { color: var(--cor-escura-azul); border-color: var(--cor-escura-azul); }
-.selecionado { box-shadow: 0 0 0 2px var(--cor-tracado-1); }

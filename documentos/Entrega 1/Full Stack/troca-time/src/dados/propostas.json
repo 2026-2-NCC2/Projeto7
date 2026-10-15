@@ -1,8 +1,0 @@
-[
-  { "id": "p1", "eventoId": 1, "servico": "Som e iluminação", "valor": "R$ 4.800,00", "status": "pendente" },
-  { "id": "p2", "eventoId": 2, "servico": "Palco e equipamentos", "valor": "R$ 3.200,00", "status": "aprovado" },
-  { "id": "p3", "eventoId": 3, "servico": "Iluminação cênica", "valor": "R$ 2.750,00", "status": "reprovado" },
-  { "id": "p4", "eventoId": 4, "servico": "Estruturas e estandes", "valor": "R$ 5.100,00", "status": "pendente" },
-  { "id": "p5", "eventoId": 5, "servico": "Áudio e produção musical", "valor": "R$ 3.900,00", "status": "aprovado" },
-  { "id": "p6", "eventoId": 6, "servico": "Palco e cobertura", "valor": "R$ 6.500,00", "status": "pendente" }
-]

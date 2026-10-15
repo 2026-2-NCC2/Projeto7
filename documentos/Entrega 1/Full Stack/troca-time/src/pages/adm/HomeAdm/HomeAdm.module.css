@@ -445,7 +445,11 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    object-fit: cover;
+    background: var(--cor-fundo-4);
+    display: grid;
+    place-items: center;
+    font-size: 0.7rem;
+    font-weight: 700;
 }
 
 .pessoa-nome {

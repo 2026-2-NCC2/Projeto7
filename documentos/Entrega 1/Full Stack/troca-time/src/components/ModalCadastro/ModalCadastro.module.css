@@ -1,6 +1,0 @@
-.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 20px; background: var(--cor-texto-simples); }
-.modal { position: relative; width: min(540px, 100%); display: grid; gap: 14px; padding: 30px; border-radius: 24px; background: var(--cor-clara); box-shadow: var(--sombra-1); }
-.fechar { position: absolute; top: 12px; right: 16px; border: 0; background: transparent; font-size: 1.5rem; cursor: pointer; }
-.acoes { display: flex; justify-content: flex-end; gap: 10px; }
-.acoes button { padding: 10px 18px; border: 0; border-radius: 20px; color: var(--cor-clara); background: var(--cor-escura-azul); cursor: pointer; }
-.acoes button:first-child { background: var(--cor-escura-vinho); }

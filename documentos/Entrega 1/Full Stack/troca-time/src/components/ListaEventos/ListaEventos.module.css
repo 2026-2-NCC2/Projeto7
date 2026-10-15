@@ -1,0 +1,13 @@
+.lista {
+    padding: 30px 50px;
+    border-radius: 30px;
+    background: var(--azul-claro);
+    display: grid;
+    gap: 14px;
+}
+
+@media (max-width: 720px) {
+    .lista {
+        padding: 16px;
+    }
+}
