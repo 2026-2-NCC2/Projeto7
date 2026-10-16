@@ -1,0 +1,24 @@
+.pagina { width: min(920px, calc(100% - 48px)); margin: 36px auto 150px; }
+.busca { display: block; margin: 0 10px 14px; }
+.busca input { width: 100%; height: 48px; padding: 0 20px; border: 1px solid var(--cor-primaria); border-radius: 28px; background: var(--cor-clara); outline: none; }
+.busca input:focus { border-color: var(--cor-escura-1); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+.filtros { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 10px 14px; }
+.filtro { padding: 9px 18px; border: 1px solid transparent; border-radius: 22px; cursor: pointer; }
+.pendente { color: var(--cor-clara); background: var(--cor-escura-azul); }
+.aprovado { background: var(--cor-clara-verde); }
+.reprovado { color: var(--cor-clara); background: var(--cor-escura-vinho); }
+.todos { color: var(--cor-escura-azul); border-color: var(--cor-escura-azul); background: var(--cor-clara); }
+.selecionado { box-shadow: 0 0 0 2px var(--cor-tracado-1); }
+.lista { display: grid; gap: 16px; padding: 28px; border-radius: 30px; background: var(--azul-claro); }
+.cartao { position: relative; display: grid; grid-template-columns: 124px minmax(200px, 1fr) minmax(150px, 180px); gap: 24px; align-items: center; min-height: 160px; padding: 16px 24px 42px; border-radius: 26px; background: var(--cor-clara); }
+.imagem { width: 124px; height: 124px; border-radius: 18px; object-fit: cover; }
+.evento h2 { margin-bottom: 18px; font-size: 1rem; }
+.evento p, .proposta p { margin-top: 8px; font-size: .84rem; }
+.proposta { justify-self: stretch; padding: 14px 12px; border-radius: 18px; background: var(--azul-claro); }
+.verMais { position: absolute; right: 50px; bottom: 10px; padding: 7px 20px; border: 0; border-radius: 20px; color: var(--cor-clara); background: var(--cor-escura-azul); cursor: pointer; }
+.vazio { padding: 28px; text-align: center; }
+.overlay { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 20px; background: var(--cor-texto-simples); }
+.modal { position: relative; width: min(520px, 100%); display: grid; gap: 12px; padding: 30px; border-radius: 24px; background: var(--cor-clara); box-shadow: var(--sombra-1); }
+.fechar { position: absolute; top: 12px; right: 16px; border: 0; background: transparent; font-size: 1.5rem; cursor: pointer; }
+@media (max-width: 720px) { .pagina { width: min(100% - 30px, 560px); margin-top: 20px; } .lista { padding: 14px; } .cartao { grid-template-columns: 82px 1fr; gap: 12px; padding: 14px 14px 48px; } .imagem { width: 82px; height: 92px; border-radius: 14px; } .evento h2 { margin-bottom: 8px; } .evento p, .proposta p { font-size: .75rem; } .proposta { grid-column: 2; padding: 8px; } .verMais { right: 18px; } }

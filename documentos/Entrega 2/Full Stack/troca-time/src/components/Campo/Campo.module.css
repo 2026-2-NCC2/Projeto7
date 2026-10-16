@@ -1,0 +1,37 @@
+.campo {
+    margin-bottom: 20px;
+}
+
+.rotulo {
+    display: block;
+    margin: 0 0 6px 18px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--cor-escura-1);
+}
+
+.input {
+    width: 100%;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    border: 1.5px solid var(--cor-tracado-1);
+    border-radius: 999px;
+    font-family: var(--fonte-principal);
+    font-size: 1rem;
+    outline: none;
+    background: var(--cor-fundo-3);
+    box-shadow: var(--sombra-1);
+}
+
+.input::placeholder {
+    color: var(--cor-texto-suave);
+    font-size: 1rem;
+}
+
+.invalido {
+    border-color: var(--cor-erro);
+}
+
+.input:focus {
+    border-color: var(--cor-escura-1);
+}

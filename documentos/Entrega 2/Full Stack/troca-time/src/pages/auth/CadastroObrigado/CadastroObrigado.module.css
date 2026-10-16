@@ -1,0 +1,17 @@
+.status {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.pendente {
+    color: var(--cor-clara-verde);
+}
+
+.aprovado {
+    color: var(--cor-escura-azul);
+}
+
+.recusado {
+    color: var(--cor-erro);
+}

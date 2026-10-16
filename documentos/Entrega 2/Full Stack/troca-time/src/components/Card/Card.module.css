@@ -1,0 +1,23 @@
+.card {
+    width: 100%;
+    border-radius: 24px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Variantes ---------- */
+.primario {
+    background: var(--cor-fundo-4);
+    border: 1px solid var(--cor-tracado-2);
+    box-shadow: var(--sombra-1);
+}
+
+/* ---------- Larguras ---------- */
+.estreito {
+    max-width: 400px;
+}
+
+.largo {
+    max-width: 760px;
+}

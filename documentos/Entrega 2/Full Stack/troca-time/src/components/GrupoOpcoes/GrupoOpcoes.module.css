@@ -1,0 +1,43 @@
+.opcoes {
+    display: flex;
+    gap: 12px;
+    padding: 10px 18px 12px;
+}
+
+.opcao {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border: 1.5px solid var(--cor-tracado-1);
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 450;
+    background: var(--cor-fundo-3);
+    box-shadow: var(--sombra-1);
+    cursor: pointer;
+    transition:
+        background 0.15s,
+        transform 0.1s,
+        box-shadow 0.1s;
+}
+
+/* esconde o radio nativo, o label inteiro funciona como botão */
+.opcao input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.opcao:has(input:focus-visible) {
+    border-color: var(--cor-escura-1);
+}
+
+.ativa {
+    transform: translateY(2px);
+    border-color: var(--cor-escura-1);
+    background-color: var(--cor-escura-1);
+    color: var(--cor-fundo-1);
+    box-shadow: var(--sombra-2);
+}

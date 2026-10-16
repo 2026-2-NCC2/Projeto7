@@ -1,0 +1,39 @@
+@import './variables.css';
+
+/* Apenas estilos gerais. Estilos de componentes e páginas ficam em cada Nome.module.css */
+
+:root { /*-------------- EVENTOS ------------*/
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cor-primaria);
+    font-synthesis: none;
+    min-height: 100%;
+    background: linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2)), var(--cor-clara);
+}
+
+body {
+    color: var(--cor-texto-simples);
+    position: relative;
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    display: flow-root; /* impede que as margens dos filhos vazem para fora do body */
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+button,
+input {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
