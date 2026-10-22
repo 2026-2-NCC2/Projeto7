@@ -1,10 +1,9 @@
-import express from "express";
-import eventosRoutes from "./routes/eventosRoutes.js";
+import express from 'express';
+import eventoRoute from './src/routes/eventoRoute.js';
 
 const app = express();
 
-app.use(express.json());
-
-app.use("/eventos", eventosRoutes);
+// Rotas
+app.use('/eventos', eventoRoute);
 
 export default app;
