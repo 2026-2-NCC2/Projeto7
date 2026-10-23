@@ -31,28 +31,12 @@ CREATE TABLE IF NOT EXISTS usuario (
     )
 );
 
-CREATE TABLE IF NOT EXISTS endereco (
-    id             INT AUTO_INCREMENT PRIMARY KEY,
-    nome_local     VARCHAR(200) NOT NULL,
-    cep            CHAR(8) NOT NULL,
-    rua            VARCHAR(200) NOT NULL,
-    numero         VARCHAR(20),
-    complemento    VARCHAR(200),
-    bairro         VARCHAR(120) NOT NULL,
-    cidade         VARCHAR(120) NOT NULL,
-    estado         CHAR(2) NOT NULL,
-    criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    atualizado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS evento (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     nome                 VARCHAR(200) NOT NULL,
     descricao            TEXT,
     inicio               DATETIME NOT NULL,
     fim                  DATETIME NOT NULL,
-    prazo_cotacao        DATE,
-    endereco_id          INT NOT NULL,
     organizador_id       INT NOT NULL,
     publico_min          INT NOT NULL,
     publico_max          INT NOT NULL,
@@ -61,10 +45,17 @@ CREATE TABLE IF NOT EXISTS evento (
     ticket_publico_min   DECIMAL(10,2),
     ticket_publico_max   DECIMAL(10,2),
     status               VARCHAR(20) NOT NULL DEFAULT 'rascunho',
+    nome_local     VARCHAR(200),
+    cep            CHAR(8),
+    rua            VARCHAR(200),
+    numero         VARCHAR(20),
+    complemento    VARCHAR(200),
+    bairro         VARCHAR(120),
+    cidade         VARCHAR(120),
+    estado         VARCHAR(20),
     criado_em            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_evento_endereco    FOREIGN KEY (endereco_id)    REFERENCES endereco(id),
     CONSTRAINT fk_evento_organizador FOREIGN KEY (organizador_id) REFERENCES usuario(id),
 
     CONSTRAINT ck_evento_publico CHECK (publico_min > 0 AND publico_max > publico_min),
@@ -124,7 +115,7 @@ CREATE TABLE IF NOT EXISTS custo_evento (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     evento_id      INT NOT NULL,
     descricao      VARCHAR(200) NOT NULL,
-    tipo           VARCHAR(20) NOT NULL,
+    origem         VARCHAR(200) NOT NULL,
     valor          DECIMAL(12,2) NOT NULL,
     criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

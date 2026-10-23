@@ -1,0 +1,8 @@
+import { Router } from 'express';
+import * as admController from '../controllers/adm/admController.js';
+
+const router = Router();
+
+router.get('/resumo', admController.buscarResumoPlataformaController);
+
+export default router;
