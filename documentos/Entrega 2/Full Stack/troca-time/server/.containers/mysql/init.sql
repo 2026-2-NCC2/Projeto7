@@ -31,20 +31,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     )
 );
 
-CREATE TABLE IF NOT EXISTS endereco (
-    id             INT AUTO_INCREMENT PRIMARY KEY,
-    nome_local     VARCHAR(200) NOT NULL,
-    cep            CHAR(8) NOT NULL,
-    rua            VARCHAR(200) NOT NULL,
-    numero         VARCHAR(20),
-    complemento    VARCHAR(200),
-    bairro         VARCHAR(120) NOT NULL,
-    cidade         VARCHAR(120) NOT NULL,
-    estado         CHAR(2) NOT NULL,
-    criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    atualizado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
 CREATE TABLE IF NOT EXISTS evento (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     nome                 VARCHAR(200) NOT NULL,
@@ -129,7 +115,7 @@ CREATE TABLE IF NOT EXISTS custo_evento (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     evento_id      INT NOT NULL,
     descricao      VARCHAR(200) NOT NULL,
-    tipo           VARCHAR(20) NOT NULL,
+    origem         VARCHAR(200) NOT NULL,
     valor          DECIMAL(12,2) NOT NULL,
     criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
