@@ -1,8 +1,7 @@
 @import './variables.css';
 
-/* Apenas estilos gerais. Estilos de componentes e páginas ficam em cada Nome.module.css */
 
-:root { /*-------------- EVENTOS ------------*/
+:root { 
     font-family: Arial, Helvetica, sans-serif;
     color: var(--cor-primaria);
     font-synthesis: none;
@@ -16,7 +15,7 @@ body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    display: flow-root; /* impede que as margens dos filhos vazem para fora do body */
+    display: flow-root; 
 }
 
 

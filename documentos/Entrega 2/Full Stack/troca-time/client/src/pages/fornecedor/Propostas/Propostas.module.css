@@ -1,1 +1,152 @@
-.pagina { min-height: 60vh; }
+.pagina {
+    width: min(1020px, calc(100% - 48px));
+    margin: 35px auto 120px;
+}
+
+.pagina h1 {
+    margin: 0 0 18px;
+    font-size: 1.6rem;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.filtro {
+    padding: 9px 17px;
+    border: 2px solid transparent;
+    border-radius: 22px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.enviada {
+    color: white;
+    background: var(--cor-escura-azul);
+}
+
+.aprovada {
+    background: var(--cor-clara-verde);
+}
+
+.recusada {
+    color: white;
+    background: var(--cor-escura-vinho);
+}
+
+.todas {
+    border-color: var(--cor-escura-azul);
+    color: var(--cor-escura-azul);
+    background: white;
+}
+
+.ativo {
+    outline: 2px solid var(--cor-primaria);
+    outline-offset: 2px;
+}
+
+.tabelaWrap {
+    overflow-x: auto;
+    padding: 22px;
+    border: 1px solid #f0f0e7;
+    border-radius: 26px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.tabelaWrap table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabelaWrap th {
+    padding: 12px 10px;
+    border-bottom: 2px solid #333;
+    font-size: .7rem;
+}
+
+.tabelaWrap td {
+    padding: 14px 10px;
+    border-bottom: 1px solid #d9d9ef;
+    font-size: .85rem;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 11px;
+    border-radius: 18px;
+    font-size: .75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status_enviada {
+    color: white;
+    background: var(--cor-escura-azul);
+}
+
+.status_aprovada {
+    background: var(--cor-clara-verde);
+}
+
+.status_recusada {
+    color: white;
+    background: var(--cor-escura-vinho);
+}
+
+.status_cancelada {
+    color: white;
+    background: #777;
+}
+
+.acoes {
+    display: flex;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.acoes button {
+    padding: 5px 7px;
+    border: 0;
+    background: transparent;
+    color: var(--cor-escura-azul);
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+    font-size: .76rem;
+}
+
+.erro {
+    color: var(--cor-erro);
+    font-size: .82rem;
+}
+
+.vazio {
+    padding: 18px;
+    text-align: center;
+}
+
+.nota {
+    margin-top: 18px;
+    color: #73737c;
+    font-size: .78rem;
+}
+
+@media (max-width: 650px) {
+    .pagina {
+        width: min(100% - 30px, 560px);
+        margin-top: 22px;
+    }
+
+    .tabelaWrap {
+        padding: 10px;
+    }
+
+    .tabelaWrap table {
+        min-width: 620px;
+    }
+}
