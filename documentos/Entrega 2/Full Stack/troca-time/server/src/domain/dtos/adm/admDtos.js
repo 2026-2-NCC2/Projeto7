@@ -10,6 +10,7 @@ export function usuarioLista(usuario) {
     return {
         id: usuario.id,
         nome: usuario.nome,
+        status_cadastro: usuario.status_cadastro,
         tipo_usuario: usuario.tipo_usuario,
         cpf: usuario.cpf,
         cnpj: usuario.cnpj,

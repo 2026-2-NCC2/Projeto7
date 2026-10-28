@@ -34,6 +34,7 @@ export async function listarUsuariosRepository() {
         SELECT 
             u.id,
             u.nome,
+            u.status_cadastro,
             u.tipo_usuario,
             u.cpf,
             u.cnpj,
