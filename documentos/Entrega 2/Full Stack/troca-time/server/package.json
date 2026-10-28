@@ -2,11 +2,16 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch main.js",
-    "start": "node main.js"
+    "start": "node main.js",
+    "swagger": "node swagger.js"
   },
   "dependencies": {
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
-    "mysql2": "^3.24.6"
+    "mysql2": "^3.24.6",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
   }
 }
