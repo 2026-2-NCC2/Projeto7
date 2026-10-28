@@ -28,3 +28,20 @@ export async function buscarResumoPlataformaRepository() {
 
     return resumo[0];
 }
+
+export async function listarUsuariosRepository() {
+    const [usuarios] = await pool.query(`
+        SELECT 
+            u.id,
+            u.nome,
+            u.tipo_usuario,
+            u.cpf,
+            u.cnpj,
+            u.descricao,
+            u.criado_em
+        FROM usuario u
+        WHERE tipo_usuario != 'adm'
+    `)
+
+    return usuarios;
+}
