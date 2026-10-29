@@ -1,0 +1,139 @@
+API TROCA TICKET - ROTAS
+========================
+
+URL base: http://localhost:3000
+Formato: JSON. Nenhuma rota recebe body.
+Datas: "AAAA-MM-DD HH:MM:SS"
+Valores em reais: numero (ex.: 8500)
+
+
+PADRAO DE ERRO
+--------------
+
+{
+  "status": number,
+  "erro": string
+}
+
+400 -> parametro invalido (mensagem da rota)
+404 -> recurso nao encontrado (mensagem da rota)
+500 -> "Erro interno do servidor"
+
+
+1) GET /fornecedores/:id
+------------------------
+
+Request:
+  path   id: integer (> 0, obrigatorio)
+  query  -
+  body   -
+
+Response 200:
+{
+  "id": number,
+  "nome": string,
+  "status_cadastro": string,        // pendente | aprovado | reprovado
+  "tipo_usuario": string,           // fornecedor
+  "categoria": string,
+  "cnpj": string,
+  "telefone": string | null,
+  "email": string,
+  "descricao": string | null,
+  "criado_em": string,
+  "propostas": [
+    {
+      "id": number,
+      "nome_vaga": string,
+      "categoria": string,
+      "evento_id": number,
+      "nome_evento": string,
+      "valor": number,
+      "status": string,             // enviada | em_negociacao | aceita | recusada
+      "descricao": string
+    }
+  ]
+}
+
+Erros:
+  400 { "status": 400, "erro": "ID do fornecedor inválido" }
+  404 { "status": 404, "erro": "Fornecedor não encontrado" }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+2) GET /admin/resumo
+--------------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "total_cadastros_pendentes": number,
+  "total_eventos_cotacao": number,
+  "total_propostas_recebidas": number
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+3) GET /admin/usuarios
+----------------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "usuarios": [
+    {
+      "id": number,
+      "nome": string,
+      "status_cadastro": string,    // pendente | aprovado | reprovado
+      "tipo_usuario": string,       // organizador | fornecedor
+      "cpf": string | null,
+      "cnpj": string | null,
+      "descricao": string | null,
+      "criado_em": string
+    }
+  ]
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+4) GET /eventos
+---------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "eventos": [
+    {
+      "id": number,
+      "nome": string,
+      "status": string,
+      "descricao": string | null,
+      "inicio": string,
+      "fim": string,
+      "nome_local": string | null,
+      "quantidade_propostas": number,
+      "ticket_estimado_min": number | null,
+      "ticket_estimado_max": number | null,
+      "nome_organizador": string,
+      "organizador_id": number
+    }
+  ]
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }

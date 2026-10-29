@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 CREATE DATABASE IF NOT EXISTS troca_time;
 USE troca_time;
 
@@ -76,6 +78,7 @@ CREATE TABLE IF NOT EXISTS vaga_servico (
     evento_id      INT NOT NULL,
     nome           VARCHAR(200) NOT NULL,
     categoria      VARCHAR(20) NOT NULL,
+    item           VARCHAR(100) NOT NULL,
     descricao      TEXT,
     criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -88,7 +91,6 @@ CREATE TABLE IF NOT EXISTS proposta (
     id                  INT AUTO_INCREMENT PRIMARY KEY,
     vaga_servico_id     INT NOT NULL,
     fornecedor_id       INT NOT NULL,
-    origem              VARCHAR(20) NOT NULL,
     valor               DECIMAL(12,2) NOT NULL,
     descricao           TEXT NOT NULL,
     observacoes         TEXT,
@@ -220,57 +222,57 @@ VALUES
  'Praça da Comunidade', '06100000', 'Rua da Comunidade', '45', NULL,
  'Jardim das Flores', 'Osasco', 'SP');
 
-INSERT INTO vaga_servico (id, evento_id, nome, categoria, descricao)
+INSERT INTO vaga_servico (id, evento_id, nome, categoria, item, descricao)
 VALUES
-(1, 1, 'Sonorização e iluminação', 'audiovisual',
+(1, 1, 'Sonorização e iluminação', 'audiovisual', 'Sistema de som e luz',
  'Fornecimento e operação de som e iluminação durante o festival.'),
-(2, 1, 'Buffet para equipe', 'alimentacao',
+(2, 1, 'Buffet para equipe', 'alimentacao', 'Refeição',
  'Refeições para equipe técnica e produção.'),
-(3, 1, 'Segurança do evento', 'seguranca',
+(3, 1, 'Segurança do evento', 'seguranca', 'Equipe de seguranças',
  'Controle de acesso e segurança durante todo o evento.'),
-(4, 2, 'Estrutura de palco', 'estrutura',
+(4, 2, 'Estrutura de palco', 'estrutura', 'Palco modular',
  'Palco modular com cobertura e montagem.'),
-(5, 2, 'Coffee break', 'alimentacao',
+(5, 2, 'Coffee break', 'alimentacao', 'Coffee break',
  'Coffee break para expositores e equipe.'),
-(6, 3, 'Áudio e projeção', 'audiovisual',
+(6, 3, 'Áudio e projeção', 'audiovisual', 'Projetor e microfones',
  'Microfones, caixas de som e projeção para palestras.'),
-(7, 4, 'Equipe de segurança', 'seguranca',
+(7, 4, 'Equipe de segurança', 'seguranca', 'Equipe de seguranças',
  'Controle de acesso e apoio à organização.');
 
 INSERT INTO proposta
-(id, vaga_servico_id, fornecedor_id, origem, valor, descricao, observacoes,
+(id, vaga_servico_id, fornecedor_id, valor, descricao, observacoes,
  validade, status, conversa_criada_em)
 VALUES
-(1, 1, 5, 'fornecedor', 8500.00,
+(1, 1, 5, 8500.00,
  'Pacote de sonorização e iluminação com operação técnica.',
  'Inclui montagem, passagem de som e desmontagem.',
  '2026-11-10', 'enviada', NULL),
 
-(2, 2, 6, 'fornecedor', 3200.00,
+(2, 2, 6, 3200.00,
  'Buffet para até 40 integrantes da equipe.',
  'Cardápio a definir com a organização.',
  '2026-11-12', 'aceita', '2026-10-20 15:30:00'),
 
-(3, 3, 7, 'fornecedor', 4100.00,
+(3, 3, 7, 4100.00,
  'Equipe de segurança com supervisão e controle de acesso.',
  'Quantidade final de profissionais depende do plano do evento.',
  '2026-11-14', 'em_negociacao', '2026-10-21 10:00:00'),
 
-(4, 4, 8, 'fornecedor', 2800.00,
+(4, 4, 8, 2800.00,
  'Locação de palco modular com cobertura.',
  'Proposta sujeita à confirmação de disponibilidade.',
  '2026-11-20', 'enviada', NULL),
 
-(5, 5, 6, 'fornecedor', 1450.00,
+(5, 5, 6, 1450.00,
  'Coffee break simples para expositores e equipe.',
  NULL, '2026-11-25', 'recusada', NULL),
 
-(6, 6, 5, 'fornecedor', 2300.00,
+(6, 6, 5, 2300.00,
  'Pacote de áudio e projeção para auditório.',
  'Inclui técnico durante as apresentações.',
  '2026-08-30', 'aceita', '2026-08-15 09:00:00'),
 
-(7, 7, 7, 'fornecedor', 1900.00,
+(7, 7, 7, 1900.00,
  'Equipe de apoio à segurança e orientação do público.',
  NULL, '2026-12-01', 'enviada', NULL);
 
