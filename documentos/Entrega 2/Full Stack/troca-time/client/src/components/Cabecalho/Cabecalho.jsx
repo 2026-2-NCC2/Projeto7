@@ -1,17 +1,37 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import logo from '@/assets/logo_navbar_web.png'
 import styles from './Cabecalho.module.css'
 
-const LINKS = [
+const LINKS_ADMIN = [
     { rotulo: 'Home', caminho: '/home' },
     { rotulo: 'Eventos', caminho: '/eventos' },
     { rotulo: 'Fornecedores', caminho: '/fornecedores' },
     { rotulo: 'Organizadores', caminho: '/organizadores/1' },
 ]
+const LINKS_ORGANIZADOR = [
+    { rotulo: 'Meus eventos', caminho: '/organizador/eventos' },
+    { rotulo: 'Novo evento', caminho: '/organizador/eventos/novo' },
+    { rotulo: 'Fornecedores', caminho: '/organizador/fornecedores' },
+]
+const LINKS_FORNECEDOR = [
+    { rotulo: 'Oportunidades', caminho: '/fornecedor/oportunidades' },
+    { rotulo: 'Minhas propostas', caminho: '/fornecedor/propostas' },
+]
 
 function Cabecalho() {
     const [perfilAberto, setPerfilAberto] = useState(false)
+    const { pathname } = useLocation()
+    const perfil = pathname.startsWith('/organizador/')
+        ? 'organizador'
+        : pathname.startsWith('/fornecedor/')
+            ? 'fornecedor'
+            : 'admin'
+    const links = perfil === 'organizador'
+        ? LINKS_ORGANIZADOR
+        : perfil === 'fornecedor'
+            ? LINKS_FORNECEDOR
+            : LINKS_ADMIN
 
     function fecharPerfil() {
         setPerfilAberto(false)
@@ -27,10 +47,11 @@ function Cabecalho() {
             </Link>
 
             <nav className={styles.navegacao} aria-label='Navegação principal'>
-                {LINKS.map((link) => (
+                {links.map((link) => (
                     <NavLink
                         key={link.caminho}
                         to={link.caminho}
+                        end={perfil !== 'admin'}
                         className={({ isActive }) =>
                             isActive ? `${styles.link} ${styles.ativo}` : styles.link
                         }
@@ -40,7 +61,7 @@ function Cabecalho() {
                 ))}
             </nav>
 
-            <div className={styles.perfil}>
+            {perfil === 'admin' && <div className={styles.perfil}>
                 <button
                     className={styles.perfilBotao}
                     type='button'
@@ -62,7 +83,7 @@ function Cabecalho() {
                         </Link>
                     </div>
                 )}
-            </div>
+            </div>}
         </header>
     )
 }

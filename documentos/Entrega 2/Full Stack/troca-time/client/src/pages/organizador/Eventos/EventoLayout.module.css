@@ -1,0 +1,13 @@
+.pagina { width: min(1180px, calc(100% - 48px)); margin: 24px auto 90px; }
+.cabecalho { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px 8px 20px; }
+.cabecalho h1 { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: clamp(1.4rem, 2vw, 2rem); }
+.cabecalho p { color: #555; font-size: .92rem; }
+.status { display: inline-flex; padding: 6px 14px; border-radius: 20px; color: white; background: var(--cor-escura-azul); font-size: .8rem; }
+.status_rascunho { color: var(--cor-primaria); border: 1px solid; background: transparent; }.status_publicado { color: var(--cor-primaria); background: var(--cor-clara-verde); }
+.status_reprovado { color: #fff; background: var(--cor-escura-vinho); }
+.editar { flex: none; padding: 10px 20px; border: 1px solid var(--cor-escura-azul); border-radius: 22px; color: var(--cor-escura-azul); text-decoration: none; }
+.abas { display: flex; align-items: center; gap: 10px; padding: 0 8px 16px; border-bottom: 1px solid #ddd; margin-bottom: 18px; }
+.aba,.abaAtiva { display: inline-flex; padding: 10px 17px; border: 1px solid var(--cor-primaria); border-radius: 22px; color: var(--cor-primaria); text-decoration: none; font-size: .86rem; }
+.abaAtiva { color: white; background: var(--cor-primaria); }.abaDesativada { opacity: .4; cursor: not-allowed; }
+.estado { width: min(1180px, calc(100% - 48px)); margin: 50px auto; text-align: center; }
+@media(max-width:700px){.pagina{width:calc(100% - 26px)}.cabecalho{align-items:flex-start;flex-direction:column}.abas{overflow-x:auto}.aba,.abaAtiva{white-space:nowrap;padding:9px 13px}}

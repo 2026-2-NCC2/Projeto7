@@ -1,0 +1,34 @@
+.conteudo { display: grid; gap: 24px; padding: 4px 8px; min-width: 0; }
+.painel { min-width: 0; padding: 28px 34px 32px; border: 1px solid #e8e8dd; border-radius: 28px; background: var(--cor-clara); box-shadow: 0 1px 2px #0002; }
+.painel h2 { margin-bottom: 20px; font-size: .8rem; }
+.tabelaWrap { width: 100%; min-width: 0; overflow-x: auto; }
+.tabelaWrap table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.tabelaWrap th { padding: 12px 10px; border-bottom: 1px solid #333; text-align: left; font-size: .7rem; }
+.tabelaWrap td { padding: 12px 10px; border-bottom: 1px solid #e1e1e1; vertical-align: middle; }
+.tabelaWrap td:nth-child(4), .tabelaWrap th:nth-child(4) { text-align: center; }
+.selecionada, .aguardando { display: inline-block; padding: 6px 12px; border-radius: 18px; color: white; background: var(--cor-escura-azul); font-size: .7rem; white-space: nowrap; }
+.selecionada { color: #161616; background: var(--cor-clara-verde); }
+.vazio { padding: 22px; text-align: center; color: #666; }
+.formVaga, .formCusto { display: grid; min-width: 0; gap: 14px; align-items: start; margin-top: 28px; padding: 20px; border: 1px solid var(--cor-tracado-1); border-radius: 18px; background: #f0f0f2; }
+.formVaga { grid-template-columns: minmax(0, 1.2fr) minmax(145px, .9fr) minmax(0, 1.4fr) minmax(145px, .9fr) auto; }
+.formCusto { grid-template-columns: minmax(0, 1.3fr) minmax(150px, .9fr) minmax(0, .9fr) auto; }
+.formVaga :global(.campo), .formCusto :global(.campo) { display: grid; align-content: start; gap: 6px; width: 100%; min-width: 0; margin: 0; }
+.formVaga :global(.rotulo), .formCusto :global(.rotulo) { min-height: 1.2em; margin: 0 0 0 10px; font-size: .8rem; line-height: 1.2; }
+.formVaga :global(.campo) input, .formCusto :global(.campo) input { box-sizing: border-box; display: block; width: 100%; min-width: 0; height: 46px; min-height: 46px; margin: 0; padding: 8px 14px; font-size: .86rem; }
+.conteudo .formVaga label, .conteudo .formCusto label { display: grid; align-content: start; gap: 6px; width: 100%; min-width: 0; margin: 0; color: var(--cor-escura-azul); font-size: .8rem; font-weight: 700; }
+.formVaga select, .formCusto select { box-sizing: border-box; width: 100%; min-width: 0; height: 46px; min-height: 46px; padding: 8px 14px; border: 1px solid var(--cor-tracado-1); border-radius: 20px; background: var(--cor-fundo-3); font: inherit; }
+.formVaga button, .formCusto button { align-self: end; min-width: 132px; min-height: 46px; padding: 10px 18px; white-space: nowrap; }
+.subtotal { font-weight: 700; }
+.excluir { padding: 7px 15px; border: 1px solid var(--cor-escura-vinho); border-radius: 20px; color: var(--cor-escura-vinho); background: transparent; cursor: pointer; }
+.erro { color: var(--cor-erro); padding: 10px; }
+@media (max-width: 1050px) {
+    .formVaga { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .formCusto { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .formVaga button, .formCusto button { justify-self: start; }
+}
+@media (max-width: 600px) {
+    .conteudo { padding: 0; }
+    .painel { padding: 16px; }
+    .formVaga, .formCusto { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+    .tabelaWrap table { min-width: 680px; }
+}
