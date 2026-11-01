@@ -7,6 +7,8 @@ import HomeAdm from '@/pages/adm/HomeAdm/HomeAdm'
 import Eventos from '@/pages/adm/Eventos/Eventos'
 import DetalheEvento from '@/pages/adm/DetalheEvento/DetalheEvento'
 import PerfilOrganizador from '@/pages/adm/PerfilOrganizador/PerfilOrganizador'
+import ListaFornecedorAdm from '@/pages/adm/Fornecedores/ListaFornecedor'
+import DetalhesFornecedorAdm from '@/pages/adm/DetalhesFornecedor/DetalhesFornecedor'
 import HomeFornecedores from '@/pages/fornecedor/HomeFornecedores/HomeFornecedores'
 import PaginaVazia from '@/pages/PaginaVazia/PaginaVazia'
 
@@ -23,6 +25,8 @@ function App() {
                     <Route path='/adm' element={<HomeAdm />} />
                     <Route path='/eventos' element={<Eventos />} />
                     <Route path='/eventos/:id' element={<DetalheEvento />} />
+                    <Route path='/adm/fornecedores' element={<ListaFornecedorAdm />} />
+                    <Route path='/adm/fornecedores/:id' element={<DetalhesFornecedorAdm />} />
                     <Route path='/fornecedores' element={<HomeFornecedores />} />
                     <Route path='/organizadores' element={<PerfilOrganizador />} />
                     <Route path='/organizadores/:id' element={<PerfilOrganizador />} />

@@ -6,7 +6,7 @@ import styles from './Cabecalho.module.css'
 const LINKS = [
     { rotulo: 'Home', caminho: '/home' },
     { rotulo: 'Eventos', caminho: '/eventos' },
-    { rotulo: 'Fornecedores', caminho: '/fornecedores' },
+    { rotulo: 'Fornecedores', caminho: '/adm/fornecedores' },
     { rotulo: 'Organizadores', caminho: '/organizadores/1' },
 ]
 

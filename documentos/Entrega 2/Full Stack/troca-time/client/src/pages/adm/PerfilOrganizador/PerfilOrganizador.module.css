@@ -227,7 +227,7 @@
     scroll-snap-align: start;
     background: var(--cor-clara);
     border-radius: 18px;
-    padding: 16px 18px;
+    padding: 22px 18px;
     display: flex;
     flex-direction: column;
     gap: 3px;

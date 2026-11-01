@@ -6,6 +6,9 @@ export const eventos = [
         local: 'Arena Central',
         organizador: 'Eventos Brasil',
         fornecedor: 'Palco & Som',
+        descricao: 'Festival ao ar livre com artistas locais e feira gastronômica.',
+        propostas: 9,
+        statusAdm: 'em_cotacao',
         status: 'aprovado',
     },
     {
@@ -15,6 +18,9 @@ export const eventos = [
         local: 'Teatro Aurora',
         organizador: 'Viva Cultura',
         fornecedor: 'Música Viva',
+        descricao: 'Apresentação musical com artistas convidados e estrutura de áudio.',
+        propostas: 6,
+        statusAdm: 'reprovado',
         status: 'reprovado',
     },
     {
@@ -24,6 +30,9 @@ export const eventos = [
         local: 'Parque Municipal',
         organizador: 'Rock Produções',
         fornecedor: 'Luzes Pro',
+        descricao: 'Festival de música ao vivo com bandas e praça de alimentação.',
+        propostas: 14,
+        statusAdm: 'orcamento_fechado',
         status: 'aprovado',
     },
     {
@@ -33,6 +42,9 @@ export const eventos = [
         local: 'Centro de Eventos',
         organizador: 'Ideia Livre',
         fornecedor: 'Expo Estruturas',
+        descricao: 'Feira de artistas independentes, marcas locais e experiências criativas.',
+        propostas: 3,
+        statusAdm: 'reprovado',
         status: 'reprovado',
     },
     {
@@ -42,6 +54,9 @@ export const eventos = [
         local: 'Clube Pulse',
         organizador: 'Wave Eventos',
         fornecedor: 'Sound Lab',
+        descricao: 'Festa com DJs, pista de dança e apresentações especiais.',
+        propostas: 8,
+        statusAdm: 'reprovado',
         status: 'reprovado',
     },
     {
@@ -51,6 +66,9 @@ export const eventos = [
         local: 'Praia Central',
         organizador: 'Sol Produções',
         fornecedor: 'Mega Palco',
+        descricao: 'Evento ao ar livre com música, atividades e praça de alimentação.',
+        propostas: 12,
+        statusAdm: 'orcamento_fechado',
         status: 'aprovado',
     },
 ]
