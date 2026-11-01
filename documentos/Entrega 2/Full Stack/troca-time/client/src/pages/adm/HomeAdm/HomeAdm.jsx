@@ -9,10 +9,6 @@ function formatarDataEvento(data) {
     return `${dataEvento}, ${hora.replace(':', 'h')}`
 }
 
-function formatarMoeda(valor) {
-    return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-}
-
 function HomeAdm() {
     const trilhaRef = useRef(null)
     const [indicadores, setIndicadores] = useState(null)
@@ -95,12 +91,10 @@ function HomeAdm() {
                     <article className={styles.indicador}>
                         <h3>Propostas recebidas</h3>
                         <strong>{indicadores?.propostasRecebidas ?? '–'}</strong>
-                        <p>nos últimos 30 dias</p>
                     </article>
                     <article className={styles.indicador}>
-                        <h3>Ticket médio estimado</h3>
-                        <strong>{indicadores ? formatarMoeda(indicadores.ticketMedio) : '–'}</strong>
-                        <p>média dos eventos</p>
+                        <h3>Tickets Publicados</h3>
+                        <strong>{indicadores?.ticketsPublicados ?? '–'}</strong>
                     </article>
                 </div>
             </section>
