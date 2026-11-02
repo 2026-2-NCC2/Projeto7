@@ -77,3 +77,34 @@ export function validateCadastroUsuarioRequest(usuario) {
 
     return true;
 }
+
+export function loginRequest(usuario) {
+    return {
+        email: usuario.email?.trim().toLowerCase(),
+        senha: usuario.senha
+    };
+}
+
+export function validateLoginRequest(usuario) {
+    if (!usuario.email || !usuario.senha) {
+        throw new AppException('E-mail e senha são obrigatórios.', 400);
+    }
+
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValido.test(usuario.email)) {
+        throw new AppException('E-mail inválido.', 400);
+    }
+}
+
+export function loginResponse(usuario, token) {
+    return {
+        usuario: {
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email,
+            tipo_usuario: usuario.tipo_usuario
+        },
+        token: token
+    };
+}
