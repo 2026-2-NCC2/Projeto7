@@ -1,5 +1,337 @@
+.pagina {
+    width: min(1040px, calc(100% - 48px));
+    margin: 24px auto 72px;
+    font-family: var(--fonte-principal);
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: var(--cor-escura-azul);
+    font-size: 0.78rem;
+}
+
+.tituloLinha {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tituloLinha h1 {
+    color: #252525;
+    font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+    font-weight: 700;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.statusEmCotacao {
+    background: #153fc4;
+    color: #fff;
+}
+
+.statusOrcamentoFechado {
+    background: #c8e331;
+    color: #222;
+}
+
+.statusReprovado {
+    background: #4a1930;
+    color: #fff;
+}
+
+.capaLinha {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    align-items: start;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.imagem {
+    display: grid;
+    min-height: 190px;
+    aspect-ratio: 2.6 / 1;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--cor-escura-vinho);
+    color: #fff;
+    font-size: 0.75rem;
+}
+
+.acoesEvento {
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+    padding-top: 2px;
+    color: #383838;
+    font-size: 0.74rem;
+}
+
+.reprovar {
+    padding: 9px 18px;
+    border: 1px solid #d64545;
+    border-radius: 999px;
+    background: transparent;
+    color: #bd3030;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.reprovar:hover {
+    background: #fff1f1;
+}
+
+.mensagem {
+    min-height: 1em;
+    color: #315b18;
+}
+
+.descricao {
+    margin-bottom: 24px;
+    color: #292929;
+    font-size: 0.8rem;
+}
+
+.descricao h2,
+.financeiro > h2,
+.organizador > h2,
+.fornecedores > h2 {
+    margin-bottom: 10px;
+    color: #242424;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.descricao > p {
+    margin-bottom: 20px;
+    line-height: 1.55;
+}
+
+.dadosEvento {
+    display: grid;
+    gap: 6px;
+}
+
+.dadosEvento div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.dadosEvento dt {
+    font-weight: 700;
+}
+
+.financeiro,
+.listaFornecedores {
+    margin-bottom: 22px;
+}
+
+.indicadores,
+.organizadorCard,
+.listaFornecedores {
+    padding: 18px;
+    border-radius: 22px;
+    background: #e8f1a4;
+}
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.indicadores article {
+    display: flex;
+    min-height: 82px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 8px;
+    border-radius: 14px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+    text-align: center;
+}
+
+.indicadores h3 {
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.indicadores strong {
+    color: #242424;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.organizador {
+    margin-bottom: 22px;
+}
+
+.organizadorCard {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    place-items: center;
+    border-radius: 50%;
+    background: #cecece;
+    color: #242424;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.organizadorCard > strong,
+.fornecedorDados > strong {
+    font-size: 0.85rem;
+}
+
+.botaoVer {
+    display: inline-flex;
+    min-width: 76px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    padding: 8px 15px;
+    border-radius: 999px;
+    background: #153fc4;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.botaoVer:hover {
+    background: #280699;
+}
+
+.listaFornecedores {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.fornecedorCard {
+    display: flex;
+    min-height: 66px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.fornecedorDados {
+    min-width: 0;
+}
+
+.fornecedorDados p {
+    margin-top: 3px;
+    color: #383838;
+    font-size: 0.73rem;
+}
+
+.semFornecedores,
+.naoEncontrado {
+    padding: 20px 8px;
+    font-size: 0.82rem;
+}
+
+.voltar:focus-visible,
+.reprovar:focus-visible,
+.botaoVer:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 3px;
+}
+
 @media (max-width: 720px) {
     .pagina {
-        padding: 30px 20px;
+        width: min(100% - 30px, 620px);
+        margin-top: 20px;
+    }
+
+    .capaLinha {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .imagem {
+        min-height: 180px;
+    }
+
+    .acoesEvento {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 8px 14px;
+    }
+
+    .acoesEvento .reprovar {
+        grid-row: span 2;
+    }
+
+    .indicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagina {
+        width: min(100% - 26px, 420px);
+    }
+
+    .imagem {
+        min-height: 150px;
+    }
+
+    .organizadorCard,
+    .fornecedorCard {
+        gap: 9px;
+        padding: 12px;
+    }
+
+    .avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 0.68rem;
+    }
+
+    .organizadorCard > strong,
+    .fornecedorDados > strong {
+        font-size: 0.78rem;
+    }
+
+    .fornecedorDados p {
+        font-size: 0.68rem;
+    }
+
+    .botaoVer {
+        min-width: 66px;
+        padding: 7px 10px;
+        font-size: 0.63rem;
     }
 }
