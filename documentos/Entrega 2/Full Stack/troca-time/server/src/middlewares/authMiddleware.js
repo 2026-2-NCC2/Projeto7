@@ -3,6 +3,7 @@ import { configs } from '../configs/configs.js';
 import { AppException } from '../exceptions/appExceptions.js';
 
 export function autenticar(req, res, next) {
+    console.log(req.cookies);
     const token = req.cookies?.token;
 
     if (!token) {

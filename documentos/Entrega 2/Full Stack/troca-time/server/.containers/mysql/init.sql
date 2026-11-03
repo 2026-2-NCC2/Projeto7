@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS usuario (
     cnpj CHAR(14) UNIQUE,
     senha_hash VARCHAR(255) NOT NULL,
     tipo_usuario VARCHAR(20) NOT NULL,
-    categoria VARCHAR(30),
     descricao TEXT,
     status_cadastro VARCHAR(20) NOT NULL DEFAULT 'pendente',
     criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,16 +31,6 @@ CREATE TABLE IF NOT EXISTS usuario (
             )
         )
         OR (tipo_usuario = 'adm')
-    ),
-    CONSTRAINT ck_usuario_categoria CHECK (
-        (
-            tipo_usuario = 'fornecedor'
-            AND categoria IS NOT NULL
-        )
-        OR (
-            tipo_usuario <> 'fornecedor'
-            AND categoria IS NULL
-        )
     )
 );
 
@@ -160,7 +149,6 @@ INSERT INTO
         cnpj,
         senha_hash,
         tipo_usuario,
-        categoria,
         descricao,
         status_cadastro
     )
@@ -173,7 +161,6 @@ VALUES (
         NULL,
         'mock_hash_admin',
         'adm',
-        NULL,
         'Conta administrativa para testes.',
         'aprovado'
     ),
@@ -186,7 +173,6 @@ VALUES (
         NULL,
         'mock_hash_mariana',
         'organizador',
-        NULL,
         'Organizadora de eventos culturais e musicais.',
         'aprovado'
     ),
@@ -199,7 +185,6 @@ VALUES (
         '12345678000199',
         'mock_hash_rafael',
         'organizador',
-        NULL,
         'Produção de festivais e eventos corporativos.',
         'pendente'
     ),
@@ -212,7 +197,6 @@ VALUES (
         NULL,
         'mock_hash_camila',
         'organizador',
-        NULL,
         'Organização de feiras e eventos gastronômicos.',
         'reprovado'
     ),
@@ -225,7 +209,6 @@ VALUES (
         '23456789000188',
         'mock_hash_someluz',
         'fornecedor',
-        'audiovisual',
         'Equipamentos de áudio, iluminação e equipe técnica.',
         'aprovado'
     ),
@@ -238,7 +221,6 @@ VALUES (
         '34567890000177',
         'mock_hash_buffet',
         'fornecedor',
-        'alimentacao',
         'Serviço de buffet para eventos de pequeno e médio porte.',
         'aprovado'
     ),
@@ -251,7 +233,6 @@ VALUES (
         '45678901000166',
         'mock_hash_seguranca',
         'fornecedor',
-        'seguranca',
         'Equipe de segurança e controle de acesso.',
         'aprovado'
     ),
@@ -264,7 +245,6 @@ VALUES (
         '56789012000155',
         'mock_hash_palco',
         'fornecedor',
-        'estrutura',
         'Montagem de palco, estruturas e cobertura.',
         'pendente'
     );
