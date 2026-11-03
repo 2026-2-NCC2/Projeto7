@@ -25,7 +25,15 @@ export async function loginController(req, res) {
 
     validateLoginRequest(usuario);
 
-    const resultado = await loginService(usuario);
+    const [usuarioLogin, token] = await loginService(usuario);
 
-    return res.status(200).json(resultado);
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 24 * 60 * 60 * 1000,
+        path: '/'
+    });
+
+    return res.status(200).json(usuarioLogin);
 }

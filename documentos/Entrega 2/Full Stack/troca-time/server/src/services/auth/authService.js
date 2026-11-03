@@ -44,7 +44,7 @@ export async function cadastrarUsuarioService(usuarioRequest) {
     };
 }
 
-export async function gerarToken(usuario_id, tipo_usuario) {
+function gerarToken(usuario_id, tipo_usuario) {
     const token = jwt.sign(
         {
             tipo_usuario: tipo_usuario
@@ -79,7 +79,7 @@ export async function loginService(usuarioRequest) {
         throw new AppException('Seu cadastro ainda não foi aprovado.', 403);
     }
 
-    const token = await gerarToken(usuario.id, usuario.tipo_usuario)
+    const token = gerarToken(usuario.id, usuario.tipo_usuario)
 
-    return loginResponse(usuario, token);
+    return [loginResponse(usuario), token];
 }

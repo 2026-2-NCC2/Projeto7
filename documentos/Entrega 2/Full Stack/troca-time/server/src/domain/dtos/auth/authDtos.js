@@ -99,12 +99,9 @@ export function validateLoginRequest(usuario) {
 
 export function loginResponse(usuario, token) {
     return {
-        usuario: {
-            id: usuario.id,
-            nome: usuario.nome,
-            email: usuario.email,
-            tipo_usuario: usuario.tipo_usuario
-        },
-        token: token
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+        tipo_usuario: usuario.tipo_usuario
     };
 }
