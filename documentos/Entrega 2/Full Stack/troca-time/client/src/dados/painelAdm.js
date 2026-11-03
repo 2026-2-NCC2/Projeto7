@@ -1,14 +1,14 @@
 import { responder } from './simularApi.js'
 import { atualizarStatusOrganizador } from './organizadores.js'
 
-// Indicadores por período (7 dias, 30 dias, tudo)
-// tickets: valor estimado do ingresso com público mínimo e com público máximo (RF13)
+// Indicadores de demonstração por período (7 dias, 30 dias, tudo).
+// Tickets publicados acompanha os eventos que chegaram à etapa "Ticket calculado".
 const INDICADORES = {
     '7d': {
         eventosCadastrados: 9,
         eventosEmCotacao: 4,
         propostasRecebidas: 17,
-        ticketMedio: 96,
+        ticketsPublicados: 1,
         etapas: [
             { nome: 'Em cadastro', total: 5 },
             { nome: 'Em cotação', total: 4 },
@@ -25,7 +25,7 @@ const INDICADORES = {
         eventosCadastrados: 37,
         eventosEmCotacao: 11,
         propostasRecebidas: 63,
-        ticketMedio: 103,
+        ticketsPublicados: 5,
         etapas: [
             { nome: 'Em cadastro', total: 14 },
             { nome: 'Em cotação', total: 11 },
@@ -44,7 +44,7 @@ const INDICADORES = {
         eventosCadastrados: 84,
         eventosEmCotacao: 13,
         propostasRecebidas: 191,
-        ticketMedio: 112,
+        ticketsPublicados: 31,
         etapas: [
             { nome: 'Em cadastro', total: 21 },
             { nome: 'Em cotação', total: 13 },

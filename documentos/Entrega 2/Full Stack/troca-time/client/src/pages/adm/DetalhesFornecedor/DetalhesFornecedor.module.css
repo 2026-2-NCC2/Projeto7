@@ -1,0 +1,293 @@
+.pagina {
+    width: min(1040px, calc(100% - 48px));
+    margin: 24px auto 70px;
+    font-family: var(--fonte-principal);
+}
+
+.voltar {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: var(--cor-escura-azul);
+    font-size: 0.78rem;
+}
+
+.destaque,
+.bloco {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 22px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.destaque {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    min-height: 178px;
+    margin-bottom: 24px;
+    padding: 22px 32px;
+}
+
+.avatar {
+    display: grid;
+    width: 112px;
+    height: 112px;
+    flex: none;
+    place-items: center;
+    border-radius: 50%;
+    background: #cecece;
+    color: #242424;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.identificacao {
+    min-width: 0;
+}
+
+.nomeLinha {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.nomeLinha h1 {
+    color: #242424;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    font-weight: 700;
+}
+
+.identificacao > p:not(.mensagem) {
+    color: #383838;
+    font-size: 0.76rem;
+}
+
+.status,
+.statusProposta {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.statuspendente,
+.propostapendente {
+    background: var(--cor-escura-1);
+    color: #fff;
+}
+
+.statusaprovado,
+.propostaaprovado {
+    background: var(--cor-clara-verde);
+    color: #202020;
+}
+
+.statusrejeitado,
+.propostareprovado {
+    background: var(--cor-escura-vinho);
+    color: #fff;
+}
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.acoes button {
+    padding: 9px 16px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.aprovar {
+    background: var(--cor-clara-verde);
+    color: #202020;
+}
+
+.reprovar {
+    border-color: #d64545 !important;
+    background: transparent;
+    color: #bd3030;
+}
+
+.acoes button:hover {
+    filter: brightness(0.95);
+}
+
+.mensagem {
+    min-height: 1em;
+    margin-top: 4px;
+    color: #315b18;
+    font-size: 0.68rem;
+}
+
+.informacoes {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    align-items: start;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.bloco {
+    min-height: 162px;
+    padding: 20px 24px;
+}
+
+.bloco h2,
+.secaoPropostas > h2 {
+    margin-bottom: 14px;
+    color: #242424;
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.bloco dl {
+    display: grid;
+    gap: 7px;
+    font-size: 0.8rem;
+}
+
+.bloco dl div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.bloco dt {
+    font-weight: 700;
+}
+
+.bloco dd {
+    overflow-wrap: anywhere;
+}
+
+.textoDescricao {
+    color: #2d2d2d;
+    font-size: 0.83rem;
+    line-height: 1.55;
+}
+
+.secaoPropostas > h2 {
+    margin-bottom: 10px;
+}
+
+.listaPropostas {
+    display: grid;
+    gap: 10px;
+    min-height: 90px;
+    padding: 16px;
+    border-radius: 22px;
+    background: #b3c0e0;
+}
+
+.proposta {
+    display: flex;
+    min-height: 66px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+    font-size: 0.8rem;
+}
+
+.nomeEvento {
+    min-width: 0;
+}
+
+.nomeEvento strong {
+    font-weight: 700;
+}
+
+.detalheProposta {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.detalheProposta > strong {
+    font-size: 0.72rem;
+}
+
+.semPropostas,
+.naoEncontrado {
+    padding: 18px 10px;
+    font-size: 0.78rem;
+}
+
+.destaque button:focus-visible,
+.voltar:focus-visible {
+    outline: 2px solid var(--cor-escura-1);
+    outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+    .informacoes {
+        grid-template-columns: 1fr;
+    }
+
+    .destaque {
+        gap: 18px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagina {
+        width: min(100% - 30px, 560px);
+        margin-top: 18px;
+    }
+
+    .voltar {
+        margin-bottom: 16px;
+    }
+
+    .destaque {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 18px;
+    }
+
+    .avatar {
+        width: 78px;
+        height: 78px;
+        font-size: 1.25rem;
+    }
+
+    .bloco {
+        padding: 18px;
+    }
+
+    .listaPropostas {
+        padding: 10px;
+        border-radius: 18px;
+    }
+
+    .proposta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .detalheProposta {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
