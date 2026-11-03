@@ -1,0 +1,138 @@
+.pagina {
+    width: min(680px, calc(100% - 48px));
+    margin: 28px auto 120px;
+}
+
+.pagina>h1 {
+    margin: 0 0 22px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.resumo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border: 1px solid #ededdf;
+    border-radius: 20px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.dia {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: white;
+    background: var(--cor-escura-vinho);
+    font-weight: 700;
+}
+
+.resumo div {
+    display: grid;
+    gap: 3px;
+}
+
+.resumo small {
+    font-size: .65rem;
+    font-weight: 700;
+}
+
+.resumo span {
+    font-size: .75rem;
+}
+
+.formulario {
+    display: grid;
+    gap: 16px;
+    margin-top: 22px;
+    padding: 34px 42px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 24px;
+    background: #efeff2;
+}
+
+.camposTopo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.camposTopo>div:nth-child(3) {
+    grid-column: 1;
+}
+
+.camposTopo select {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 22px;
+    background: white;
+    padding: 0 14px;
+}
+
+.rotulo {
+    color: var(--cor-escura-azul);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.formulario textarea {
+    min-height: 72px;
+    resize: vertical;
+    padding: 13px 15px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 18px;
+    background: white;
+    font: inherit;
+}
+
+.formulario :global(input) {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 22px;
+    background: white;
+}
+
+.formulario button {
+    justify-self: center;
+    min-width: 165px;
+    border-radius: 24px;
+}
+
+.nota {
+    max-width: 410px;
+    margin: 0 auto;
+    text-align: center;
+    color: #666;
+    font-size: .75rem;
+}
+
+.erro {
+    margin: 0;
+    color: var(--cor-erro);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .pagina {
+        width: min(100% - 30px, 500px);
+    }
+
+    .formulario {
+        padding: 24px 18px;
+    }
+
+    .camposTopo {
+        grid-template-columns: 1fr;
+    }
+
+    .camposTopo>div:nth-child(3) {
+        grid-column: auto;
+    }
+}
