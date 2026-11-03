@@ -5,9 +5,10 @@ import { autenticar, autorizar } from '../middlewares/authMiddleware.js';
 const router = Router();
 
 router.get(
-    '/:id', fornecedorController.buscarDetalhesFornecedorController,
+    '/:id',
     autenticar,
-    autorizar('adm', 'forncedor', 'organizador')
+    autorizar('adm', 'fornecedor', 'organizador'),
+    fornecedorController.buscarDetalhesFornecedorController
 );
 
 export default router;
