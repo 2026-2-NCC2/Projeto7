@@ -6,5 +6,6 @@ const router = Router();
 router.use(autenticar, autorizar('adm', 'organizador', 'fornecedor'));
 
 router.get('/', eventoController.listarEventosController);
+router.get('/:id', eventoController.buscarDetalheEventoController);
 
 export default router;

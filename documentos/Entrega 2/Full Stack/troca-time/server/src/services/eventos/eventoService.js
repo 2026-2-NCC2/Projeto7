@@ -8,3 +8,13 @@ export async function listarEventosService() {
 
     return eventosResponse
 }
+
+export async function buscarDetalheEventosService(evento_id){
+    const eventos = await repository.buscarDetalheEventoRepository(evento_id)
+
+    const vagas_servico = await repository.buscarVagasPorEventoIdRepository(evento_id)
+
+    const detalheEventoResponse = dto.detalheEvento(eventos, vagas_servico)
+
+    return detalheEventoResponse
+}

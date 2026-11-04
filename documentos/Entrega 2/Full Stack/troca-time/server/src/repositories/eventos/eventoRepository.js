@@ -33,3 +33,52 @@ export async function listarEventosRepository() {
 
     return eventos;
 }
+
+export async function buscarDetalheEventoRepository(evento_id){
+    const [detalheEvento] = await pool.query(`
+        SELECT
+            e.id,
+            e.nome,
+            e.status,
+            e.descricao,
+            e.inicio,
+            e.nome_local,
+            e.rua,
+            e.cep,
+            e.bairro,
+            e.cidade,
+            e.numero,
+            e.criado_em,
+            e.atualizado_em,
+            e.custo_total,
+            e.margem_lucro,
+            e.ticket_publico_min AS ticket_estimado_min,
+            e.ticket_publico_max AS ticket_estimado_max,
+            e.publico_min,
+            e.publico_max,
+            u.nome AS nome_organizador,
+            e.organizador_id
+        FROM evento e
+        INNER JOIN usuario u
+            ON u.id = e.organizador_id
+        WHERE e.id = ?
+    `, evento_id);
+
+    return detalheEvento[0];
+}
+
+export async function buscarVagasPorEventoIdRepository(evento_id){
+    const[vagasEvento] = await pool.query(`
+        SELECT
+        u.nome AS nome_fornecedor,
+        u.id AS fornecedor_id,
+        p.valor,
+        v.categoria
+        FROM proposta p 
+        INNER JOIN usuario u ON u.id = p.fornecedor_id
+        INNER JOIN vaga_servico v ON p.vaga_servico_id = v.id 
+        WHERE v.evento_id = ?
+    `, evento_id);
+
+    return vagasEvento;
+}
