@@ -3,8 +3,9 @@ import * as dto from '../../domain/dtos/organizadores/organizadorDtos.js'
 import { AppException } from '../../exceptions/appExceptions.js'
 
 export async function criarEventoService(criarEventoRequest) {
-    const eventoId = await repository.criarEventoRepository(
-        
-    )
-    
+    const eventoId = await repository.criarEventoRepository(criarEventoRequest)
+
+    return {
+        "evento_id": eventoId
+    }
 }
