@@ -20,3 +20,38 @@ export function listarEventosResponse(eventos) {
         eventos: eventos.map(eventoLista)
     };
 }
+
+function formatarEndereco (evento){
+    return evento.nome_local + ' - ' + evento.rua + ', ' + evento.numero + ' - ' + evento.bairro + ' - ' + evento.cep
+}
+
+export function vagaServicoDetalhe(vaga_servico){
+    return {
+        fornecedor_id: vaga_servico.id,
+        fornecedor_nome: vaga_servico.nome,
+        vaga_categoria: vaga_servico.categoria,
+        proposta_valor: vaga_servico.valor
+        
+    };
+}
+
+export function detalheEvento(evento, vagas_servico){
+    return{
+        id: evento.id,
+        nome: evento.nome,
+        status: evento.status,
+        descricao: evento.descricao,
+        inicio: evento.inicio,
+        endereco: formatarEndereco(evento),
+        status: evento.status,
+        publico_min: evento.publico_min,
+        publico_max: evento.publico_max,
+        ticket_min: evento.ticket_min,
+        ticket_max: evento.ticket_max,
+        custo_total: evento.custo_total,
+        margem_lucro: evento.margem_lucro,
+        organizador_nome: evento.organizador_nome,
+        organizador_id: evento.organizador_id,
+        vagas_servico: vagas_servico.map(vagaServicoDetalhe)
+    }
+}
