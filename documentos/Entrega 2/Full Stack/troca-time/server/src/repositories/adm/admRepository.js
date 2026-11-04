@@ -46,3 +46,7 @@ export async function listarUsuariosRepository() {
 
     return usuarios;
 }
+
+export async function atualizarStatusCadastroRepository(usuario_id, novo_status) {
+    await pool.execute(`UPDATE usuario SET status_cadastro = ? WHERE id = ?`,[novo_status, usuario_id])
+}

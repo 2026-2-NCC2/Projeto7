@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS evento (
     publico_min INT NOT NULL,
     publico_max INT NOT NULL,
     margem_lucro DECIMAL(5, 2) NOT NULL,
+    publico_esperado INT,
     custo_total DECIMAL(12, 2),
     ticket_publico_min DECIMAL(10, 2),
     ticket_publico_max DECIMAL(10, 2),
