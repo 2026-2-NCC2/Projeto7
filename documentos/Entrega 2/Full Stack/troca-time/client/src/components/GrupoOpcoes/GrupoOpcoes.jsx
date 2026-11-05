@@ -1,7 +1,7 @@
 import Campo from '@/components/Campo/Campo'
 import styles from './GrupoOpcoes.module.css'
 
-// opcoes: [{ id, rotulo }]
+
 function GrupoOpcoes({ nome, rotulo, opcoes, valor, onChange, erro }) {
     return (
         <Campo rotulo={rotulo} erro={erro}>

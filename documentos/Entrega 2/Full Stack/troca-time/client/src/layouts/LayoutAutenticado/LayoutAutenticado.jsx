@@ -11,7 +11,7 @@ function LayoutAutenticado() {
         <>
             <Cabecalho />
             <Outlet />
-            <ChatIA />
+            
             {pathname === '/fornecedores' && <ChatConversa />}
         </>
     )

@@ -1,8 +1,7 @@
 import Texto from '@/components/Texto/Texto'
 import styles from './Campo.module.css'
 
-// Sem children: renderiza um input com label.
-// Com children: usa o mesmo rótulo e mensagem de erro em volta de outro conteúdo (ex.: GrupoOpcoes).
+
 function Campo({ id, rotulo, erro, children, ...props }) {
     const Rotulo = children ? 'span' : 'label'
 
