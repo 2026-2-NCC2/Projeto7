@@ -6,11 +6,6 @@ export async function buscarResumoPlataformaController(req, res) {
     return res.status(200).json(resumo);
 }
 
-export async function listarUsuariosController(req, res) {
-    const usuarios = await service.listarUsuariosService()
-    return res.status(200).json(usuarios)
-}
-
 export async function atualizarStatusCadastroController(req, res) {
 
     const usuario_id = req.params.id

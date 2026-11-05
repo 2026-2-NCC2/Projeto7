@@ -8,13 +8,6 @@ export async function buscarResumoPlataformaService() {
     return resumoResponse;
 }
 
-export async function listarUsuariosService() {
-    const usuarios = await repository.listarUsuariosRepository()
-
-    const usuarioResponse = dto.listarUsuariosResponse(usuarios)
-    return usuarioResponse
-}
-
 export async function atualizarStatusCadastroService(usuario_id, novo_status) {
     await repository.atualizarStatusCadastroRepository(usuario_id, novo_status)
 }

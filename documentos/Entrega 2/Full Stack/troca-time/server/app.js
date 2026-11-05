@@ -7,6 +7,7 @@ import admRoute from './src/routes/admRoute.js';
 import fornecedorRoute from './src/routes/fornecedorRoute.js';
 import authRoute from './src/routes/authRoute.js';
 import organizadorRoute from './src/routes/organizadorRoute.js'
+import usuarioRoute from './src/routes/usuarioRoute.js';
 import { configs } from './src/configs/configs.js';
 
 import { errorMiddleware } from './src/middlewares/errorMiddleware.js';
@@ -31,6 +32,7 @@ app.use('/admin', admRoute);
 app.use('/fornecedores', fornecedorRoute);
 app.use('/auth', authRoute);
 app.use('/organizadores', organizadorRoute);
+app.use('/usuarios', usuarioRoute);
 
 // Middleware de tratamento de erros
 app.use(errorMiddleware);

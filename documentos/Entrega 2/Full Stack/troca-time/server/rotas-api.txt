@@ -79,8 +79,8 @@ Erros:
   500 { "status": 500, "erro": "Erro interno do servidor" }
 
 
-3) GET /admin/usuarios
-----------------------
+3) GET /usuarios
+----------------
 
 Request:
   path   -
@@ -95,8 +95,7 @@ Response 200:
       "nome": string,
       "status_cadastro": string,    // pendente | aprovado | reprovado
       "tipo_usuario": string,       // organizador | fornecedor
-      "cpf": string | null,
-      "cnpj": string | null,
+      "cpf_cnpj": string,
       "descricao": string | null,
       "criado_em": string
     }
