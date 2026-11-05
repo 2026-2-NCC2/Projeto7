@@ -7,7 +7,6 @@ const router = Router();
 router.use(autenticar, autorizar('adm'));
 
 router.get('/resumo', admController.buscarResumoPlataformaController);
-router.get('/usuarios', admController.listarUsuariosController);
 router.patch('/:id', admController.atualizarStatusCadastroController);
 
 export default router;

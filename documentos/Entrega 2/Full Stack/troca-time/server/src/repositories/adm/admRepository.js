@@ -29,24 +29,6 @@ export async function buscarResumoPlataformaRepository() {
     return resumo[0];
 }
 
-export async function listarUsuariosRepository() {
-    const [usuarios] = await pool.query(`
-        SELECT 
-            u.id,
-            u.nome,
-            u.status_cadastro,
-            u.tipo_usuario,
-            u.cpf,
-            u.cnpj,
-            u.descricao,
-            u.criado_em
-        FROM usuario u
-        WHERE tipo_usuario != 'adm'
-    `)
-
-    return usuarios;
-}
-
 export async function atualizarStatusCadastroRepository(usuario_id, novo_status) {
     await pool.execute(`UPDATE usuario SET status_cadastro = ? WHERE id = ?`,[novo_status, usuario_id])
 }
