@@ -28,6 +28,7 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
             vs.categoria,
             e.id AS evento_id,
             e.nome AS nome_evento,
+            e.organizador_id,
             p.valor,
             p.status,
             p.descricao

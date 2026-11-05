@@ -5,7 +5,7 @@ export function propostaFornecedorLista(proposta) {
         categoria: proposta.categoria,
         evento_id: proposta.evento_id,
         nome_evento: proposta.nome_evento,
-        nome_evento: proposta.nome_evento,
+        organizador_id: proposta.organizador_id,
         valor: proposta.valor,
         status: proposta.status,
         descricao: proposta.descricao

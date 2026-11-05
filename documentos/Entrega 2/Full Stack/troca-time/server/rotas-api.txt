@@ -46,6 +46,7 @@ Response 200:
       "categoria": string,
       "evento_id": number,
       "nome_evento": string,
+      "organizador_id": number,
       "valor": number,
       "status": string,             // enviada | em_negociacao | aceita | recusada
       "descricao": string
