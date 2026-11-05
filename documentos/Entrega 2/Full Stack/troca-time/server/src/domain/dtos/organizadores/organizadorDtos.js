@@ -1,3 +1,5 @@
+import { AppException } from "../../../exceptions/appExceptions.js"
+
 export function criarEventoRequest(evento) {
     return {
         nome: evento.nome,
@@ -45,9 +47,9 @@ export function validateCriarEventoRequest(criarEventoRequest) {
 
     for (const campo of camposObrigatorios) {
         if (
-            evento[campo] === undefined ||
-            evento[campo] === null ||
-            String(evento[campo]).trim() === ''
+            criarEventoRequest[campo] === undefined ||
+            criarEventoRequest[campo] === null ||
+            String(criarEventoRequest[campo]).trim() === ''
         ) {
             throw new AppException(`O campo ${campo} é obrigatório.`, 400);
         }

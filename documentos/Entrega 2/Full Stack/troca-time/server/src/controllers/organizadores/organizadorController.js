@@ -3,11 +3,11 @@ import { AppException } from "../../exceptions/appExceptions.js"
 import { criarEventoRequest, validateCriarEventoRequest } from "../../domain/dtos/organizadores/organizadorDtos.js"
 
 export async function criarEventoController(req, res) {
-    const criarEventoRequest = criarEventoRequest(req.body)
+    const eventoRequest = criarEventoRequest(req.body)
 
-    validateCriarEventoRequest(criarEventoRequest)
+    validateCriarEventoRequest(eventoRequest)
 
-    const eventoIdResponse = await service.criarEventoService(criarEventoRequest)
+    const eventoIdResponse = await service.criarEventoService(eventoRequest)
     
     res.status(200).json(eventoIdResponse)
 }
