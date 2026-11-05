@@ -7,7 +7,6 @@ export async function buscarDetalhesFornecedorRepository(usuario_id) {
             u.nome,
             u.status_cadastro,
             u.tipo_usuario,
-            u.categoria,
             u.cnpj,
             u.telefone,
             u.email,

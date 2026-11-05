@@ -34,7 +34,6 @@ Response 200:
   "nome": string,
   "status_cadastro": string,        // pendente | aprovado | reprovado
   "tipo_usuario": string,           // fornecedor
-  "categoria": string,
   "cnpj": string,
   "telefone": string | null,
   "email": string,
