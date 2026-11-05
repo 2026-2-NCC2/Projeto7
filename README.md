@@ -15,7 +15,7 @@
 ## Descrição
 
 <p align="center">
-<img src="https://github.com/2026-2-NCC2/Projeto7/blob/main/imagens/Tela%20login.png?raw=true">
+<img src="https://github.com/2026-2-NCC2/Projeto7/blob/main/imagens/Troca%20time.png?raw=true">
   Imagem de autoria do autor 
 </p>
 <br><br>
