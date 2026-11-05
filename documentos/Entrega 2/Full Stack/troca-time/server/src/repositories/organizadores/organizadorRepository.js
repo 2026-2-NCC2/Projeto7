@@ -24,7 +24,8 @@ export async function criarEventoRepository(evento) {
         VALUES (
             ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )
-     `, evento.nome,
+     `, [
+        evento.nome,
         evento.descricao,
         evento.inicio,
         evento.fim,
@@ -37,11 +38,11 @@ export async function criarEventoRepository(evento) {
         evento.cep,
         evento.rua,
         evento.numero,
-        evento.complemonto,
+        evento.complemento,
         evento.bairro,
         evento.cidade,
         evento.estado
-    ) 
+    ])
 
     return resultado.insertId
 }
