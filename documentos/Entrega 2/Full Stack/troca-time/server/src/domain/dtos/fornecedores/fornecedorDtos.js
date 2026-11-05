@@ -18,7 +18,6 @@ export function buscarDetalhesFornecedorResponse(dadosFornecedor, propostasForne
         nome: dadosFornecedor.nome,
         status_cadastro: dadosFornecedor.status_cadastro,
         tipo_usuario: dadosFornecedor.tipo_usuario,
-        categoria: dadosFornecedor.categoria,
         cnpj: dadosFornecedor.cnpj,
         telefone: dadosFornecedor.telefone,
         email: dadosFornecedor.email,
