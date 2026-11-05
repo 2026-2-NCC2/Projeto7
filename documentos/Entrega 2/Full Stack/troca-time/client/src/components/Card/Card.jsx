@@ -1,6 +1,6 @@
 import styles from './Card.module.css'
 
-// variante: 'primario' | largura: 'estreito' | 'largo'
+
 function Card({
     children,
     variante = 'primario',
