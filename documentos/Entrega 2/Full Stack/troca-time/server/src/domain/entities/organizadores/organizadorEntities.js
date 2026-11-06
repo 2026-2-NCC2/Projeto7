@@ -21,3 +21,22 @@ export function eventoEntity(criarEventoRequest) {
         estado: criarEventoRequest.estado
     };
 }
+
+export function vagaServicoEntity(evento_id, criarVagaServicoRequest) {
+    return {
+        evento_id: evento_id,
+        item: criarVagaServicoRequest.item,
+        categoria: criarVagaServicoRequest.categoria,
+        descricao: criarVagaServicoRequest.descricao || null,
+        cotacao_ate: criarVagaServicoRequest.cotacao_ate
+    };
+}
+
+export function custoEntity(evento_id, criarCustoRequest) {
+    return {
+        evento_id: evento_id,
+        descricao: criarCustoRequest.descricao,
+        origem: criarCustoRequest.tipo,
+        valor: criarCustoRequest.valor
+    };
+}

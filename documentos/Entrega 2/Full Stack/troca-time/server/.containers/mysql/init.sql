@@ -74,10 +74,11 @@ CREATE TABLE IF NOT EXISTS evento (
 CREATE TABLE IF NOT EXISTS vaga_servico (
     id INT AUTO_INCREMENT PRIMARY KEY,
     evento_id INT NOT NULL,
-    nome VARCHAR(200) NOT NULL,
     categoria VARCHAR(20) NOT NULL,
     item VARCHAR(100) NOT NULL,
+    cotacao_ate DATE NOT NULL,
     descricao TEXT,
+    status VARCHAR(20) NOT NULL DEFAULT 'pendente',
     criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_vaga_evento FOREIGN KEY (evento_id) REFERENCES evento (id) ON DELETE CASCADE
@@ -371,65 +372,65 @@ INSERT INTO
     vaga_servico (
         id,
         evento_id,
-        nome,
         categoria,
         item,
+        cotacao_ate,
         descricao
     )
 VALUES (
         1,
         1,
-        'Sonorização e iluminação',
         'audiovisual',
         'Sistema de som e luz',
+        '2026-12-01',
         'Fornecimento e operação de som e iluminação durante o festival.'
     ),
     (
         2,
         1,
-        'Buffet para equipe',
         'alimentacao',
         'Refeição',
+        '2026-12-01',
         'Refeições para equipe técnica e produção.'
     ),
     (
         3,
         1,
-        'Segurança do evento',
         'seguranca',
         'Equipe de seguranças',
+        '2026-12-01',
         'Controle de acesso e segurança durante todo o evento.'
     ),
     (
         4,
         2,
-        'Estrutura de palco',
         'estrutura',
         'Palco modular',
+        '2026-12-15',
         'Palco modular com cobertura e montagem.'
     ),
     (
         5,
         2,
-        'Coffee break',
         'alimentacao',
         'Coffee break',
+        '2026-12-15',
         'Coffee break para expositores e equipe.'
     ),
     (
         6,
         3,
-        'Áudio e projeção',
         'audiovisual',
         'Projetor e microfones',
+        '2027-01-10',
         'Microfones, caixas de som e projeção para palestras.'
     ),
     (
         7,
         4,
-        'Equipe de segurança',
         'seguranca',
         'Equipe de seguranças',
+        '2027-01-20',
         'Controle de acesso e apoio à organização.'
     );
 

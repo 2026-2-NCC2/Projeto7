@@ -57,3 +57,88 @@ export function validateCriarEventoRequest(criarEventoRequest) {
 
     return true;
 }
+
+export function criarVagaServicoRequest(vaga) {
+    return {
+        item: vaga.item,
+        categoria: vaga.categoria,
+        descricao: vaga.descricao,
+        cotacao_ate: vaga.cotacao_ate
+    };
+}
+
+export function validateCriarVagaServicoRequest(criarVagaServicoRequest) {
+    const camposObrigatorios = [
+        'item',
+        'categoria',
+        'cotacao_ate'
+    ];
+
+    for (const campo of camposObrigatorios) {
+        if (
+            criarVagaServicoRequest[campo] === undefined ||
+            criarVagaServicoRequest[campo] === null ||
+            String(criarVagaServicoRequest[campo]).trim() === ''
+        ) {
+            throw new AppException(`O campo ${campo} é obrigatório.`, 400);
+        }
+    }
+
+    return true;
+}
+
+export function criarCustoRequest(custo) {
+    return {
+        descricao: custo.descricao,
+        tipo: custo.tipo,
+        valor: custo.valor
+    };
+}
+
+export function validateCriarCustoRequest(criarCustoRequest) {
+    const camposObrigatorios = [
+        'descricao',
+        'tipo',
+        'valor'
+    ];
+
+    for (const campo of camposObrigatorios) {
+        if (
+            criarCustoRequest[campo] === undefined ||
+            criarCustoRequest[campo] === null ||
+            String(criarCustoRequest[campo]).trim() === ''
+        ) {
+            throw new AppException(`O campo ${campo} é obrigatório.`, 400);
+        }
+    }
+
+    return true;
+}
+
+export function vagaServicoLista(vaga) {
+    return {
+        id: vaga.id,
+        item: vaga.item,
+        categoria: vaga.categoria,
+        descricao: vaga.descricao,
+        cotacao_ate: vaga.cotacao_ate,
+        quantidade_propostas: vaga.quantidade_propostas,
+        status: vaga.status
+    };
+}
+
+export function custoLista(custo) {
+    return {
+        id: custo.id,
+        descricao: custo.descricao,
+        tipo: custo.origem,
+        valor: custo.valor
+    };
+}
+
+export function listarCustosResponse(vagas, custos) {
+    return {
+        vagas_servico: vagas.map(vagaServicoLista),
+        custos: custos.map(custoLista)
+    };
+}
