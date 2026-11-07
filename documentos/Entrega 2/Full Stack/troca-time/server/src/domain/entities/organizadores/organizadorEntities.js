@@ -3,8 +3,9 @@ export function eventoEntity(criarEventoRequest) {
         nome: criarEventoRequest.nome,
         descricao: criarEventoRequest.descricao || null,
 
-        inicio: `${criarEventoRequest.data_inicio} ${criarEventoRequest.horario_inicio}`,
-        fim: `${criarEventoRequest.data_fim} ${criarEventoRequest.horario_fim}`,
+        data: criarEventoRequest.data,
+        horario_inicio: criarEventoRequest.horario_inicio,
+        horario_fim: criarEventoRequest.horario_fim,
 
         organizador_id: criarEventoRequest.organizador_id,
         publico_min: criarEventoRequest.publico_min,

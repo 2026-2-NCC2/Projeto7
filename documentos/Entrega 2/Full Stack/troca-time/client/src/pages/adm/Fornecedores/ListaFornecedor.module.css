@@ -114,7 +114,9 @@
 }
 
 .filtroAtivo {
-    box-shadow: 0 0 0 2px #fefff8, 0 0 0 3px #111;
+    box-shadow:
+        0 0 0 2px #fefff8,
+        0 0 0 3px #111;
 }
 
 .lista {

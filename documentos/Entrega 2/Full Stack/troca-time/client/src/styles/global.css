@@ -1,12 +1,12 @@
 @import './variables.css';
 
-
 :root {
     font-family: var(--fonte-principal);
     color: var(--cor-primaria);
     font-synthesis: none;
     min-height: 100%;
-    background: linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2)), var(--cor-clara);
+    background:
+        linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2)), var(--cor-clara);
 }
 
 body {
@@ -16,17 +16,14 @@ body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    display: flow-root; 
+    display: flow-root;
 }
-
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-
 
 button,
 input {

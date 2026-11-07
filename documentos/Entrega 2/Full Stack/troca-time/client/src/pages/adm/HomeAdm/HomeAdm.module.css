@@ -127,7 +127,9 @@
     font-size: 0.78rem;
     font-weight: 700;
     text-decoration: none;
-    transition: background 150ms ease, transform 150ms ease;
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
 }
 
 .botaoVer:hover,

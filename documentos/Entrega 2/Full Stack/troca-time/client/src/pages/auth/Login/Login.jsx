@@ -6,7 +6,7 @@ import Campo from '@/components/Campo/Campo'
 import Acoes from '@/components/Acoes/Acoes'
 import Botao from '@/components/Botao/Botao'
 import { validarEmail } from '@/utils/validacoes'
-import {api} from '@/utils/api'
+import { api } from '@/utils/api'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -38,18 +38,21 @@ function Login() {
             return
         }
 
-        try{
-            const usuario = await api ('/auth/login', {
+        try {
+            const usuario = await api('/auth/login', {
                 method: 'POST',
-                body: JSON.stringify({email,senha}),
+                body: JSON.stringify({ email, senha }),
             })
+            localStorage.setItem('usuario_id', usuario.id)
+            localStorage.setItem('usuario_nome', usuario.nome)
+            localStorage.setItem('tipo_usuario', usuario.tipo_usuario)
             const destinos = {
                 adm: '/adm',
                 organizador: '/organizador/eventos',
                 fornecedor: '/fornecedor/oportunidades',
             }
-            navegar(destinos[usuario.tipo_usuario] ?? '/', {replace: true})
-        }catch (erro) {
+            navegar(destinos[usuario.tipo_usuario] ?? '/', { replace: true })
+        } catch (erro) {
             alert(erro.message)
         }
     }

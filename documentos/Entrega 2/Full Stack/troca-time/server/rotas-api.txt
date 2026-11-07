@@ -122,8 +122,9 @@ Response 200:
       "nome": string,
       "status": string,
       "descricao": string | null,
-      "inicio": string,
-      "fim": string,
+      "data": string,               // YYYY-MM-DD
+      "horario_inicio": string,     // HH:MM:SS
+      "horario_fim": string,        // HH:MM:SS
       "nome_local": string | null,
       "quantidade_propostas": number,
       "ticket_estimado_min": number | null,

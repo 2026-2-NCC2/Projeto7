@@ -1,1 +1,9 @@
-.criar { margin-left: auto; padding: 9px 18px; border: 0; border-radius: 22px; color: var(--cor-clara); background: var(--cor-escura-vinho); cursor: pointer; }
+.criar {
+    margin-left: auto;
+    padding: 9px 18px;
+    border: 0;
+    border-radius: 22px;
+    color: var(--cor-clara);
+    background: var(--cor-escura-vinho);
+    cursor: pointer;
+}

@@ -11,7 +11,7 @@ function LayoutAutenticado() {
         <>
             <Cabecalho />
             <Outlet />
-            
+
             {pathname === '/fornecedores' && <ChatConversa />}
         </>
     )
