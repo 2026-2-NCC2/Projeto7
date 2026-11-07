@@ -3,7 +3,7 @@
     margin: 28px auto 120px;
 }
 
-.pagina>h1 {
+.pagina > h1 {
     margin: 0 0 22px;
     text-align: center;
     font-size: 2rem;
@@ -37,12 +37,12 @@
 }
 
 .resumo small {
-    font-size: .65rem;
+    font-size: 0.65rem;
     font-weight: 700;
 }
 
 .resumo span {
-    font-size: .75rem;
+    font-size: 0.75rem;
 }
 
 .formulario {
@@ -61,7 +61,7 @@
     gap: 18px;
 }
 
-.camposTopo>div:nth-child(3) {
+.camposTopo > div:nth-child(3) {
     grid-column: 1;
 }
 
@@ -76,7 +76,7 @@
 
 .rotulo {
     color: var(--cor-escura-azul);
-    font-size: .85rem;
+    font-size: 0.85rem;
     font-weight: 700;
 }
 
@@ -110,7 +110,7 @@
     margin: 0 auto;
     text-align: center;
     color: #666;
-    font-size: .75rem;
+    font-size: 0.75rem;
 }
 
 .erro {
@@ -132,7 +132,7 @@
         grid-template-columns: 1fr;
     }
 
-    .camposTopo>div:nth-child(3) {
+    .camposTopo > div:nth-child(3) {
         grid-column: auto;
     }
 }

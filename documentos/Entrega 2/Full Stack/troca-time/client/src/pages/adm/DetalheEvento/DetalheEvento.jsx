@@ -35,13 +35,17 @@ function DetalheEvento() {
     if (!evento) {
         return (
             <main className={styles.pagina}>
-                <Link className={styles.voltar} to='/eventos'>← Voltar para eventos</Link>
+                <Link className={styles.voltar} to='/eventos'>
+                    ← Voltar para eventos
+                </Link>
                 <p className={styles.naoEncontrado}>Evento não encontrado.</p>
             </main>
         )
     }
 
-    const fornecedores = cadastros.fornecedores.filter((fornecedor) => fornecedor.eventos.includes(evento.id))
+    const fornecedores = cadastros.fornecedores.filter((fornecedor) =>
+        fornecedor.eventos.includes(evento.id),
+    )
     const organizador = cadastros.organizadores.find((item) => item.nome === evento.organizador)
     const [data, hora] = evento.data.split(' - ')
     const statusInfo = STATUS_EVENTO[status] || { rotulo: status, classe: '' }
@@ -55,7 +59,9 @@ function DetalheEvento() {
 
     return (
         <main className={styles.pagina}>
-            <Link className={styles.voltar} to='/eventos'>← Voltar para eventos</Link>
+            <Link className={styles.voltar} to='/eventos'>
+                ← Voltar para eventos
+            </Link>
 
             <header className={styles.tituloLinha}>
                 <h1>{evento.nome}</h1>
@@ -63,14 +69,28 @@ function DetalheEvento() {
             </header>
 
             <section className={styles.capaLinha} aria-label='Imagem e situação do evento'>
-                <div className={styles.imagem} role='img' aria-label={`Imagem do evento ${evento.nome}`}>
+                <div
+                    className={styles.imagem}
+                    role='img'
+                    aria-label={`Imagem do evento ${evento.nome}`}
+                >
                     <span>[ Imagem do evento ]</span>
                 </div>
                 <aside className={styles.acoesEvento}>
-                    {status !== 'reprovado' && <button type='button' className={styles.reprovar} onClick={reprovarEvento}>Reprovar evento</button>}
-                    <p><b>Criado em:</b> {formatarData(evento.criadoEm)}</p>
-                    <p><b>Última alteração:</b> {formatarData(evento.atualizadoEm)}</p>
-                    <p className={styles.mensagem} role='status' aria-live='polite'>{mensagem}</p>
+                    {status !== 'reprovado' && (
+                        <button type='button' className={styles.reprovar} onClick={reprovarEvento}>
+                            Reprovar evento
+                        </button>
+                    )}
+                    <p>
+                        <b>Criado em:</b> {formatarData(evento.criadoEm)}
+                    </p>
+                    <p>
+                        <b>Última alteração:</b> {formatarData(evento.atualizadoEm)}
+                    </p>
+                    <p className={styles.mensagem} role='status' aria-live='polite'>
+                        {mensagem}
+                    </p>
                 </aside>
             </section>
 
@@ -78,30 +98,78 @@ function DetalheEvento() {
                 <h2 id='titulo-descricao'>Descrição:</h2>
                 <p>{evento.descricao || 'Descrição não informada.'}</p>
                 <dl className={styles.dadosEvento}>
-                    <div><dt>Data:</dt><dd>{formatarData(data)}</dd></div>
-                    <div><dt>Hora:</dt><dd>{hora || 'Não informado'}</dd></div>
-                    <div><dt>Local:</dt><dd>{evento.local || 'Não informado'}</dd></div>
-                    <div><dt>Público mínimo:</dt><dd>{evento.publicoMinimo ?? 'Não informado'}{evento.publicoMinimo != null ? ' pessoas' : ''}</dd></div>
-                    <div><dt>Público máximo:</dt><dd>{evento.publicoMaximo ?? 'Não informado'}{evento.publicoMaximo != null ? ' pessoas' : ''}</dd></div>
+                    <div>
+                        <dt>Data:</dt>
+                        <dd>{formatarData(data)}</dd>
+                    </div>
+                    <div>
+                        <dt>Hora:</dt>
+                        <dd>{hora || 'Não informado'}</dd>
+                    </div>
+                    <div>
+                        <dt>Local:</dt>
+                        <dd>{evento.local || 'Não informado'}</dd>
+                    </div>
+                    <div>
+                        <dt>Público mínimo:</dt>
+                        <dd>
+                            {evento.publicoMinimo ?? 'Não informado'}
+                            {evento.publicoMinimo != null ? ' pessoas' : ''}
+                        </dd>
+                    </div>
+                    <div>
+                        <dt>Público máximo:</dt>
+                        <dd>
+                            {evento.publicoMaximo ?? 'Não informado'}
+                            {evento.publicoMaximo != null ? ' pessoas' : ''}
+                        </dd>
+                    </div>
                 </dl>
             </section>
 
             <section className={styles.financeiro} aria-labelledby='titulo-financeiro'>
                 <h2 id='titulo-financeiro'>Planejamento financeiro:</h2>
                 <div className={styles.indicadores}>
-                    <article><h3>Custo total</h3><strong>{formatarMoeda(evento.custoTotal)}</strong></article>
-                    <article><h3>Margem de lucro</h3><strong>{evento.margemLucro == null ? 'Não calculada' : `${evento.margemLucro}%`}</strong></article>
-                    <article><h3>Ticket (público mín.)</h3><strong>{formatarMoeda(evento.ticketMinimo)}</strong></article>
-                    <article><h3>Ticket (público máx.)</h3><strong>{formatarMoeda(evento.ticketMaximo)}</strong></article>
+                    <article>
+                        <h3>Custo total</h3>
+                        <strong>{formatarMoeda(evento.custoTotal)}</strong>
+                    </article>
+                    <article>
+                        <h3>Margem de lucro</h3>
+                        <strong>
+                            {evento.margemLucro == null
+                                ? 'Não calculada'
+                                : `${evento.margemLucro}%`}
+                        </strong>
+                    </article>
+                    <article>
+                        <h3>Ticket (público mín.)</h3>
+                        <strong>{formatarMoeda(evento.ticketMinimo)}</strong>
+                    </article>
+                    <article>
+                        <h3>Ticket (público máx.)</h3>
+                        <strong>{formatarMoeda(evento.ticketMaximo)}</strong>
+                    </article>
                 </div>
             </section>
 
             <section className={styles.organizador} aria-labelledby='titulo-organizador'>
                 <h2 id='titulo-organizador'>Organizador responsável:</h2>
                 <div className={styles.organizadorCard}>
-                    <span className={styles.avatar} aria-hidden='true'>{evento.organizador.split(/\s+/).slice(0, 2).map((parte) => parte[0]).join('').toUpperCase()}</span>
+                    <span className={styles.avatar} aria-hidden='true'>
+                        {evento.organizador
+                            .split(/\s+/)
+                            .slice(0, 2)
+                            .map((parte) => parte[0])
+                            .join('')
+                            .toUpperCase()}
+                    </span>
                     <strong>{evento.organizador}</strong>
-                    {organizador && <Link className={styles.botaoVer} to={`/organizadores/${organizador.id}`}>Ver mais</Link>}
+                    {organizador && (
+                        <Link className={styles.botaoVer} to={`/organizadores/${organizador.id}`}>
+                            Ver mais
+                        </Link>
+                    )}
                 </div>
             </section>
 
@@ -110,15 +178,32 @@ function DetalheEvento() {
                 <div className={styles.listaFornecedores}>
                     {fornecedores.map((fornecedor) => (
                         <article className={styles.fornecedorCard} key={fornecedor.id}>
-                            <span className={styles.avatar} aria-hidden='true'>{fornecedor.nome.split(/\s+/).slice(0, 2).map((parte) => parte[0]).join('').toUpperCase()}</span>
+                            <span className={styles.avatar} aria-hidden='true'>
+                                {fornecedor.nome
+                                    .split(/\s+/)
+                                    .slice(0, 2)
+                                    .map((parte) => parte[0])
+                                    .join('')
+                                    .toUpperCase()}
+                            </span>
                             <div className={styles.fornecedorDados}>
                                 <strong>{fornecedor.nome}</strong>
-                                <p>Item: {fornecedor.servico || 'Serviço não informado'} · {formatarMoeda(fornecedor.valor)}</p>
+                                <p>
+                                    Item: {fornecedor.servico || 'Serviço não informado'} ·{' '}
+                                    {formatarMoeda(fornecedor.valor)}
+                                </p>
                             </div>
-                            <Link className={styles.botaoVer} to={`/adm/fornecedores/${fornecedor.id}`}>Ver mais</Link>
+                            <Link
+                                className={styles.botaoVer}
+                                to={`/adm/fornecedores/${fornecedor.id}`}
+                            >
+                                Ver mais
+                            </Link>
                         </article>
                     ))}
-                    {fornecedores.length === 0 && <p className={styles.semFornecedores}>Nenhum fornecedor selecionado.</p>}
+                    {fornecedores.length === 0 && (
+                        <p className={styles.semFornecedores}>Nenhum fornecedor selecionado.</p>
+                    )}
                 </div>
             </section>
         </main>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { buscarIndicadores, buscarCadastrosPendentes } from '@/dados/painelAdm'
 import { eventos } from '@/dados/eventos'
+import { usuarioNome } from '@/utils/api'
 import styles from './HomeAdm.module.css'
 
 function formatarDataEvento(data) {
@@ -23,7 +24,9 @@ function HomeAdm() {
                 setPendentes(cadastros.length)
             },
         )
-        return () => { ativo = false }
+        return () => {
+            ativo = false
+        }
     }, [])
 
     function moverCarrossel(direcao) {
@@ -45,7 +48,7 @@ function HomeAdm() {
     return (
         <main className={styles.painel}>
             <header className={styles.boasVindas}>
-                <h1>Olá, Administrador</h1>
+                <h1>Olá, {usuarioNome()}</h1>
                 <p>Bem-vindo de volta!</p>
             </header>
 
@@ -53,8 +56,20 @@ function HomeAdm() {
                 <div className={styles.cabecalhoEventos}>
                     <h2 id='titulo-eventos'>Próximos eventos</h2>
                     <div className={styles.controlesCarrossel}>
-                        <button type='button' onClick={() => moverCarrossel(-1)} aria-label='Ver eventos anteriores'>‹</button>
-                        <button type='button' onClick={() => moverCarrossel(1)} aria-label='Ver próximos eventos'>›</button>
+                        <button
+                            type='button'
+                            onClick={() => moverCarrossel(-1)}
+                            aria-label='Ver eventos anteriores'
+                        >
+                            ‹
+                        </button>
+                        <button
+                            type='button'
+                            onClick={() => moverCarrossel(1)}
+                            aria-label='Ver próximos eventos'
+                        >
+                            ›
+                        </button>
                     </div>
                 </div>
 
@@ -66,7 +81,9 @@ function HomeAdm() {
                                 <p>Dia e hora: {formatarDataEvento(evento.data)}</p>
                                 <p>Organizador: {evento.organizador}</p>
                                 <p>Local: {evento.local}</p>
-                                <Link to={`/eventos/${evento.id}`} className={styles.botaoVer}>Ver</Link>
+                                <Link to={`/eventos/${evento.id}`} className={styles.botaoVer}>
+                                    Ver
+                                </Link>
                             </article>
                         ))}
                     </div>
@@ -74,7 +91,9 @@ function HomeAdm() {
                     <p className={styles.vazio}>Não há próximos eventos cadastrados.</p>
                 )}
 
-                <Link to='/eventos' className={styles.botaoTodos}>Ver todos os eventos</Link>
+                <Link to='/eventos' className={styles.botaoTodos}>
+                    Ver todos os eventos
+                </Link>
             </section>
 
             <section className={styles.resumo} aria-labelledby='titulo-resumo'>

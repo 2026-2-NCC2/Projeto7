@@ -25,13 +25,14 @@ function Cabecalho() {
     const perfil = pathname.startsWith('/organizador/')
         ? 'organizador'
         : pathname.startsWith('/fornecedor/')
-            ? 'fornecedor'
-            : 'admin'
-    const links = perfil === 'organizador'
-        ? LINKS_ORGANIZADOR
-        : perfil === 'fornecedor'
-            ? LINKS_FORNECEDOR
-            : LINKS_ADMIN
+          ? 'fornecedor'
+          : 'admin'
+    const links =
+        perfil === 'organizador'
+            ? LINKS_ORGANIZADOR
+            : perfil === 'fornecedor'
+              ? LINKS_FORNECEDOR
+              : LINKS_ADMIN
 
     function fecharPerfil() {
         setPerfilAberto(false)
@@ -61,29 +62,31 @@ function Cabecalho() {
                 ))}
             </nav>
 
-            {perfil === 'admin' && <div className={styles.perfil}>
-                <button
-                    className={styles.perfilBotao}
-                    type='button'
-                    aria-expanded={perfilAberto}
-                    onClick={() => setPerfilAberto((aberto) => !aberto)}
-                >
-                    Perfil
-                </button>
-                {perfilAberto && (
-                    <div className={styles.perfilMenu}>
-                        <Link to='/perfil' onClick={fecharPerfil}>
-                            Minha conta
-                        </Link>
-                        <Link to='/perfil' onClick={fecharPerfil}>
-                            Configurações
-                        </Link>
-                        <Link to='/' onClick={fecharPerfil}>
-                            Sair
-                        </Link>
-                    </div>
-                )}
-            </div>}
+            {perfil === 'admin' && (
+                <div className={styles.perfil}>
+                    <button
+                        className={styles.perfilBotao}
+                        type='button'
+                        aria-expanded={perfilAberto}
+                        onClick={() => setPerfilAberto((aberto) => !aberto)}
+                    >
+                        Perfil
+                    </button>
+                    {perfilAberto && (
+                        <div className={styles.perfilMenu}>
+                            <Link to='/perfil' onClick={fecharPerfil}>
+                                Minha conta
+                            </Link>
+                            <Link to='/perfil' onClick={fecharPerfil}>
+                                Configurações
+                            </Link>
+                            <Link to='/' onClick={fecharPerfil}>
+                                Sair
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            )}
         </header>
     )
 }

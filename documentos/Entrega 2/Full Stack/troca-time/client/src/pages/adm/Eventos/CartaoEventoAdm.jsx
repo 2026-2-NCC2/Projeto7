@@ -25,15 +25,25 @@ function CartaoEventoAdm({ evento }) {
                         <h2>{evento.nome}</h2>
                         <span className={`${styles.status} ${status.classe}`}>{status.rotulo}</span>
                     </div>
-                    <p><b>DATA E HORA:</b> {data}, {hora.replace(':', 'h')}</p>
-                    <p><b>LOCAL:</b> {evento.local}</p>
-                    <p><b>ORGANIZADOR:</b> {evento.organizador}</p>
-                    <p><b>PROPOSTAS:</b> {evento.propostas ?? 0} recebidas</p>
+                    <p>
+                        <b>DATA E HORA:</b> {data}, {hora.replace(':', 'h')}
+                    </p>
+                    <p>
+                        <b>LOCAL:</b> {evento.local}
+                    </p>
+                    <p>
+                        <b>ORGANIZADOR:</b> {evento.organizador}
+                    </p>
+                    <p>
+                        <b>PROPOSTAS:</b> {evento.propostas ?? 0} recebidas
+                    </p>
                 </div>
                 <div className={styles.descricao}>
                     <h3>Descrição</h3>
                     <p>{evento.descricao || 'Descrição não informada.'}</p>
-                    <Link className={styles.verMais} to={`/eventos/${evento.id}`}>Ver mais</Link>
+                    <Link className={styles.verMais} to={`/eventos/${evento.id}`}>
+                        Ver mais
+                    </Link>
                 </div>
             </div>
         </article>

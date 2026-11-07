@@ -1,14 +1,13 @@
 import { AppException } from "../../../exceptions/appExceptions.js"
 
-export function criarEventoRequest(evento) {
+export function criarEventoRequest(evento, organizador_id) {
     return {
         nome: evento.nome,
         descricao: evento.descricao,
-        horario_fim: evento.horario_fim,
+        data: evento.data,
         horario_inicio: evento.horario_inicio,
-        data_inicio: evento.data_inicio,
-        data_fim: evento.data_fim,
-        organizador_id: evento.organizador_id,
+        horario_fim: evento.horario_fim,
+        organizador_id: organizador_id,
         publico_min: evento.publico_min,
         publico_max: evento.publico_max,
         publico_esperado: evento.publico_esperado,
@@ -27,14 +26,12 @@ export function criarEventoRequest(evento) {
 export function validateCriarEventoRequest(criarEventoRequest) {
     const camposObrigatorios = [
         'nome',
-        'horario_fim',
+        'data',
         'horario_inicio',
-        'data_inicio',
-        'data_fim',
+        'horario_fim',
         'organizador_id',
         'publico_min',
         'publico_max',
-        'publico_esperado',
         'margem_lucro',
         'nome_local',
         'cep',

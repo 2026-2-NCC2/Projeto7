@@ -1,6 +1,5 @@
 import styles from './Card.module.css'
 
-
 function Card({
     children,
     variante = 'primario',

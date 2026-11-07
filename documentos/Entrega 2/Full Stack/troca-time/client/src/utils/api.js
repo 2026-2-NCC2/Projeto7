@@ -1,5 +1,3 @@
-
-
 const API_BASE = import.meta.env.VITE_API_URL || '/api'
 
 export async function api(path, options = {}) {
@@ -13,14 +11,26 @@ export async function api(path, options = {}) {
     })
     if (response.status === 204) return null
     const data = await response.json().catch(() => ({}))
-    if (!response.ok) {throw new Error(data.erro || 'Não foi possível concluir a solicitação.')}
+    if (!response.ok) {
+        throw new Error(data.erro || 'Não foi possível concluir a solicitação.')
+    }
     return data
 }
 
 export function usuarioId(tipo) {
-    const salvo = sessionStorage.getItem('usuario_id') || localStorage.getItem('usuario_id')
+    const salvo = localStorage.getItem('usuario_id')
     const padrao = tipo === 'fornecedor' ? 5 : 2
-    return Number(salvo || (tipo === 'fornecedor' ? import.meta.env.VITE_FORNECEDOR_ID : import.meta.env.VITE_ORGANIZADOR_ID) || padrao)
+    return Number(
+        salvo ||
+            (tipo === 'fornecedor'
+                ? import.meta.env.VITE_FORNECEDOR_ID
+                : import.meta.env.VITE_ORGANIZADOR_ID) ||
+            padrao,
+    )
+}
+
+export function usuarioNome() {
+    return localStorage.getItem('usuario_nome') || ''
 }
 
 export function dataBr(data) {
