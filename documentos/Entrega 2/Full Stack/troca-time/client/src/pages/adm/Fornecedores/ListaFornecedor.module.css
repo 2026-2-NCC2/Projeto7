@@ -102,7 +102,7 @@
     color: #222;
 }
 
-.rejeitado {
+.reprovado {
     background: var(--cor-escura-vinho);
     color: #fff;
 }
@@ -114,7 +114,9 @@
 }
 
 .filtroAtivo {
-    box-shadow: 0 0 0 2px #fefff8, 0 0 0 3px #111;
+    box-shadow:
+        0 0 0 2px #fefff8,
+        0 0 0 3px #111;
 }
 
 .lista {
@@ -197,7 +199,7 @@
     color: #222;
 }
 
-.statusrejeitado {
+.statusreprovado {
     background: var(--cor-escura-vinho);
     color: #fff;
 }

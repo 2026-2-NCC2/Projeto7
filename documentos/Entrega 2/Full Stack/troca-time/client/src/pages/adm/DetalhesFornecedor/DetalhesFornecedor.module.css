@@ -88,7 +88,7 @@
     color: #202020;
 }
 
-.statusrejeitado,
+.statusreprovado,
 .propostareprovado {
     background: var(--cor-escura-vinho);
     color: #fff;

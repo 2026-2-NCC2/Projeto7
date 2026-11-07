@@ -7,8 +7,9 @@ export async function listarEventosRepository() {
             e.nome,
             e.status,
             e.descricao,
-            e.inicio,
-            e.fim,
+            e.data,
+            e.horario_inicio,
+            e.horario_fim,
             e.nome_local,
             COALESCE(p.quantidade_propostas, 0) AS quantidade_propostas,
             e.ticket_publico_min AS ticket_estimado_min,
@@ -28,7 +29,7 @@ export async function listarEventosRepository() {
             GROUP BY v.evento_id
         ) p
             ON p.evento_id = e.id
-        ORDER BY e.inicio ASC
+        ORDER BY e.data ASC, e.horario_inicio ASC
     `);
 
     return eventos;
@@ -41,7 +42,9 @@ export async function buscarDetalheEventoRepository(evento_id){
             e.nome,
             e.status,
             e.descricao,
-            e.inicio,
+            e.data,
+            e.horario_inicio,
+            e.horario_fim,
             e.nome_local,
             e.rua,
             e.cep,
@@ -78,6 +81,7 @@ export async function buscarVagasPorEventoIdRepository(evento_id){
         INNER JOIN usuario u ON u.id = p.fornecedor_id
         INNER JOIN vaga_servico v ON p.vaga_servico_id = v.id 
         WHERE v.evento_id = ?
+            AND p.status = 'aceita'
     `, evento_id);
 
     return vagasEvento;

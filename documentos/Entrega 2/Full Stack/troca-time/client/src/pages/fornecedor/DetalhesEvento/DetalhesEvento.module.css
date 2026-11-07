@@ -16,12 +16,12 @@
     font-size: 1.7rem;
 }
 
-.titulo>span:not(.cotacao) {
+.titulo > span:not(.cotacao) {
     padding: 5px 14px;
     border-radius: 20px;
     color: white;
     background: var(--cor-escura-azul);
-    font-size: .8rem;
+    font-size: 0.8rem;
 }
 
 .cotacao {
@@ -47,7 +47,7 @@
 
 .dados h2 {
     margin: 22px 0 5px;
-    font-size: .85rem;
+    font-size: 0.85rem;
 }
 
 .dados p {

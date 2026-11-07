@@ -10,7 +10,7 @@ import {
 } from "../../domain/dtos/organizadores/organizadorDtos.js"
 
 export async function criarEventoController(req, res) {
-    const eventoRequest = criarEventoRequest(req.body)
+    const eventoRequest = criarEventoRequest(req.body, req.usuario.id)
 
     validateCriarEventoRequest(eventoRequest)
 

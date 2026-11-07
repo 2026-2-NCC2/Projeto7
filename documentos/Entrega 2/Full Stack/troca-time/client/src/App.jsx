@@ -38,12 +38,18 @@ function App() {
                     <Route path='/adm' element={<HomeAdm />} />
                     <Route path='/eventos' element={<Eventos />} />
                     <Route path='/eventos/:id' element={<DetalheEvento />} />
-                    <Route path='/adm/fornecedores' element={<ListaFornecedorAdm />} />
+                    <Route path='/adm/usuarios' element={<ListaFornecedorAdm />} />
                     <Route path='/adm/fornecedores/:id' element={<DetalhesFornecedorAdm />} />
                     <Route path='/fornecedores' element={<HomeFornecedores />} />
                     <Route path='/fornecedor/oportunidades' element={<OportunidadesFornecedor />} />
-                    <Route path='/fornecedor/eventos/:eventoId' element={<DetalhesEventoFornecedor />} />
-                    <Route path='/fornecedor/eventos/:eventoId/propostas/nova' element={<NovaPropostaFornecedor />} />
+                    <Route
+                        path='/fornecedor/eventos/:eventoId'
+                        element={<DetalhesEventoFornecedor />}
+                    />
+                    <Route
+                        path='/fornecedor/eventos/:eventoId/propostas/nova'
+                        element={<NovaPropostaFornecedor />}
+                    />
                     <Route path='/fornecedor/propostas' element={<PropostasFornecedor />} />
                     <Route path='/organizador/eventos' element={<EventosOrganizador />} />
                     <Route path='/organizador/eventos/novo' element={<NovoEvento />} />
@@ -54,8 +60,14 @@ function App() {
                         <Route path='propostas' element={<PropostasOrganizador />} />
                         <Route path='orcamento' element={<OrcamentoTicket />} />
                     </Route>
-                    <Route path='/organizador/fornecedores' element={<ListaFornecedoresOrganizador />} />
-                    <Route path='/organizador/fornecedores/:fornecedorId' element={<DetalheFornecedorOrganizador />} />
+                    <Route
+                        path='/organizador/fornecedores'
+                        element={<ListaFornecedoresOrganizador />}
+                    />
+                    <Route
+                        path='/organizador/fornecedores/:fornecedorId'
+                        element={<DetalheFornecedorOrganizador />}
+                    />
                     <Route path='/organizadores' element={<PerfilOrganizador />} />
                     <Route path='/organizadores/:id' element={<PerfilOrganizador />} />
                     <Route path='/perfil' element={<PaginaVazia titulo='Perfil' />} />

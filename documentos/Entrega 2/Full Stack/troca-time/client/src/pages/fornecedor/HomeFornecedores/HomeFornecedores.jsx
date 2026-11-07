@@ -5,6 +5,7 @@ import {
     VISIBLE_EVENTS,
     COLUMN_LABELS,
 } from '@/dados/dadosFornecedores'
+import { usuarioNome } from '@/utils/api'
 import styles from './HomeFornecedores.module.css'
 
 const CLASSES_COLUNA = {
@@ -60,7 +61,7 @@ function HomeFornecedores() {
             <main className={styles.page}>
                 {/* ===================== BOAS-VINDAS ===================== */}
                 <section className={styles.greeting}>
-                    <h1>Olá,</h1>
+                    <h1>Olá, {usuarioNome()}</h1>
                     <p>Bem-vindo de volta!</p>
                 </section>
 

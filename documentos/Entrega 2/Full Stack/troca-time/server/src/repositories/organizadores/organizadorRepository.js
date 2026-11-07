@@ -5,8 +5,9 @@ export async function criarEventoRepository(evento) {
         INSERT INTO evento (
             nome, 
             descricao,
-            inicio,
-            fim,
+            data,
+            horario_inicio,
+            horario_fim,
             organizador_id,
             publico_min,
             publico_max,
@@ -22,13 +23,14 @@ export async function criarEventoRepository(evento) {
             estado
         )
         VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )
      `, [
         evento.nome,
         evento.descricao,
-        evento.inicio,
-        evento.fim,
+        evento.data,
+        evento.horario_inicio,
+        evento.horario_fim,
         evento.organizador_id,
         evento.publico_min,
         evento.publico_max, 

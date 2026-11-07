@@ -64,12 +64,12 @@
     color: #fff;
 }
 
-.orcamentoFechado {
+.publicado {
     background: #c8e331;
     color: #222;
 }
 
-.reprovado {
+.encerrado {
     background: #4a1930;
     color: #fff;
 }
@@ -81,7 +81,9 @@
 }
 
 .selecionado {
-    box-shadow: 0 0 0 2px var(--cor-clara), 0 0 0 3px #111;
+    box-shadow:
+        0 0 0 2px var(--cor-clara),
+        0 0 0 3px #111;
 }
 
 .filtro:focus-visible {

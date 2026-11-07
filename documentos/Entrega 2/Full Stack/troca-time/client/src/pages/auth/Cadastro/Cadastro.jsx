@@ -8,6 +8,7 @@ import Acoes from '@/components/Acoes/Acoes'
 import Botao from '@/components/Botao/Botao'
 import Texto from '@/components/Texto/Texto'
 import { validarEmail, validarCpf, validarCnpj } from '@/utils/validacoes'
+import { api } from '@/utils/api'
 
 const PERFIS = [
     { id: 'fornecedor', rotulo: 'Fornecedor' },
@@ -18,6 +19,7 @@ function Cadastro() {
     const [tipoPerfil, setTipoPerfil] = useState('')
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
+    const [telefone, setTelefone] = useState('')
     const [senha, setSenha] = useState('')
     const [confirmarSenha, setConfirmarSenha] = useState('')
     const [cpfOuCnpj, setCpfOuCnpj] = useState('')
@@ -41,6 +43,11 @@ function Cadastro() {
             errosCadastro.email = 'E-mail inválido'
         }
 
+        const digitosTelefone = telefone.replace(/\D/g, '')
+        if (digitosTelefone.length !== 10 && digitosTelefone.length !== 11) {
+            errosCadastro.telefone = 'Telefone inválido'
+        }
+
         if (!cpfOuCnpj.trim()) {
             errosCadastro.cpfOuCnpj = ehFornecedor ? 'Informe o CNPJ' : 'Informe o CPF ou CNPJ'
         } else if (ehFornecedor && !validarCnpj(cpfOuCnpj)) {
@@ -60,7 +67,7 @@ function Cadastro() {
         return errosCadastro
     }
 
-    function submit(e) {
+    async function submit(e) {
         e.preventDefault()
 
         const errosCadastro = validar()
@@ -70,8 +77,23 @@ function Cadastro() {
             return
         }
 
-        console.log('cadastro:', { tipoPerfil, nome, email, cpfOuCnpj })
-        navegar('/cadastro/obrigado')
+        try {
+            await api('/auth/cadastro', {
+                method: 'POST',
+                body: JSON.stringify({
+                    tipo_usuario: tipoPerfil,
+                    nome,
+                    email,
+                    telefone,
+                    cpf_cnpj: cpfOuCnpj,
+                    senha,
+                    confirmacao_senha: confirmarSenha,
+                }),
+            })
+            navegar('/cadastro/obrigado')
+        } catch (erro) {
+            alert(erro.message)
+        }
     }
 
     return (
@@ -104,6 +126,16 @@ function Cadastro() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     erro={erros.email}
+                />
+
+                <Campo
+                    id='telefone'
+                    rotulo='*Telefone:'
+                    type='tel'
+                    placeholder='(11) 99999-9999'
+                    value={telefone}
+                    onChange={(e) => setTelefone(e.target.value)}
+                    erro={erros.telefone}
                 />
 
                 <Campo

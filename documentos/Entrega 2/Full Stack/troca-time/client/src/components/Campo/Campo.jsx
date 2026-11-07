@@ -1,7 +1,6 @@
 import Texto from '@/components/Texto/Texto'
 import styles from './Campo.module.css'
 
-
 function Campo({ id, rotulo, erro, children, ...props }) {
     const Rotulo = children ? 'span' : 'label'
 
