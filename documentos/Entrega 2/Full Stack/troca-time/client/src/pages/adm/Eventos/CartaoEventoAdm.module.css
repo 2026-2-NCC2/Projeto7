@@ -66,11 +66,11 @@
     background: var(--cor-escura-1);
     color: #fff;
 }
-.orcamentoFechado {
+.publicado {
     background: var(--cor-clara-verde);
     color: #222;
 }
-.reprovado {
+.encerrado {
     background: var(--cor-escura-vinho);
     color: #fff;
 }

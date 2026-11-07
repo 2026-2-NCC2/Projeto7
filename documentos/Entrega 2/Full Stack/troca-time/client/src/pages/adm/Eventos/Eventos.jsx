@@ -1,27 +1,40 @@
-import { useMemo, useState } from 'react'
-import { eventos } from '@/dados/eventos'
+import { useEffect, useMemo, useState } from 'react'
+import { api } from '@/utils/api'
 import CartaoEventoAdm from './CartaoEventoAdm'
 import styles from './Eventos.module.css'
 
 const FILTROS = [
     { valor: 'em_cotacao', rotulo: 'Em cotação', classe: 'emCotacao' },
-    { valor: 'orcamento_fechado', rotulo: 'Orçamento fechado', classe: 'orcamentoFechado' },
-    { valor: 'reprovado', rotulo: 'Reprovados', classe: 'reprovado' },
+    { valor: 'publicado', rotulo: 'Publicado', classe: 'publicado' },
+    { valor: 'encerrado', rotulo: 'Encerrado', classe: 'encerrado' },
     { valor: 'todos', rotulo: 'Todos', classe: 'todos' },
 ]
 
 function Eventos() {
     const [filtro, setFiltro] = useState('todos')
     const [busca, setBusca] = useState('')
+    const [eventos, setEventos] = useState([])
+
+    useEffect(() => {
+        api('/eventos/')
+            .then((resposta) =>
+                setEventos(
+                    (resposta.eventos || []).filter((evento) => evento.status !== 'rascunho'),
+                ),
+            )
+            .catch((erro) => alert(erro.message))
+    }, [])
+
     const eventosFiltrados = useMemo(() => {
         const termo = busca.trim().toLocaleLowerCase('pt-BR')
         return eventos.filter((evento) => {
-            const correspondeBusca = `${evento.nome} ${evento.organizador} ${evento.local}`
-                .toLocaleLowerCase('pt-BR')
-                .includes(termo)
-            return correspondeBusca && (filtro === 'todos' || evento.statusAdm === filtro)
+            const correspondeBusca =
+                `${evento.nome} ${evento.nome_organizador} ${evento.nome_local}`
+                    .toLocaleLowerCase('pt-BR')
+                    .includes(termo)
+            return correspondeBusca && (filtro === 'todos' || evento.status === filtro)
         })
-    }, [busca, filtro])
+    }, [eventos, busca, filtro])
 
     return (
         <main className={styles.pagina}>

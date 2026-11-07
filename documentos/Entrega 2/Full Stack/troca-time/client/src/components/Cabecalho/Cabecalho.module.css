@@ -10,7 +10,7 @@
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: 20px;
-    background: #fff;
+    background: transparent;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 

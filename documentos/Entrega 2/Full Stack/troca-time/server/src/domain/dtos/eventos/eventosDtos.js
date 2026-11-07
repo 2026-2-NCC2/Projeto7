@@ -54,6 +54,8 @@ export function detalheEvento(evento, vagas_servico){
         custo_total: evento.custo_total,
         margem_lucro: evento.margem_lucro,
         organizador_nome: evento.nome_organizador,
+        criado_em: evento.criado_em,
+        atualizado_em: evento.atualizado_em,
         organizador_id: evento.organizador_id,
         vagas_servico: vagas_servico.map(vagaServicoDetalhe)
     }

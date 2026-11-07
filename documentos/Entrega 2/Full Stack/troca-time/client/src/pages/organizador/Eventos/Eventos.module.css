@@ -50,10 +50,35 @@
     background: var(--cor-fundo-1);
     cursor: pointer;
 }
-.ativo {
+.filtroTodos {
+    border-color: var(--cor-escura-1);
+    color: var(--cor-escura-1);
+    background: #fff;
+}
+.filtroRascunho {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+    background: transparent;
+}
+.filtroEmCotacao {
+    border-color: var(--cor-escura-1);
     color: #fff;
-    border-color: #111;
-    background: #111;
+    background: var(--cor-escura-1);
+}
+.filtroPublicado {
+    border-color: var(--cor-clara-verde);
+    color: #222;
+    background: var(--cor-clara-verde);
+}
+.filtroEncerrado {
+    border-color: var(--cor-escura-vinho);
+    color: #fff;
+    background: var(--cor-escura-vinho);
+}
+.ativo {
+    box-shadow:
+        0 0 0 2px var(--cor-clara),
+        0 0 0 3px #111;
 }
 .lista {
     display: grid;
@@ -110,16 +135,20 @@
     color: white;
     background: var(--cor-escura-azul);
 }
-.status_rascunho {
+.statusRascunho {
     color: var(--cor-primaria);
     background: transparent;
     border: 1px solid var(--cor-primaria);
 }
-.status_publicado {
-    color: var(--cor-primaria);
+.statusEmCotacao {
+    color: #fff;
+    background: var(--cor-escura-1);
+}
+.statusPublicado {
+    color: #222;
     background: var(--cor-clara-verde);
 }
-.status_reprovado {
+.statusEncerrado {
     color: #fff;
     background: var(--cor-escura-vinho);
 }

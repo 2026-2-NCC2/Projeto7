@@ -6,8 +6,7 @@ import styles from './Cabecalho.module.css'
 const LINKS_ADMIN = [
     { rotulo: 'Home', caminho: '/home' },
     { rotulo: 'Eventos', caminho: '/eventos' },
-    { rotulo: 'Fornecedores', caminho: '/adm/fornecedores' },
-    { rotulo: 'Organizadores', caminho: '/organizadores/1' },
+    { rotulo: 'Usuários', caminho: '/adm/usuarios' },
 ]
 const LINKS_ORGANIZADOR = [
     { rotulo: 'Meus eventos', caminho: '/organizador/eventos' },

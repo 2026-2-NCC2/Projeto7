@@ -38,21 +38,17 @@
     color: #fff;
 }
 
-.statusOrcamentoFechado {
+.statusPublicado {
     background: #c8e331;
     color: #222;
 }
 
-.statusReprovado {
+.statusEncerrado {
     background: #4a1930;
     color: #fff;
 }
 
 .capaLinha {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 180px;
-    align-items: start;
-    gap: 24px;
     margin-bottom: 24px;
 }
 
@@ -66,35 +62,6 @@
     background: var(--cor-escura-vinho);
     color: #fff;
     font-size: 0.75rem;
-}
-
-.acoesEvento {
-    display: grid;
-    justify-items: start;
-    gap: 12px;
-    padding-top: 2px;
-    color: #383838;
-    font-size: 0.74rem;
-}
-
-.reprovar {
-    padding: 9px 18px;
-    border: 1px solid #d64545;
-    border-radius: 999px;
-    background: transparent;
-    color: #bd3030;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.reprovar:hover {
-    background: #fff1f1;
-}
-
-.mensagem {
-    min-height: 1em;
-    color: #315b18;
 }
 
 .descricao {
@@ -261,7 +228,6 @@
 }
 
 .voltar:focus-visible,
-.reprovar:focus-visible,
 .botaoVer:focus-visible {
     outline: 2px solid #111;
     outline-offset: 3px;
@@ -273,23 +239,8 @@
         margin-top: 20px;
     }
 
-    .capaLinha {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
     .imagem {
         min-height: 180px;
-    }
-
-    .acoesEvento {
-        grid-template-columns: auto 1fr;
-        align-items: center;
-        gap: 8px 14px;
-    }
-
-    .acoesEvento .reprovar {
-        grid-row: span 2;
     }
 
     .indicadores {

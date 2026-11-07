@@ -1,12 +1,12 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import cadastros from '@/dados/cadastros.json'
+import { api } from '@/utils/api'
 import styles from './ListaFornecedor.module.css'
 
 const FILTROS = [
     { id: 'pendente', label: 'Pendentes' },
     { id: 'aprovado', label: 'Aprovados' },
-    { id: 'rejeitado', label: 'Reprovados' },
+    { id: 'reprovado', label: 'Reprovados' },
     { id: 'todos', label: 'Todos' },
 ]
 
@@ -14,28 +14,47 @@ function ListaFornecedor() {
     const [tipo, setTipo] = useState('fornecedores')
     const [filtro, setFiltro] = useState('pendente')
     const [busca, setBusca] = useState('')
-    const lista = cadastros[tipo]
+    const [usuarios, setUsuarios] = useState([])
     const organizadores = tipo === 'organizadores'
+    const lista = usuarios.filter(
+        (usuario) => usuario.tipo_usuario === (organizadores ? 'organizador' : 'fornecedor'),
+    )
+
+    async function carregar() {
+        try {
+            const resposta = await api('/usuarios/')
+            setUsuarios(resposta.usuarios || [])
+        } catch (erro) {
+            alert(erro.message)
+        }
+    }
+
+    useEffect(() => {
+        carregar()
+    }, [])
 
     const filtrados = useMemo(
         () =>
             lista.filter((item) => {
                 const texto =
-                    `${item.nome} ${item.documento} ${item.cidade} ${item.estado} ${item.descricao}`.toLocaleLowerCase(
+                    `${item.nome} ${item.cpf_cnpj} ${item.descricao || ''}`.toLocaleLowerCase(
                         'pt-BR',
                     )
                 return (
                     texto.includes(busca.toLocaleLowerCase('pt-BR')) &&
-                    (filtro === 'todos' || item.status === filtro)
+                    (filtro === 'todos' || item.status_cadastro === filtro)
                 )
             }),
         [lista, busca, filtro],
     )
 
-    function atualizarStatus(id, status) {
-        const cadastro = lista.find((item) => item.id === id)
-        if (cadastro) cadastro.status = status
-        setFiltro(status)
+    async function atualizarStatus(id, status) {
+        try {
+            await api(`/admin/${id}?status_cadastro=${status}`, { method: 'PATCH' })
+            await carregar()
+        } catch (erro) {
+            alert(erro.message)
+        }
     }
 
     function trocarTipo(novoTipo) {
@@ -112,33 +131,25 @@ function ListaFornecedor() {
                             <div className={styles.nomeLinha}>
                                 <h2>{cadastro.nome}</h2>
                                 <span
-                                    className={`${styles.status} ${styles[`status${cadastro.status}`]}`}
+                                    className={`${styles.status} ${styles[`status${cadastro.status_cadastro}`]}`}
                                 >
-                                    {cadastro.status === 'pendente'
+                                    {cadastro.status_cadastro === 'pendente'
                                         ? 'Pendente'
-                                        : cadastro.status === 'aprovado'
+                                        : cadastro.status_cadastro === 'aprovado'
                                           ? 'Aprovado'
                                           : 'Reprovado'}
                                 </span>
                             </div>
                             <p>
-                                <b>CPF/CNPJ:</b> {cadastro.documento}
+                                <b>CPF/CNPJ:</b> {cadastro.cpf_cnpj}
                             </p>
-                            <p>
-                                <b>CIDADE:</b> {cadastro.cidade}/{cadastro.estado}
-                            </p>
-                            {cadastro.servico && (
-                                <p>
-                                    <b>CATEGORIA:</b> {cadastro.servico}
-                                </p>
-                            )}
                         </div>
                         <div className={styles.descricao}>
                             <h3>Descrição</h3>
-                            <p>{cadastro.descricao}</p>
+                            <p>{cadastro.descricao || 'Sem descrição cadastrada.'}</p>
                         </div>
                         <div className={styles.acoes}>
-                            {cadastro.status !== 'aprovado' && (
+                            {cadastro.status_cadastro !== 'aprovado' && (
                                 <button
                                     type='button'
                                     className={styles.aprovar}
@@ -147,11 +158,11 @@ function ListaFornecedor() {
                                     Aprovar
                                 </button>
                             )}
-                            {cadastro.status !== 'rejeitado' && (
+                            {cadastro.status_cadastro !== 'reprovado' && (
                                 <button
                                     type='button'
                                     className={styles.reprovar}
-                                    onClick={() => atualizarStatus(cadastro.id, 'rejeitado')}
+                                    onClick={() => atualizarStatus(cadastro.id, 'reprovado')}
                                 >
                                     Reprovar
                                 </button>
