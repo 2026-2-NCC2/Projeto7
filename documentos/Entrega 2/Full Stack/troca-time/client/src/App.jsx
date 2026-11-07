@@ -38,7 +38,7 @@ function App() {
                     <Route path='/adm' element={<HomeAdm />} />
                     <Route path='/eventos' element={<Eventos />} />
                     <Route path='/eventos/:id' element={<DetalheEvento />} />
-                    <Route path='/adm/fornecedores' element={<ListaFornecedorAdm />} />
+                    <Route path='/adm/usuarios' element={<ListaFornecedorAdm />} />
                     <Route path='/adm/fornecedores/:id' element={<DetalhesFornecedorAdm />} />
                     <Route path='/fornecedores' element={<HomeFornecedores />} />
                     <Route path='/fornecedor/oportunidades' element={<OportunidadesFornecedor />} />

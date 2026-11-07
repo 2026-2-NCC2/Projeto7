@@ -102,7 +102,7 @@
     color: #222;
 }
 
-.rejeitado {
+.reprovado {
     background: var(--cor-escura-vinho);
     color: #fff;
 }
@@ -199,7 +199,7 @@
     color: #222;
 }
 
-.statusrejeitado {
+.statusreprovado {
     background: var(--cor-escura-vinho);
     color: #fff;
 }

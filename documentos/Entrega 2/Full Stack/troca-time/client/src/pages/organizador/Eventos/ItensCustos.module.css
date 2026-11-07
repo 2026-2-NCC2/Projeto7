@@ -73,10 +73,9 @@
     background: #f0f0f2;
 }
 .formVaga {
-    grid-template-columns: minmax(0, 1.2fr) minmax(145px, 0.9fr) minmax(0, 1.4fr) minmax(
-            145px,
-            0.9fr
-        ) auto;
+    grid-template-columns:
+        minmax(0, 1.2fr) minmax(145px, 0.9fr) minmax(0, 1.4fr) minmax(145px, 0.9fr)
+        auto;
 }
 .formCusto {
     grid-template-columns: minmax(0, 1.3fr) minmax(150px, 0.9fr) minmax(0, 0.9fr) auto;

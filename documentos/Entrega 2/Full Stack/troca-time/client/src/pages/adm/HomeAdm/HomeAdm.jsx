@@ -1,32 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { buscarIndicadores, buscarCadastrosPendentes } from '@/dados/painelAdm'
-import { eventos } from '@/dados/eventos'
-import { usuarioNome } from '@/utils/api'
+import { api, dataHoraBr, usuarioNome } from '@/utils/api'
 import styles from './HomeAdm.module.css'
-
-function formatarDataEvento(data) {
-    const [dataEvento, hora] = data.split(' - ')
-    return `${dataEvento}, ${hora.replace(':', 'h')}`
-}
 
 function HomeAdm() {
     const trilhaRef = useRef(null)
     const [indicadores, setIndicadores] = useState(null)
-    const [pendentes, setPendentes] = useState(0)
+    const [eventos, setEventos] = useState([])
 
     useEffect(() => {
-        let ativo = true
-        Promise.all([buscarIndicadores('30d'), buscarCadastrosPendentes()]).then(
-            ([resumo, cadastros]) => {
-                if (!ativo) return
+        Promise.all([api('/admin/resumo'), api('/eventos/')])
+            .then(([resumo, resposta]) => {
                 setIndicadores(resumo)
-                setPendentes(cadastros.length)
-            },
-        )
-        return () => {
-            ativo = false
-        }
+                setEventos(resposta.eventos || [])
+            })
+            .catch((erro) => alert(erro.message))
     }, [])
 
     function moverCarrossel(direcao) {
@@ -37,13 +25,8 @@ function HomeAdm() {
         trilha.scrollBy({ left: distancia * direcao, behavior: 'smooth' })
     }
 
-    const proximosEventos = eventos.filter((evento) => {
-        const [dia, mes, ano] = evento.data.split(' - ')[0].split('/')
-        const dataEvento = new Date(Number(ano), Number(mes) - 1, Number(dia))
-        const hoje = new Date()
-        hoje.setHours(0, 0, 0, 0)
-        return dataEvento >= hoje
-    })
+    const hoje = new Date().toLocaleDateString('sv-SE')
+    const proximosEventos = eventos.filter((evento) => evento.data >= hoje)
 
     return (
         <main className={styles.painel}>
@@ -78,9 +61,12 @@ function HomeAdm() {
                         {proximosEventos.map((evento) => (
                             <article className={styles.cartaoEvento} key={evento.id}>
                                 <h3>{evento.nome}</h3>
-                                <p>Dia e hora: {formatarDataEvento(evento.data)}</p>
-                                <p>Organizador: {evento.organizador}</p>
-                                <p>Local: {evento.local}</p>
+                                <p>
+                                    Dia e hora:{' '}
+                                    {dataHoraBr(`${evento.data} ${evento.horario_inicio}`)}
+                                </p>
+                                <p>Organizador: {evento.nome_organizador}</p>
+                                <p>Local: {evento.nome_local}</p>
                                 <Link to={`/eventos/${evento.id}`} className={styles.botaoVer}>
                                     Ver
                                 </Link>
@@ -101,19 +87,19 @@ function HomeAdm() {
                 <div className={styles.indicadores}>
                     <article className={styles.indicador}>
                         <h3>Cadastros pendentes</h3>
-                        <strong>{indicadores ? pendentes : '–'}</strong>
+                        <strong>{indicadores?.total_cadastros_pendentes ?? '–'}</strong>
                     </article>
                     <article className={styles.indicador}>
                         <h3>Eventos em cotação</h3>
-                        <strong>{indicadores?.eventosEmCotacao ?? '–'}</strong>
+                        <strong>{indicadores?.total_eventos_cotacao ?? '–'}</strong>
                     </article>
                     <article className={styles.indicador}>
                         <h3>Propostas recebidas</h3>
-                        <strong>{indicadores?.propostasRecebidas ?? '–'}</strong>
+                        <strong>{indicadores?.total_propostas_recebidas ?? '–'}</strong>
                     </article>
                     <article className={styles.indicador}>
                         <h3>Tickets Publicados</h3>
-                        <strong>{indicadores?.ticketsPublicados ?? '–'}</strong>
+                        <strong>–</strong>
                     </article>
                 </div>
             </section>

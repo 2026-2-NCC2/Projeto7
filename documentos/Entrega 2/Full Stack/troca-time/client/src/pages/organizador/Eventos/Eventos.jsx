@@ -5,17 +5,23 @@ import { api, dataHoraBr, usuarioId, usuarioNome } from '@/utils/api'
 import styles from './Eventos.module.css'
 
 const FILTROS = [
-    { id: 'todos', label: 'Todos' },
-    { id: 'rascunho', label: 'Rascunho' },
-    { id: 'em_cotacao', label: 'Em cotação' },
-    { id: 'publicado', label: 'Publicado' },
+    { id: 'todos', label: 'Todos', classe: 'filtroTodos' },
+    { id: 'rascunho', label: 'Rascunho', classe: 'filtroRascunho' },
+    { id: 'em_cotacao', label: 'Em cotação', classe: 'filtroEmCotacao' },
+    { id: 'publicado', label: 'Publicado', classe: 'filtroPublicado' },
+    { id: 'encerrado', label: 'Encerrado', classe: 'filtroEncerrado' },
 ]
 const LABEL_STATUS = {
     rascunho: 'Rascunho',
     em_cotacao: 'Em cotação',
     publicado: 'Publicado',
-    reprovado: 'Reprovado',
     encerrado: 'Encerrado',
+}
+const CLASSE_STATUS = {
+    rascunho: styles.statusRascunho,
+    em_cotacao: styles.statusEmCotacao,
+    publicado: styles.statusPublicado,
+    encerrado: styles.statusEncerrado,
 }
 const MESES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
 
@@ -79,7 +85,7 @@ function EventosOrganizador() {
                         key={item.id}
                         type='button'
                         aria-pressed={filtro === item.id}
-                        className={`${styles.filtro} ${styles[`filtro_${item.id}`]} ${filtro === item.id ? styles.ativo : ''}`}
+                        className={`${styles.filtro} ${styles[item.classe]} ${filtro === item.id ? styles.ativo : ''}`}
                         onClick={() => setFiltro(item.id)}
                     >
                         {item.label}
@@ -112,7 +118,7 @@ function EventosOrganizador() {
                                     <h2>
                                         {evento.nome}
                                         <span
-                                            className={`${styles.status} ${styles[`status_${evento.status}`]}`}
+                                            className={`${styles.status} ${CLASSE_STATUS[evento.status] || ''}`}
                                         >
                                             {LABEL_STATUS[evento.status] || evento.status}
                                         </span>

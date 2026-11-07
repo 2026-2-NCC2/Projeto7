@@ -7,8 +7,13 @@ const LABEL_STATUS = {
     rascunho: 'Rascunho',
     em_cotacao: 'Em cotação',
     publicado: 'Publicado',
-    reprovado: 'Reprovado',
     encerrado: 'Encerrado',
+}
+const CLASSE_STATUS = {
+    rascunho: styles.statusRascunho,
+    em_cotacao: styles.statusEmCotacao,
+    publicado: styles.statusPublicado,
+    encerrado: styles.statusEncerrado,
 }
 
 function EventoLayout() {
@@ -50,7 +55,7 @@ function EventoLayout() {
                 <div>
                     <h1>
                         {evento.nome}
-                        <span className={`${styles.status} ${styles[`status_${evento.status}`]}`}>
+                        <span className={`${styles.status} ${CLASSE_STATUS[evento.status] || ''}`}>
                             {LABEL_STATUS[evento.status] || evento.status}
                         </span>
                     </h1>

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { api } from '@/utils/api'
+import { api, usuarioId } from '@/utils/api'
 import styles from './DetalheFornecedor.module.css'
 
 const STATUS = {
-    enviada: 'Disponível',
-    em_negociacao: 'Selecionada',
-    aceita: 'Salva',
+    enviada: 'Aguardando resposta',
+    em_negociacao: 'Em negociação',
+    aceita: 'Selecionada',
     recusada: 'Recusada',
-    cancelada: 'Indisponível',
 }
 const dinheiro = (valor) =>
     `R$ ${Number(valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
@@ -28,6 +27,9 @@ function DetalheFornecedor() {
             </main>
         )
     if (!fornecedor) return <main className={styles.pagina}>Carregando fornecedor…</main>
+    const propostas = fornecedor.propostas.filter(
+        (proposta) => proposta.organizador_id === usuarioId('organizador'),
+    )
     return (
         <main className={styles.pagina}>
             <section className={styles.cabecalho}>
@@ -64,7 +66,7 @@ function DetalheFornecedor() {
             </div>
             <h2 className={styles.rotulo}>PROPOSTAS COM VOCÊ:</h2>
             <section className={styles.propostas}>
-                {fornecedor.propostas.map((p) => (
+                {propostas.map((p) => (
                     <article key={p.id}>
                         <div>
                             <b>{p.nome_evento}</b>
@@ -74,7 +76,7 @@ function DetalheFornecedor() {
                         <span className={styles.status}>{STATUS[p.status] || p.status}</span>
                     </article>
                 ))}
-                {!fornecedor.propostas.length && <p>Nenhuma proposta deste fornecedor.</p>}
+                {!propostas.length && <p>Nenhuma proposta deste fornecedor com você.</p>}
             </section>
         </main>
     )

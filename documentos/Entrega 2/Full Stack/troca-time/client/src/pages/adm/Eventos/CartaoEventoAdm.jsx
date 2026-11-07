@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom'
+import { dataHoraBr } from '@/utils/api'
 import styles from './CartaoEventoAdm.module.css'
 
 const MESES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
 const STATUS = {
     em_cotacao: { rotulo: 'Em cotação', classe: styles.emCotacao },
-    orcamento_fechado: { rotulo: 'Orçamento fechado', classe: styles.orcamentoFechado },
-    reprovado: { rotulo: 'Reprovado', classe: styles.reprovado },
+    publicado: { rotulo: 'Publicado', classe: styles.publicado },
+    encerrado: { rotulo: 'Encerrado', classe: styles.encerrado },
 }
 
 function CartaoEventoAdm({ evento }) {
-    const [data, hora] = evento.data.split(' - ')
-    const [dia, mes] = data.split('/')
-    const status = STATUS[evento.statusAdm] || { rotulo: evento.statusAdm, classe: '' }
+    const [, mes, dia] = String(evento.data).split('-')
+    const status = STATUS[evento.status] || { rotulo: evento.status, classe: '' }
 
     return (
         <article className={styles.cartao}>
-            <div className={styles.dataEvento} aria-label={`Data do evento: ${data}`}>
+            <div className={styles.dataEvento} aria-label={`Data do evento: ${dia}/${mes}`}>
                 <strong>{dia}</strong>
                 <span>{MESES[Number(mes) - 1]}</span>
             </div>
@@ -26,16 +26,16 @@ function CartaoEventoAdm({ evento }) {
                         <span className={`${styles.status} ${status.classe}`}>{status.rotulo}</span>
                     </div>
                     <p>
-                        <b>DATA E HORA:</b> {data}, {hora.replace(':', 'h')}
+                        <b>DATA E HORA:</b> {dataHoraBr(`${evento.data} ${evento.horario_inicio}`)}
                     </p>
                     <p>
-                        <b>LOCAL:</b> {evento.local}
+                        <b>LOCAL:</b> {evento.nome_local}
                     </p>
                     <p>
-                        <b>ORGANIZADOR:</b> {evento.organizador}
+                        <b>ORGANIZADOR:</b> {evento.nome_organizador}
                     </p>
                     <p>
-                        <b>PROPOSTAS:</b> {evento.propostas ?? 0} recebidas
+                        <b>PROPOSTAS:</b> {evento.quantidade_propostas ?? 0} recebidas
                     </p>
                 </div>
                 <div className={styles.descricao}>
