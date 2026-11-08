@@ -35,7 +35,11 @@
 }
 .linha {
     display: grid;
-    grid-template-columns: minmax(230px, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        'titulo titulo'
+        'dados lateral'
+        'valor acoes';
     gap: 12px 22px;
     align-items: center;
     padding: 18px 20px;
@@ -43,22 +47,34 @@
     background: var(--cor-clara);
     box-shadow: var(--sombra-1);
 }
-.dados h3 {
-    margin-bottom: 8px;
-    font-size: 1rem;
+.titulo {
+    grid-area: titulo;
+    font-size: 1.15rem;
+}
+.dados {
+    grid-area: dados;
 }
 .dados p {
     margin: 5px 0;
     font-size: 0.8rem;
     line-height: 1.45;
 }
-.dados a {
-    display: inline-block;
-    margin-top: 5px;
+.lateral {
+    grid-area: lateral;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+.lateral a {
     color: var(--cor-escura-azul);
     font-size: 0.8rem;
 }
 .valor {
+    grid-area: valor;
+    font-size: 0.8rem;
+}
+.valor strong {
     font-size: 1.2rem;
     white-space: nowrap;
 }
@@ -70,20 +86,20 @@
     font-size: 0.75rem;
     white-space: nowrap;
 }
-.status_em_negociacao {
+.statusSelecionada {
     color: #111;
     background: var(--cor-clara-verde);
 }
-.status_aceita {
+.statusAceita {
     color: #fff;
     background: var(--cor-escura-vinho);
 }
-.status_recusada {
+.statusRecusada {
     color: #fff;
     background: #777;
 }
 .acoes {
-    grid-column: 1/-1;
+    grid-area: acoes;
     display: flex;
     justify-content: flex-end;
     gap: 9px;
@@ -148,13 +164,15 @@
 }
 @media (max-width: 800px) {
     .linha {
-        grid-template-columns: 1fr auto;
-    }
-    .dados {
-        grid-column: 1/-1;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'titulo'
+            'dados'
+            'lateral'
+            'valor'
+            'acoes';
     }
     .acoes {
-        grid-column: 1/-1;
         flex-wrap: wrap;
     }
     .acoes button {
@@ -171,8 +189,5 @@
     .acoes {
         display: grid;
         grid-template-columns: 1fr;
-    }
-    .status {
-        justify-self: start;
     }
 }

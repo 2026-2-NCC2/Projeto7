@@ -42,13 +42,14 @@ CREATE TABLE IF NOT EXISTS evento (
     horario_inicio TIME NOT NULL,
     horario_fim TIME NOT NULL,
     organizador_id INT NOT NULL,
-    publico_min INT NOT NULL,
-    publico_max INT NOT NULL,
-    margem_lucro DECIMAL(5, 2) NOT NULL,
+    publico_min INT,
+    publico_max INT,
+    margem_lucro DECIMAL(5, 2),
     publico_esperado INT,
     custo_total DECIMAL(12, 2),
     ticket_publico_min DECIMAL(10, 2),
     ticket_publico_max DECIMAL(10, 2),
+    ticket_publico_esperado DECIMAL(10, 2),
     status VARCHAR(20) NOT NULL DEFAULT 'rascunho',
     nome_local VARCHAR(200),
     cep CHAR(8),
@@ -92,7 +93,7 @@ CREATE TABLE IF NOT EXISTS proposta (
     descricao TEXT NOT NULL,
     observacoes TEXT,
     validade DATE NOT NULL,
-    status VARCHAR(20) NOT NULL DEFAULT 'enviada',
+    status VARCHAR(20) NOT NULL DEFAULT 'pendente',
     conversa_criada_em DATETIME,
     criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -126,11 +127,12 @@ CREATE TABLE IF NOT EXISTS mensagem (
     )
 );
 
-CREATE TABLE IF NOT EXISTS custo_evento (
+CREATE TABLE IF NOT EXISTS custo_manual (
     id INT AUTO_INCREMENT PRIMARY KEY,
     evento_id INT NOT NULL,
+    item VARCHAR(100) NOT NULL,
     descricao VARCHAR(200) NOT NULL,
-    origem VARCHAR(200) NOT NULL,
+    categoria VARCHAR(200) NOT NULL,
     valor DECIMAL(12, 2) NOT NULL,
     criado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     atualizado_em DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -459,7 +461,7 @@ VALUES (
         'Pacote de sonorização e iluminação com operação técnica.',
         'Inclui montagem, passagem de som e desmontagem.',
         '2026-11-10',
-        'enviada',
+        'pendente',
         NULL
     ),
     (
@@ -481,7 +483,7 @@ VALUES (
         'Equipe de segurança com supervisão e controle de acesso.',
         'Quantidade final de profissionais depende do plano do evento.',
         '2026-11-14',
-        'em_negociacao',
+        'selecionada',
         '2026-10-21 10:00:00'
     ),
     (
@@ -492,7 +494,7 @@ VALUES (
         'Locação de palco modular com cobertura.',
         'Proposta sujeita à confirmação de disponibilidade.',
         '2026-11-20',
-        'enviada',
+        'pendente',
         NULL
     ),
     (
@@ -525,8 +527,16 @@ VALUES (
         'Equipe de apoio à segurança e orientação do público.',
         NULL,
         '2026-12-01',
-        'enviada',
+        'pendente',
         NULL
+    );
+
+UPDATE vaga_servico
+SET status = 'preenchida'
+WHERE id IN (
+        SELECT vaga_servico_id
+        FROM proposta
+        WHERE status = 'aceita'
     );
 
 INSERT INTO
@@ -580,16 +590,18 @@ VALUES (
     );
 
 INSERT INTO
-    custo_evento (
+    custo_manual (
         id,
         evento_id,
+        item,
         descricao,
-        origem,
+        categoria,
         valor
     )
 VALUES (
         1,
         1,
+        'Locação do espaço',
         'Locação do espaço',
         'Parque das Artes',
         6500.00
@@ -598,12 +610,14 @@ VALUES (
         2,
         1,
         'Licenças e taxas',
+        'Licenças e taxas',
         'Órgãos públicos',
         1200.00
     ),
     (
         3,
         1,
+        'Divulgação',
         'Divulgação',
         'Agência de comunicação',
         2800.00
@@ -612,12 +626,14 @@ VALUES (
         4,
         2,
         'Material de divulgação',
+        'Material de divulgação',
         'Gráfica local',
         750.00
     ),
     (
         5,
         2,
+        'Locação de mobiliário',
         'Locação de mobiliário',
         'Móveis Eventos',
         1800.00
@@ -626,6 +642,7 @@ VALUES (
         6,
         3,
         'Locação do auditório',
+        'Locação do auditório',
         'Centro de Convenções Oeste',
         7000.00
     ),
@@ -633,12 +650,14 @@ VALUES (
         7,
         3,
         'Coffee break',
+        'Coffee break',
         'Buffet parceiro',
         2400.00
     ),
     (
         8,
         4,
+        'Licenças e limpeza',
         'Licenças e limpeza',
         'Serviços municipais',
         600.00

@@ -19,10 +19,6 @@ const vazio = {
     bairro: '',
     cidade: '',
     estado: '',
-    publico_min: '',
-    publico_max: '',
-    publico_esperado: '',
-    margem_lucro: '',
 }
 function dataMascaraDoBanco(value) {
     if (!value) return ''
@@ -73,10 +69,6 @@ function NovoEvento() {
             horario_inicio: form.horaInicio,
             horario_fim: form.horaFim,
             cep: form.cep.replace(/\D/g, ''),
-            publico_min: Number(form.publico_min),
-            publico_max: Number(form.publico_max),
-            publico_esperado: form.publico_esperado ? Number(form.publico_esperado) : null,
-            margem_lucro: Number(form.margem_lucro),
         }
         setSalvando(true)
         try {
@@ -216,50 +208,6 @@ function NovoEvento() {
                         placeholder='ex.: SP'
                         value={form.estado}
                         onChange={atualizar('estado')}
-                        required
-                    />
-                </div>
-                <h2>Público e margem</h2>
-                <div className={styles.duasColunas}>
-                    <Campo
-                        id='publico_min'
-                        rotulo='*Público mínimo:'
-                        type='number'
-                        min='1'
-                        placeholder='ex.: 2000'
-                        value={form.publico_min}
-                        onChange={atualizar('publico_min')}
-                        required
-                    />
-                    <Campo
-                        id='publico_max'
-                        rotulo='*Público máximo:'
-                        type='number'
-                        min='1'
-                        placeholder='ex.: 6000'
-                        value={form.publico_max}
-                        onChange={atualizar('publico_max')}
-                        required
-                    />
-                    <Campo
-                        id='publico_esperado'
-                        rotulo='Público esperado:'
-                        type='number'
-                        min='1'
-                        placeholder='opcional'
-                        value={form.publico_esperado}
-                        onChange={atualizar('publico_esperado')}
-                    />
-                    <Campo
-                        id='margem_lucro'
-                        rotulo='*Margem de lucro (%):'
-                        type='number'
-                        min='0'
-                        max='99.99'
-                        step='0.01'
-                        placeholder='entre 0 e 99,99'
-                        value={form.margem_lucro}
-                        onChange={atualizar('margem_lucro')}
                         required
                     />
                 </div>

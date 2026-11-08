@@ -57,6 +57,7 @@ th:last-child {
 .calcular {
     display: flex;
     justify-content: flex-end;
+    gap: 12px;
     margin-top: 18px;
 }
 .resultados {
@@ -82,10 +83,6 @@ th:last-child {
 }
 .resultados strong {
     font-size: 1.5rem;
-}
-.salvar {
-    display: flex;
-    justify-content: flex-end;
 }
 .erro,
 .estado {
