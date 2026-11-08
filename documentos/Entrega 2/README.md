@@ -1,7 +1,7 @@
 # Banco de Dados — Troca Ticket
 
 Banco relacional **MySQL**
-Link: 
+Link: documentos/Entrega 2/Full Stack/troca-time/server/.containers/mysql/init.sql
 
 ## Visão geral
 
