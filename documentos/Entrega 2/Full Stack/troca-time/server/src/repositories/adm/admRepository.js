@@ -17,7 +17,7 @@ export async function buscarResumoPlataformaRepository() {
         propostas_recebidas AS (
             SELECT COUNT(*) as total_propostas_recebidas
             FROM proposta p
-            WHERE p.status = 'enviada'
+            WHERE p.status = 'pendente'
         )
 
         SELECT c.total_cadastros_pendentes, e.total_eventos_cotacao, p.total_propostas_recebidas

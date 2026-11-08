@@ -46,6 +46,31 @@
     color: #fff;
     background: var(--cor-escura-vinho);
 }
+.acoesCabecalho {
+    display: flex;
+    flex: none;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+.disponibilizar {
+    padding: 10px 20px;
+    border: 1px solid var(--cor-escura-1);
+    border-radius: 22px;
+    color: #fff;
+    background: var(--cor-escura-1);
+    font: inherit;
+    cursor: pointer;
+}
+.publicar {
+    padding: 10px 20px;
+    border: 1px solid var(--cor-clara-verde);
+    border-radius: 22px;
+    color: #222;
+    background: var(--cor-clara-verde);
+    font: inherit;
+    cursor: pointer;
+}
 .editar {
     flex: none;
     padding: 10px 20px;

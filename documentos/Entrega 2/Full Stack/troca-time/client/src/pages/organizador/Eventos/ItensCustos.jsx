@@ -12,11 +12,16 @@ const CATEGORIAS = [
     ['seguranca', 'Segurança'],
     ['estrutura', 'Estrutura'],
 ]
-const TIPOS = [
+const CATEGORIAS_CUSTO = [
     ['fiscal', 'Fiscal'],
     ['operacional', 'Operacional'],
     ['variavel', 'Variável'],
 ]
+const SITUACAO_VAGA = {
+    pendente: 'Aguardando escolha',
+    preenchida: 'Preenchida',
+    vencida: 'Vencida',
+}
 const valorBR = (valor) =>
     `R$ ${Number(valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
 
@@ -26,12 +31,17 @@ function ItensCustos() {
     const [vagas, setVagas] = useState([])
     const [custos, setCustos] = useState([])
     const [vaga, setVaga] = useState({
-        nome: '',
+        item: '',
         categoria: 'iluminacao',
         descricao: '',
-        prazo_cotacao: '',
+        cotacao_ate: '',
     })
-    const [custo, setCusto] = useState({ descricao: '', tipo: 'fiscal', valor: '' })
+    const [custo, setCusto] = useState({
+        item: '',
+        categoria: 'fiscal',
+        descricao: '',
+        valor: '',
+    })
     const [erro, setErro] = useState('')
     const [enviando, setEnviando] = useState(false)
     const id = organizadorId || usuarioId('organizador')
@@ -39,11 +49,15 @@ function ItensCustos() {
     async function carregar() {
         try {
             const [vagasData, custosData] = await Promise.all([
-                api(`/organizadores/${id}/eventos/${eventoId}/vagas`),
-                api(`/organizadores/${id}/eventos/${eventoId}/custos`),
+                api('/organizadores/vagas_servico/'),
+                api(`/organizadores/${eventoId}/custos_manuais`),
             ])
-            setVagas(vagasData.vagas || [])
-            setCustos(custosData.custos || [])
+            setVagas(
+                (vagasData.vagas_servico || []).filter(
+                    (vagaServico) => vagaServico.evento_id === Number(eventoId),
+                ),
+            )
+            setCustos(custosData.custos_manuais || [])
             setErro('')
         } catch (error) {
             setErro(error.message)
@@ -58,12 +72,12 @@ function ItensCustos() {
         setErro('')
         setEnviando(true)
         try {
-            const [dia, mes, ano] = vaga.prazo_cotacao.split('/')
-            await api(`/organizadores/${id}/eventos/${eventoId}/vagas`, {
+            const [dia, mes, ano] = vaga.cotacao_ate.split('/')
+            await api(`/organizadores/${eventoId}/vagas_servico`, {
                 method: 'POST',
-                body: JSON.stringify({ ...vaga, prazo_cotacao: `${ano}-${mes}-${dia}` }),
+                body: JSON.stringify({ ...vaga, cotacao_ate: `${ano}-${mes}-${dia}` }),
             })
-            setVaga({ nome: '', categoria: 'iluminacao', descricao: '', prazo_cotacao: '' })
+            setVaga({ item: '', categoria: 'iluminacao', descricao: '', cotacao_ate: '' })
             await carregar()
         } catch (error) {
             setErro(error.message)
@@ -77,11 +91,11 @@ function ItensCustos() {
         setErro('')
         setEnviando(true)
         try {
-            await api(`/organizadores/${id}/eventos/${eventoId}/custos`, {
+            await api(`/organizadores/${eventoId}/custos_manuais`, {
                 method: 'POST',
                 body: JSON.stringify({ ...custo, valor: Number(custo.valor) }),
             })
-            setCusto({ descricao: '', tipo: 'fiscal', valor: '' })
+            setCusto({ item: '', categoria: 'fiscal', descricao: '', valor: '' })
             await carregar()
         } catch (error) {
             setErro(error.message)
@@ -90,9 +104,18 @@ function ItensCustos() {
         }
     }
 
+    async function excluirVaga(vagaId) {
+        try {
+            await api(`/organizadores/vagas_servico/${vagaId}`, { method: 'DELETE' })
+            await carregar()
+        } catch (error) {
+            setErro(error.message)
+        }
+    }
+
     async function excluirCusto(custoId) {
         try {
-            await api(`/organizadores/${id}/eventos/${eventoId}/custos/${custoId}`, {
+            await api(`/organizadores/custos_manuais/${custoId}`, {
                 method: 'DELETE',
             })
             await carregar()
@@ -114,18 +137,19 @@ function ItensCustos() {
                     <table>
                         <thead>
                             <tr>
-                                <th>SERVIÇO</th>
+                                <th>ITEM</th>
                                 <th>CATEGORIA</th>
                                 <th>DESCRIÇÃO</th>
                                 <th>PROPOSTAS</th>
                                 <th>SITUAÇÃO</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {vagas.map((item) => (
                                 <tr key={item.id}>
                                     <td>
-                                        <b>{item.nome}</b>
+                                        <b>{item.item}</b>
                                     </td>
                                     <td>
                                         {CATEGORIAS.find(([id]) => id === item.categoria)?.[1] ||
@@ -136,21 +160,30 @@ function ItensCustos() {
                                     <td>
                                         <span
                                             className={
-                                                item.situacao === 'aceita'
+                                                item.status === 'preenchida'
                                                     ? styles.selecionada
                                                     : styles.aguardando
                                             }
                                         >
-                                            {item.situacao === 'aceita'
-                                                ? 'Selecionada'
-                                                : 'Aguardando escolha'}
+                                            {SITUACAO_VAGA[item.status] || item.status}
                                         </span>
+                                    </td>
+                                    <td>
+                                        {Number(item.quantidade_propostas) === 0 && (
+                                            <button
+                                                className={styles.excluir}
+                                                type='button'
+                                                onClick={() => excluirVaga(item.id)}
+                                            >
+                                                Deletar
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
                             {!vagas.length && (
                                 <tr>
-                                    <td colSpan='5' className={styles.vazio}>
+                                    <td colSpan='6' className={styles.vazio}>
                                         Nenhum serviço cadastrado.
                                     </td>
                                 </tr>
@@ -160,11 +193,11 @@ function ItensCustos() {
                 </div>
                 <form className={styles.formVaga} onSubmit={adicionarVaga}>
                     <Campo
-                        id='nomeServico'
-                        rotulo='*Novo serviço:'
+                        id='itemServico'
+                        rotulo='*Item:'
                         placeholder='ex.: Iluminação de palco'
-                        value={vaga.nome}
-                        onChange={(e) => setVaga({ ...vaga, nome: e.target.value })}
+                        value={vaga.item}
+                        onChange={(e) => setVaga({ ...vaga, item: e.target.value })}
                         required
                     />
                     <label>
@@ -194,9 +227,9 @@ function ItensCustos() {
                         placeholder='dd/mm/aaaa'
                         inputMode='numeric'
                         maxLength='10'
-                        value={vaga.prazo_cotacao}
+                        value={vaga.cotacao_ate}
                         onChange={(e) =>
-                            setVaga({ ...vaga, prazo_cotacao: mascaraData(e.target.value) })
+                            setVaga({ ...vaga, cotacao_ate: mascaraData(e.target.value) })
                         }
                         required
                     />
@@ -211,8 +244,9 @@ function ItensCustos() {
                     <table>
                         <thead>
                             <tr>
+                                <th>ITEM</th>
+                                <th>CATEGORIA</th>
                                 <th>DESCRIÇÃO</th>
-                                <th>TIPO</th>
                                 <th>VALOR</th>
                                 <th></th>
                             </tr>
@@ -220,10 +254,15 @@ function ItensCustos() {
                         <tbody>
                             {custos.map((item) => (
                                 <tr key={item.id}>
-                                    <td>{item.descricao}</td>
                                     <td>
-                                        {TIPOS.find(([id]) => id === item.tipo)?.[1] || item.tipo}
+                                        <b>{item.item}</b>
                                     </td>
+                                    <td>
+                                        {CATEGORIAS_CUSTO.find(
+                                            ([id]) => id === item.categoria,
+                                        )?.[1] || item.categoria}
+                                    </td>
+                                    <td>{item.descricao}</td>
                                     <td>{valorBR(item.valor)}</td>
                                     <td>
                                         <button
@@ -238,14 +277,14 @@ function ItensCustos() {
                             ))}
                             {!custos.length && (
                                 <tr>
-                                    <td colSpan='4' className={styles.vazio}>
+                                    <td colSpan='5' className={styles.vazio}>
                                         Nenhum outro custo cadastrado.
                                     </td>
                                 </tr>
                             )}
                             {custos.length > 0 && (
                                 <tr className={styles.subtotal}>
-                                    <td colSpan='2'>Subtotal</td>
+                                    <td colSpan='3'>Subtotal</td>
                                     <td colSpan='2'>
                                         {valorBR(
                                             custos.reduce(
@@ -261,6 +300,27 @@ function ItensCustos() {
                 </div>
                 <form className={styles.formCusto} onSubmit={adicionarCusto}>
                     <Campo
+                        id='itemCusto'
+                        rotulo='*Item:'
+                        placeholder='ex.: Seguro'
+                        value={custo.item}
+                        onChange={(e) => setCusto({ ...custo, item: e.target.value })}
+                        required
+                    />
+                    <label>
+                        <span>*Categoria:</span>
+                        <select
+                            value={custo.categoria}
+                            onChange={(e) => setCusto({ ...custo, categoria: e.target.value })}
+                        >
+                            {CATEGORIAS_CUSTO.map(([value, label]) => (
+                                <option value={value} key={value}>
+                                    {label}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                    <Campo
                         id='descricaoCusto'
                         rotulo='*Descrição:'
                         placeholder='ex.: Seguro do evento'
@@ -268,19 +328,6 @@ function ItensCustos() {
                         onChange={(e) => setCusto({ ...custo, descricao: e.target.value })}
                         required
                     />
-                    <label>
-                        <span>*Tipo:</span>
-                        <select
-                            value={custo.tipo}
-                            onChange={(e) => setCusto({ ...custo, tipo: e.target.value })}
-                        >
-                            {TIPOS.map(([value, label]) => (
-                                <option value={value} key={value}>
-                                    {label}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
                     <Campo
                         id='valorCusto'
                         rotulo='*Valor (R$):'

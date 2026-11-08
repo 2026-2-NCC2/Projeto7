@@ -55,6 +55,42 @@ export function validateCriarEventoRequest(criarEventoRequest) {
     return true;
 }
 
+export function vagaServico(vagaServico) {
+    return {
+        id: vagaServico.id,
+        evento_id: vagaServico.evento_id,
+        item: vagaServico.item,
+        categoria: vagaServico.categoria,
+        descricao: vagaServico.descricao,
+        cotacao_ate: vagaServico.cotacao_ate,
+        status: vagaServico.status,
+        quantidade_propostas: vagaServico.qnt_propostas
+    }
+}
+
+export function listarVagasServicoResponse(vagasServico) {
+    return {
+        vagas_servico: vagasServico.map(vagaServico)
+    }
+}
+
+export function custoManual(custo) {
+    return {
+        id: custo.id,
+        evento_id: custo.evento_id,
+        item: custo.item,
+        categoria: custo.categoria,
+        descricao: custo.descricao,
+        valor: custo.valor
+    }
+}
+
+export function listarCustosManuaisResponse(custos) {
+    return {
+        custos_manuais: custos.map(custoManual)
+    }
+}
+
 export function criarVagaServicoRequest(vaga) {
     return {
         item: vaga.item,
@@ -84,58 +120,74 @@ export function validateCriarVagaServicoRequest(criarVagaServicoRequest) {
     return true;
 }
 
-export function criarCustoRequest(custo) {
+export function criarCustoManualRequest(custo) {
     return {
+        item: custo.item,
+        categoria: custo.categoria,
         descricao: custo.descricao,
-        tipo: custo.tipo,
         valor: custo.valor
     };
 }
 
-export function validateCriarCustoRequest(criarCustoRequest) {
+export function validateCriarCustoManualRequest(criarCustoManualRequest) {
     const camposObrigatorios = [
+        'item',
+        'categoria',
         'descricao',
-        'tipo',
         'valor'
     ];
 
     for (const campo of camposObrigatorios) {
         if (
-            criarCustoRequest[campo] === undefined ||
-            criarCustoRequest[campo] === null ||
-            String(criarCustoRequest[campo]).trim() === ''
+            criarCustoManualRequest[campo] === undefined ||
+            criarCustoManualRequest[campo] === null ||
+            String(criarCustoManualRequest[campo]).trim() === ''
         ) {
             throw new AppException(`O campo ${campo} é obrigatório.`, 400);
         }
     }
 
+    if (Number(criarCustoManualRequest.valor) <= 0) {
+        throw new AppException('O valor deve ser maior que zero.', 400);
+    }
+
     return true;
 }
 
-export function vagaServicoLista(vaga) {
+export function propostaEvento(proposta) {
     return {
-        id: vaga.id,
-        item: vaga.item,
-        categoria: vaga.categoria,
-        descricao: vaga.descricao,
-        cotacao_ate: vaga.cotacao_ate,
-        quantidade_propostas: vaga.quantidade_propostas,
-        status: vaga.status
-    };
+        id: proposta.id,
+        vaga_servico_id: proposta.vaga_servico_id,
+        item: proposta.item,
+        categoria: proposta.categoria,
+        cotacao_ate: proposta.cotacao_ate,
+        status_vaga: proposta.status_vaga,
+        fornecedor_id: proposta.fornecedor_id,
+        nome_fornecedor: proposta.nome_fornecedor,
+        valor: proposta.valor,
+        descricao: proposta.descricao,
+        observacoes: proposta.observacoes,
+        validade: proposta.validade,
+        status: proposta.status
+    }
 }
 
-export function custoLista(custo) {
+export function listarPropostasEventoResponse(propostas) {
     return {
-        id: custo.id,
-        descricao: custo.descricao,
-        tipo: custo.origem,
+        propostas: propostas.map(propostaEvento)
+    }
+}
+
+export function custoOrcamento(custo) {
+    return {
+        item: custo.item,
+        origem: custo.origem,
         valor: custo.valor
-    };
+    }
 }
 
-export function listarCustosResponse(vagas, custos) {
+export function listarCustosOrcamentoResponse(custos) {
     return {
-        vagas_servico: vagas.map(vagaServicoLista),
-        custos: custos.map(custoLista)
-    };
+        custos_orcamento: custos.map(custoOrcamento)
+    }
 }

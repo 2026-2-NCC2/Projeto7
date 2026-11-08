@@ -6,21 +6,16 @@ import styles from './Propostas.module.css'
 
 const dinheiro = (valor) =>
     `R$ ${Number(valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
-function statusLabel(proposta) {
-    if (proposta.status === 'em_negociacao') return 'Selecionada'
-    if (proposta.status === 'aceita') return 'Salva'
-    if (proposta.status === 'recusada') return 'Recusada'
-    if (proposta.status === 'cancelada' || proposta.vaga_preenchida) return 'Indisponível'
-    if (proposta.status_evento === 'rascunho' || proposta.status_evento === 'encerrado')
-        return 'Indisponível'
-    if (proposta.prazo_cotacao && proposta.prazo_cotacao < new Date().toISOString().slice(0, 10))
-        return 'Indisponível'
-    return 'Disponível'
+const STATUS_PROPOSTA = {
+    pendente: { rotulo: 'Pendente', classe: '' },
+    selecionada: { rotulo: 'Selecionada', classe: styles.statusSelecionada },
+    aceita: { rotulo: 'Aceita', classe: styles.statusAceita },
+    recusada: { rotulo: 'Recusada', classe: styles.statusRecusada },
 }
 
 function PropostasOrganizador() {
     const { eventoId } = useParams()
-    const { organizadorId, recarregarEvento } = useOutletContext()
+    const { recarregarEvento } = useOutletContext()
     const [propostas, setPropostas] = useState([])
     const [filtro, setFiltro] = useState('todas')
     const [modal, setModal] = useState(null)
@@ -29,9 +24,7 @@ function PropostasOrganizador() {
 
     async function carregar() {
         try {
-            const resposta = await api(
-                `/organizadores/${organizadorId}/eventos/${eventoId}/propostas`,
-            )
+            const resposta = await api(`/organizadores/${eventoId}/propostas`)
             setPropostas(resposta.propostas || [])
             setErro('')
         } catch (error) {
@@ -42,14 +35,14 @@ function PropostasOrganizador() {
     }
     useEffect(() => {
         carregar()
-    }, [organizadorId, eventoId])
+    }, [eventoId])
 
     const servicos = useMemo(
         () => [
             ...new Map(
                 propostas.map((p) => [
                     p.vaga_servico_id,
-                    { id: p.vaga_servico_id, nome: p.nome_servico, categoria: p.categoria },
+                    { id: p.vaga_servico_id, nome: p.item, categoria: p.categoria },
                 ]),
             ).values(),
         ],
@@ -63,10 +56,10 @@ function PropostasOrganizador() {
         [propostas, filtro],
     )
 
-    async function acao(proposta, acao) {
+    async function acao(proposta, novoStatus) {
         setErro('')
         try {
-            await api(`/organizadores/${organizadorId}/propostas/${proposta.id}/${acao}`, {
+            await api(`/organizadores/propostas/${proposta.id}/status?novo_status=${novoStatus}`, {
                 method: 'PATCH',
             })
             setModal(null)
@@ -116,16 +109,21 @@ function PropostasOrganizador() {
                 {!carregando &&
                     visiveis.map((proposta) => {
                         const podeMudar =
-                            ['enviada', 'em_negociacao'].includes(proposta.status) &&
-                            !proposta.vaga_preenchida
-                        const status = statusLabel(proposta)
+                            ['pendente', 'selecionada'].includes(proposta.status) &&
+                            proposta.status_vaga !== 'preenchida'
+                        const status = STATUS_PROPOSTA[proposta.status] || {
+                            rotulo: proposta.status,
+                            classe: '',
+                        }
                         return (
                             <article className={styles.linha} key={proposta.id}>
+                                <h3 className={styles.titulo}>{proposta.nome_fornecedor}</h3>
                                 <div className={styles.dados}>
-                                    <h3>{proposta.nome_fornecedor}</h3>
                                     <p>
-                                        <b>SERVIÇO:</b> {proposta.nome_servico} · <b>VALIDADE:</b>{' '}
-                                        {dataBr(proposta.validade)}
+                                        <b>SERVIÇO:</b> {proposta.item}
+                                    </p>
+                                    <p>
+                                        <b>VALIDADE:</b> {dataBr(proposta.validade)}
                                     </p>
                                     <p>
                                         <b>DESCRIÇÃO:</b> {proposta.descricao}
@@ -135,23 +133,25 @@ function PropostasOrganizador() {
                                             <b>OBSERVAÇÕES:</b> {proposta.observacoes}
                                         </p>
                                     )}
+                                </div>
+                                <div className={styles.lateral}>
                                     <Link
                                         to={`/organizador/fornecedores/${proposta.fornecedor_id}`}
                                     >
                                         Ver fornecedor
                                     </Link>
+                                    <span className={`${styles.status} ${status.classe}`}>
+                                        {status.rotulo}
+                                    </span>
                                 </div>
-                                <strong className={styles.valor}>{dinheiro(proposta.valor)}</strong>
-                                <span
-                                    className={`${styles.status} ${styles[`status_${proposta.status}`]}`}
-                                >
-                                    {status}
-                                </span>
+                                <p className={styles.valor}>
+                                    <b>VALOR:</b> <strong>{dinheiro(proposta.valor)}</strong>
+                                </p>
                                 <div className={styles.acoes}>
                                     <button
                                         type='button'
-                                        disabled={!podeMudar || proposta.status === 'em_negociacao'}
-                                        onClick={() => acao(proposta, 'selecionar')}
+                                        disabled={!podeMudar || proposta.status === 'selecionada'}
+                                        onClick={() => acao(proposta, 'selecionada')}
                                     >
                                         Selecionar proposta
                                     </button>
@@ -159,14 +159,14 @@ function PropostasOrganizador() {
                                         type='button'
                                         className={styles.recusar}
                                         disabled={!podeMudar}
-                                        onClick={() => acao(proposta, 'recusar')}
+                                        onClick={() => acao(proposta, 'recusada')}
                                     >
                                         Recusar
                                     </button>
                                     <button
                                         type='button'
                                         className={styles.salvar}
-                                        disabled={!podeMudar || proposta.status !== 'em_negociacao'}
+                                        disabled={!podeMudar || proposta.status !== 'selecionada'}
                                         onClick={() => setModal(proposta)}
                                     >
                                         Salvar
@@ -197,7 +197,7 @@ function PropostasOrganizador() {
                             <button type='button' onClick={() => setModal(null)}>
                                 Cancelar
                             </button>
-                            <Botao type='button' onClick={() => acao(modal, 'salvar')}>
+                            <Botao type='button' onClick={() => acao(modal, 'aceita')}>
                                 Salvar
                             </Botao>
                         </div>

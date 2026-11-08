@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Navigate, useOutletContext, useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import Campo from '@/components/Campo/Campo'
 import Botao from '@/components/Botao/Botao'
 import { api } from '@/utils/api'
@@ -10,48 +10,24 @@ const moeda = (valor) =>
 const arredondarParaCima = (valor) => Math.ceil(valor * 100) / 100
 function OrcamentoTicket() {
     const { eventoId } = useParams()
-    const { organizadorId, evento: eventoContext } = useOutletContext()
-    const [dados, setDados] = useState(null)
-    const [margem, setMargem] = useState('0')
+    const { organizadorId, evento } = useOutletContext()
+    const [custos, setCustos] = useState(null)
+    const [margem, setMargem] = useState(String(evento.margem_lucro ?? 0))
     const [publicoEsperado, setPublicoEsperado] = useState('')
     const [resultado, setResultado] = useState(null)
     const [erro, setErro] = useState('')
     const [salvando, setSalvando] = useState(false)
 
-    if (eventoContext && Number(eventoContext.total_propostas_aceitas || 0) <= 0) {
-        return <Navigate to={`/organizador/eventos/${eventoId}/propostas`} replace />
-    }
+    useEffect(() => {
+        setMargem(String(evento.margem_lucro ?? 0))
+        setResultado(null)
+    }, [evento.id, evento.margem_lucro])
 
     useEffect(() => {
-        api(`/organizadores/${organizadorId}/eventos/${eventoId}/orcamento`)
-            .then((response) => {
-                setDados(response)
-                setMargem(String(response.evento.margem_lucro ?? 0))
-                setPublicoEsperado(String(response.evento.publico_esperado || ''))
-                const pessoasEsperadas = Number(
-                    response.evento.publico_esperado ||
-                        Math.round(
-                            (Number(response.evento.publico_min) +
-                                Number(response.evento.publico_max)) /
-                                2,
-                        ),
-                )
-                if (response.evento.ticket_publico_min != null) {
-                    const margemSalva = Number(response.evento.margem_lucro || 0)
-                    const total = Number(response.evento.custo_total_calculado || 0)
-                    const ticketEsperado =
-                        Math.ceil(
-                            (total / (pessoasEsperadas * (1 - margemSalva / 100) * 0.99)) * 100,
-                        ) / 100
-                    setResultado({
-                        minimo: Number(response.evento.ticket_publico_min),
-                        maximo: Number(response.evento.ticket_publico_max),
-                        esperado: ticketEsperado,
-                    })
-                }
-            })
+        api(`/organizadores/${eventoId}/custos_orcamento`)
+            .then((response) => setCustos(response.custos_orcamento || []))
             .catch((error) => setErro(error.message))
-    }, [organizadorId, eventoId])
+    }, [eventoId])
 
     if (erro)
         return (
@@ -59,16 +35,14 @@ function OrcamentoTicket() {
                 {erro}
             </p>
         )
-    if (!dados) return <p className={styles.estado}>Carregando orçamento…</p>
+    if (!custos) return <p className={styles.estado}>Carregando orçamento…</p>
 
-    const { evento, custos, propostas } = dados
-    const custoTotal = Number(evento.custo_total_calculado || 0)
+    const custoTotal = custos.reduce((total, custo) => total + Number(custo.valor), 0)
     const publicos = {
         minimo: Number(evento.publico_min),
         maximo: Number(evento.publico_max),
         esperado: Number(
             publicoEsperado ||
-                evento.publico_esperado ||
                 Math.round((Number(evento.publico_min) + Number(evento.publico_max)) / 2),
         ),
     }
@@ -119,17 +93,10 @@ function OrcamentoTicket() {
                             </tr>
                         </thead>
                         <tbody>
-                            {propostas.map((proposta) => (
-                                <tr key={`p-${proposta.id}`}>
-                                    <td>{proposta.nome_servico}</td>
-                                    <td>Proposta — {proposta.nome_fornecedor}</td>
-                                    <td>{moeda(proposta.valor)}</td>
-                                </tr>
-                            ))}
-                            {custos.map((custo) => (
-                                <tr key={`c-${custo.id}`}>
-                                    <td>{custo.descricao}</td>
-                                    <td>Cadastrado pelo Organizador — {custo.tipo}</td>
+                            {custos.map((custo, index) => (
+                                <tr key={`${custo.item}-${index}`}>
+                                    <td>{custo.item}</td>
+                                    <td>{custo.origem}</td>
                                     <td>{moeda(custo.valor)}</td>
                                 </tr>
                             ))}

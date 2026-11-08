@@ -39,9 +39,33 @@ function EventoLayout() {
         carregar()
     }, [organizadorId, eventoId])
     const base = `/organizador/eventos/${eventoId}`
-    const orcamentoDisponivel = Number(evento?.total_propostas_aceitas || 0) > 0
+    const orcamentoDisponivel = ['em_cotacao', 'publicado'].includes(evento?.status)
+    const rascunho = evento?.status === 'rascunho'
+    const emCotacao = evento?.status === 'em_cotacao'
 
-    if (carregando) return <main className={styles.estado}>Carregando evento…</main>
+    async function disponibilizarParaCotacao() {
+        try {
+            await api(`/organizadores/${eventoId}/status?novo_status=em_cotacao`, {
+                method: 'PATCH',
+            })
+            await carregar()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    async function publicarEvento() {
+        try {
+            await api(`/organizadores/${eventoId}/status?novo_status=publicado`, {
+                method: 'PATCH',
+            })
+            await carregar()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    if (carregando && !evento) return <main className={styles.estado}>Carregando evento…</main>
     if (erro || !evento)
         return (
             <main className={styles.estado} role='alert'>
@@ -60,9 +84,25 @@ function EventoLayout() {
                         </span>
                     </h1>
                 </div>
-                <Link className={styles.editar} to={`/organizador/eventos/${eventoId}/editar`}>
-                    Editar evento
-                </Link>
+                <div className={styles.acoesCabecalho}>
+                    {rascunho && (
+                        <button
+                            type='button'
+                            className={styles.disponibilizar}
+                            onClick={disponibilizarParaCotacao}
+                        >
+                            Disponibilizar evento para cotação
+                        </button>
+                    )}
+                    {emCotacao && (
+                        <button type='button' className={styles.publicar} onClick={publicarEvento}>
+                            Publicar evento
+                        </button>
+                    )}
+                    <Link className={styles.editar} to={`/organizador/eventos/${eventoId}/editar`}>
+                        Editar evento
+                    </Link>
+                </div>
             </header>
             <nav className={styles.abas} aria-label='Abas do evento'>
                 <NavLink
@@ -72,18 +112,37 @@ function EventoLayout() {
                 >
                     Visão geral
                 </NavLink>
-                <NavLink
-                    to={`${base}/itens`}
-                    className={({ isActive }) => (isActive ? styles.abaAtiva : styles.aba)}
-                >
-                    Itens e custos
-                </NavLink>
-                <NavLink
-                    to={`${base}/propostas`}
-                    className={({ isActive }) => (isActive ? styles.abaAtiva : styles.aba)}
-                >
-                    Propostas
-                </NavLink>
+                {rascunho ? (
+                    <>
+                        <span
+                            className={`${styles.aba} ${styles.abaDesativada}`}
+                            title='Disponibilize o evento para cotação para liberar'
+                        >
+                            Itens e custos
+                        </span>
+                        <span
+                            className={`${styles.aba} ${styles.abaDesativada}`}
+                            title='Disponibilize o evento para cotação para liberar'
+                        >
+                            Propostas
+                        </span>
+                    </>
+                ) : (
+                    <>
+                        <NavLink
+                            to={`${base}/itens`}
+                            className={({ isActive }) => (isActive ? styles.abaAtiva : styles.aba)}
+                        >
+                            Itens e custos
+                        </NavLink>
+                        <NavLink
+                            to={`${base}/propostas`}
+                            className={({ isActive }) => (isActive ? styles.abaAtiva : styles.aba)}
+                        >
+                            Propostas
+                        </NavLink>
+                    </>
+                )}
                 {orcamentoDisponivel ? (
                     <NavLink
                         to={`${base}/orcamento`}
@@ -94,7 +153,7 @@ function EventoLayout() {
                 ) : (
                     <span
                         className={`${styles.aba} ${styles.abaDesativada}`}
-                        title='Selecione uma proposta para liberar o orçamento'
+                        title='Disponível para eventos em cotação ou publicados'
                     >
                         Orçamento e ticket
                     </span>

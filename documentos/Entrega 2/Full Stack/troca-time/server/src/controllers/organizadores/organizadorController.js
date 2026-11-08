@@ -5,8 +5,8 @@ import {
     validateCriarEventoRequest,
     criarVagaServicoRequest,
     validateCriarVagaServicoRequest,
-    criarCustoRequest,
-    validateCriarCustoRequest
+    criarCustoManualRequest,
+    validateCriarCustoManualRequest,
 } from "../../domain/dtos/organizadores/organizadorDtos.js"
 
 export async function criarEventoController(req, res) {
@@ -19,13 +19,39 @@ export async function criarEventoController(req, res) {
     res.status(200).json(eventoIdResponse)
 }
 
-export async function listarCustosController(req, res) {
+export async function atualizarStatusEventoController(req, res) {
+    const evento_id = req.params.id
+    const novo_status = req.query.novo_status
+
+    const status = ["rascunho", "em_cotacao", "publicado", "encerrado"]
+    if (!status.includes(novo_status)) {
+        throw new AppException("Status inválido", 400)
+    }
+
+    if (novo_status === 'em_cotacao') {
+        await service.disponibilizarParaCotacaoService(evento_id)
+    }
+
+    if (novo_status === 'publicado') {
+        await service.publicarEventoService(evento_id)
+    }
+
+    res.sendStatus(204)
+}
+
+export async function listarVagasServicoController(req, res) {
+    const vagasServico = await service.listarVagasServicoService()
+
+    res.status(200).json(vagasServico)
+}
+
+export async function listarCustosManuaisController(req, res) {
     const evento_id = req.params.id
     if (!evento_id) {
         throw new AppException("O ID do evento é obrigatório", 400)
     }
 
-    const custos = await service.listarCustosService(evento_id)
+    const custos = await service.listarCustosManuaisService(evento_id)
 
     res.status(200).json(custos)
 }
@@ -40,22 +66,90 @@ export async function criarVagaServicoController(req, res) {
 
     validateCriarVagaServicoRequest(vagaRequest)
 
-    const vagaIdResponse = await service.criarVagaServicoService(evento_id, vagaRequest)
+    const vagaServicoIdResponse = await service.criarVagaServicoService(evento_id, vagaRequest)
 
-    res.status(200).json(vagaIdResponse)
+    res.status(200).json(vagaServicoIdResponse)
 }
 
-export async function criarCustoController(req, res) {
+export async function criarCustoManualController(req, res) {
     const evento_id = req.params.id
     if (!evento_id) {
         throw new AppException("O ID do evento é obrigatório", 400)
     }
 
-    const custoRequest = criarCustoRequest(req.body)
+    const custoRequest = criarCustoManualRequest(req.body)
 
-    validateCriarCustoRequest(custoRequest)
+    validateCriarCustoManualRequest(custoRequest)
 
-    const custoIdResponse = await service.criarCustoService(evento_id, custoRequest)
+    const custoManualIdResponse = await service.criarCustoManualService(evento_id, custoRequest)
 
-    res.status(200).json(custoIdResponse)
+    res.status(200).json(custoManualIdResponse)
+}
+
+export async function deletarVagaServicoController(req, res) {
+    const vaga_servico_id = req.params.id
+    if (!vaga_servico_id) {
+        throw new AppException("O ID da vaga de serviço é obrigatório", 400)
+    }
+
+    await service.deletarVagaServicoService(vaga_servico_id)
+
+    res.sendStatus(204)
+}
+
+export async function deletarCustoManualController(req, res) {
+    const custo_manual_id = req.params.id
+    if (!custo_manual_id) {
+        throw new AppException("O ID do custo manual é obrigatório", 400)
+    }
+
+    await service.deletarCustoManualService(custo_manual_id)
+
+    res.sendStatus(204)
+}
+
+export async function listarPropostasEventoController(req, res) {
+    const evento_id = req.params.id
+    if (!evento_id) {
+        throw new AppException("O ID do evento é obrigatório", 400)
+    }
+
+    const propostas = await service.listarPropostasEventoService(evento_id)
+
+    res.status(200).json(propostas)
+}
+
+export async function atualizarStatusPropostaController(req, res) {
+    const proposta_id = req.params.id
+    const novo_status = req.query.novo_status
+
+    const status = ["selecionada", "recusada", "aceita"]
+    if (!status.includes(novo_status)) {
+        throw new AppException("Status inválido", 400)
+    }
+
+    if (novo_status === 'selecionada') {
+        await service.selecionarPropostaService(proposta_id)
+    }
+
+    if (novo_status === 'recusada') {
+        await service.recusarPropostaService(proposta_id)
+    }
+
+    if (novo_status === 'aceita') {
+        await service.aceitarPropostaService(proposta_id)
+    }
+
+    res.sendStatus(204)
+}
+
+export async function listarCustosOrcamentoController(req, res) {
+    const evento_id = req.params.id
+    if (!evento_id) {
+        throw new AppException("O ID do evento é obrigatório", 400)
+    }
+
+    const custos = await service.listarCustosOrcamentoService(evento_id)
+
+    res.status(200).json(custos)
 }

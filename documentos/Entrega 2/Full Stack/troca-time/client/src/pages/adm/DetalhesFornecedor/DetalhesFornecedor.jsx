@@ -10,9 +10,9 @@ const ROTULOS_STATUS = {
 }
 
 const STATUS_PROPOSTA = {
-    enviada: { rotulo: 'Aguardando resposta', classe: 'pendente' },
-    em_negociacao: { rotulo: 'Em negociação', classe: 'pendente' },
-    aceita: { rotulo: 'Selecionada', classe: 'aprovado' },
+    pendente: { rotulo: 'Pendente', classe: 'pendente' },
+    selecionada: { rotulo: 'Selecionada', classe: 'pendente' },
+    aceita: { rotulo: 'Aceita', classe: 'aprovado' },
     recusada: { rotulo: 'Recusada', classe: 'reprovado' },
 }
 

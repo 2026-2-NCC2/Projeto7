@@ -46,6 +46,7 @@ export function detalheEvento(evento, vagas_servico){
         horario_inicio: evento.horario_inicio,
         horario_fim: evento.horario_fim,
         endereco: formatarEndereco(evento),
+        estado: evento.estado,
         status: evento.status,
         publico_min: evento.publico_min,
         publico_max: evento.publico_max,

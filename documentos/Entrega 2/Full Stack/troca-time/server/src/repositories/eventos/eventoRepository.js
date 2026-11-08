@@ -50,6 +50,7 @@ export async function buscarDetalheEventoRepository(evento_id){
             e.cep,
             e.bairro,
             e.cidade,
+            e.estado,
             e.numero,
             e.criado_em,
             e.atualizado_em,

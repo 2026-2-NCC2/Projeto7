@@ -4,9 +4,9 @@ import { api, usuarioId } from '@/utils/api'
 import styles from './DetalheFornecedor.module.css'
 
 const STATUS = {
-    enviada: 'Aguardando resposta',
-    em_negociacao: 'Em negociação',
-    aceita: 'Selecionada',
+    pendente: 'Pendente',
+    selecionada: 'Selecionada',
+    aceita: 'Aceita',
     recusada: 'Recusada',
 }
 const dinheiro = (valor) =>

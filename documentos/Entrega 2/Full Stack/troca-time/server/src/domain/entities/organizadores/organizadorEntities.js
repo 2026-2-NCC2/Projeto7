@@ -33,11 +33,12 @@ export function vagaServicoEntity(evento_id, criarVagaServicoRequest) {
     };
 }
 
-export function custoEntity(evento_id, criarCustoRequest) {
+export function custoManualEntity(evento_id, criarCustoManualRequest) {
     return {
         evento_id: evento_id,
-        descricao: criarCustoRequest.descricao,
-        origem: criarCustoRequest.tipo,
-        valor: criarCustoRequest.valor
+        item: criarCustoManualRequest.item,
+        categoria: criarCustoManualRequest.categoria,
+        descricao: criarCustoManualRequest.descricao,
+        valor: criarCustoManualRequest.valor
     };
 }
