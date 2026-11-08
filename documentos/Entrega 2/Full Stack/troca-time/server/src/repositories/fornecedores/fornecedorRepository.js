@@ -25,6 +25,7 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
         SELECT
             p.id,
             vs.categoria,
+            vs.item AS nome_vaga,
             e.id AS evento_id,
             e.nome AS nome_evento,
             e.organizador_id,

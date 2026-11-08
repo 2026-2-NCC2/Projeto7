@@ -1,0 +1,27 @@
+meta {
+  name: Criar evento
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/forncedrores/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "categoria": "ilumicacao",
+    "descricao": "Luz de palco",
+    "validade": "2026-12-10",
+    "valor": "1800",
+    "observacoes": "vefvdfvfsd"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
