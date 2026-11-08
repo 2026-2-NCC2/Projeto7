@@ -24,7 +24,7 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
     const [propostasFornecedor] = await pool.query(`
         SELECT
             p.id,
-            vs.nome AS nome_vaga,
+            vs.item AS nome_vaga,
             vs.categoria,
             e.id AS evento_id,
             e.nome AS nome_evento,

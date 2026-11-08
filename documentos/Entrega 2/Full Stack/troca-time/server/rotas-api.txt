@@ -137,3 +137,86 @@ Response 200:
 
 Erros:
   500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+5) GET /organizadores/eventos/:id/custos
+----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body   -
+
+Response 200:
+{
+  "vagas_servico": [
+    {
+      "id": number,
+      "item": string,
+      "categoria": string,
+      "descricao": string | null,
+      "cotacao_ate": string,
+      "quantidade_propostas": number,
+      "status": string              // pendente | preenchida | vencida
+    }
+  ],
+  "custos": [
+    {
+      "id": number,
+      "descricao": string,
+      "tipo": string,               // Fiscal | Operacional | Variável
+      "valor": number
+    }
+  ]
+}
+
+Erros:
+  400 { "status": 400, "erro": "O ID do evento é obrigatório" }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+6) POST /organizadores/eventos/:id/vagas
+----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body
+{
+  "item": string,                   // obrigatorio
+  "categoria": string,              // obrigatorio
+  "descricao": string | null,
+  "cotacao_ate": string             // obrigatorio, YYYY-MM-DD
+}
+
+Response 200:
+{
+  "vaga_servico_id": number
+}
+
+Erros:
+  400 { "status": 400, "erro": "O campo <campo> é obrigatório." }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+7) POST /organizadores/eventos/:id/custos
+-----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body
+{
+  "descricao": string,              // obrigatorio
+  "tipo": string,                   // obrigatorio
+  "valor": number                   // obrigatorio, > 0
+}
+
+Response 200:
+{
+  "custo_id": number
+}
+
+Erros:
+  400 { "status": 400, "erro": "O campo <campo> é obrigatório." }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
