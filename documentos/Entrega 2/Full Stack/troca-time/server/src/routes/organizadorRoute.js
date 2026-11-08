@@ -8,4 +8,5 @@ router.use(autenticar, autorizar('organizador'));
 
 router.post('/', organizadorController.criarEventoController);
 
+
 export default router;

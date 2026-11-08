@@ -1,3 +1,5 @@
+import { AppException } from "../../../exceptions/appExceptions.js";
+
 export function propostaFornecedorLista(proposta) {
     return {
         id: proposta.id,
@@ -25,4 +27,23 @@ export function buscarDetalhesFornecedorResponse(dadosFornecedor, propostasForne
         criado_em: dadosFornecedor.criado_em,
         propostas: propostasFornecedor.map(propostaFornecedorLista)
     };
+}
+
+export function validarCriarPropostaRequest(criarPropostaRequest){
+    const camposObrigatorios = [
+        categoria,
+        valor,
+        validade,
+        descricao,
+    ];
+
+    for (const campo of camposObrigatorios){
+        if (
+            criarPropostaRequest[campo] === null ||
+            criarPropostaRequest[campo] === undefined ||
+            String(criarPropostaRequest[campo]).trim === ''
+        ){
+            throw new AppException (`O campo ${campo} é obrigatório.`,400);
+        }
+    }
 }

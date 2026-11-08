@@ -11,3 +11,14 @@ export async function buscarDetalhesFornecedorController(req, res) {
     const fornecedor = await service.buscarDetalhesFornecedorService(usuario_id)
     return res.status(200).json(fornecedor)
 }
+
+export async function criarPropostaController(req,res){
+    const propostaRequest = criarPropostaRequest(req.body, req.usuario.id)
+
+    validarCriarPropostaRequest(propostaRequest)
+
+    const propostaIdResponse = await service.criarPropostaService(propostaRequest)
+
+    res.status(200).json(propostaIdResponse)
+}
+

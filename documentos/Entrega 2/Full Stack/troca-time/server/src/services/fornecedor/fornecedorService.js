@@ -15,3 +15,13 @@ export async function buscarDetalhesFornecedorService(usuario_id) {
 
     return detalhesFornecedorResponse
 }
+
+export async function criarPropostaService(criarPropostaRequest){
+    const novaProposta = propostaEntity(criarPropostaRequest)
+    
+    const propostaId = await repository.criarPropostaFornecedorRepository(novaProposta)
+
+    return{
+        "proposta_id": propostaId
+    }    
+}

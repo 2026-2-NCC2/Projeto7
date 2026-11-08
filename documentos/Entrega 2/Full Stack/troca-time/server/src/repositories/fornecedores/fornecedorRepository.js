@@ -24,7 +24,6 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
     const [propostasFornecedor] = await pool.query(`
         SELECT
             p.id,
-            vs.nome AS nome_vaga,
             vs.categoria,
             e.id AS evento_id,
             e.nome AS nome_evento,
@@ -42,4 +41,28 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
     `, [usuario_id])
 
     return propostasFornecedor
+}
+
+export async function criarPropostaFornecedorRepository(proposta) {
+    const [criacaoProposta] = await pool.query(`
+        INSERT INTO proposta (
+            categoria,
+            valor,
+            validade,
+            descricao,
+            observacoes,
+        )
+        VALUES (
+            ?,?,?,?,?
+        )
+    `, [
+        proposta.categoria,
+        proposta.valor,
+        proposta.validade,
+        proposta.descricao,
+        proposta.observacoes
+    ]) 
+
+    return criacaoProposta.insertId
+    
 }
