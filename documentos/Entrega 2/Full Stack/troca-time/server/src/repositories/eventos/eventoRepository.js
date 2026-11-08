@@ -60,6 +60,7 @@ export async function buscarDetalheEventoRepository(evento_id){
             e.ticket_publico_max AS ticket_estimado_max,
             e.publico_min,
             e.publico_max,
+            e.publico_esperado,
             u.nome AS nome_organizador,
             e.organizador_id
         FROM evento e

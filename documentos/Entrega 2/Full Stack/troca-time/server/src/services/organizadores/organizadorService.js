@@ -17,10 +17,6 @@ export async function criarEventoService(criarEventoRequest) {
 export async function disponibilizarParaCotacaoService(evento_id) {
     const evento = await eventoRepository.buscarDetalheEventoRepository(evento_id)
 
-    if (!evento) {
-        throw new AppException("Evento não encontrado.", 404)
-    }
-
     if (evento.status !== 'rascunho') {
         throw new AppException("Apenas eventos em rascunho podem ser disponibilizados para cotação.", 400)
     }
@@ -31,9 +27,6 @@ export async function disponibilizarParaCotacaoService(evento_id) {
         'data',
         'horario_inicio',
         'horario_fim',
-        'publico_min',
-        'publico_max',
-        'margem_lucro',
         'nome_local',
         'cep',
         'rua',
@@ -117,7 +110,38 @@ export async function publicarEventoService(evento_id) {
         throw new AppException("Todas as vagas de serviço precisam estar preenchidas para publicar o evento.", 400)
     }
 
+    const camposOrcamento = [
+        'publico_min',
+        'publico_max',
+        'publico_esperado',
+        'margem_lucro',
+        'ticket_estimado_min',
+        'ticket_estimado_max'
+    ]
+
+    for (const campo of camposOrcamento) {
+        if (evento[campo] === undefined || evento[campo] === null) {
+            throw new AppException("Salve o orçamento do evento antes de publicar.", 400)
+        }
+    }
+
+    const custos = await repository.listarCustosOrcamentoRepository(evento_id)
+
+    if (custos.length === 0) {
+        throw new AppException("O evento precisa ter pelo menos um custo para ser publicado.", 400)
+    }
+
     await repository.atualizarStatusEventoRepository('publicado', evento_id)
+}
+
+export async function encerrarEventoService(evento_id) {
+    const evento = await eventoRepository.buscarDetalheEventoRepository(evento_id)
+
+    if (evento?.status !== 'publicado') {
+        throw new AppException("Apenas eventos publicados podem ser encerrados.", 400)
+    }
+
+    await repository.atualizarStatusEventoRepository('encerrado', evento_id)
 }
 
 export async function listarPropostasEventoService(evento_id) {
@@ -148,4 +172,51 @@ export async function listarCustosOrcamentoService(evento_id) {
 
     const custosResponse = dto.listarCustosOrcamentoResponse(custos)
     return custosResponse
+}
+
+function calcularTicketPublico(publico, custo_total, margem_lucro) {
+    const ticket_bruto = custo_total / (publico * (1 - margem_lucro)) / 0.99
+    const taxa = ticket_bruto * 0.01
+
+    return dto.calculo_ticket_publico(
+        publico,
+        ticket_bruto,
+        taxa,
+        ticket_bruto - taxa
+    )
+}
+
+export async function calcularTicketService(calcularTicketRequest) {
+    const custos = await repository.listarCustosOrcamentoRepository(calcularTicketRequest.evento_id)
+
+    const custo_total = custos.reduce((total, custo) => total + custo.valor, 0)
+    const margem_lucro = calcularTicketRequest.margem_lucro / 100
+
+    // Fórmula: Ticket = custo total ÷ [público × (1 − margem)] ÷ 0,99. O cálculo inclui a taxa de 1% que vai para a Troca Ticket em cada transação monetária no site.
+    const publicos = {
+        ticket_publico_min: calcularTicketRequest.publico_min,
+        ticket_publico_esperado: calcularTicketRequest.publico_esperado,
+        ticket_publico_max: calcularTicketRequest.publico_max
+    }
+
+    let calculos_ticket_publico = {}
+    for (const p in publicos) {
+        calculos_ticket_publico[p] = calcularTicketPublico(publicos[p], custo_total, margem_lucro)
+    }
+
+    return dto.calculoTicketResponse(calculos_ticket_publico, calcularTicketRequest.margem_lucro, custo_total)
+}
+
+export async function salvarOrcamentoService(salvarOrcamentoRequest) {
+    const calculo = await calcularTicketService(salvarOrcamentoRequest)
+
+    await repository.salvarOrcamentoRepository(salvarOrcamentoRequest.evento_id, {
+        publico_min: salvarOrcamentoRequest.publico_min,
+        publico_max: salvarOrcamentoRequest.publico_max,
+        publico_esperado: salvarOrcamentoRequest.publico_esperado,
+        margem_lucro: salvarOrcamentoRequest.margem_lucro,
+        custo_total: calculo.custo_total,
+        ticket_publico_min: calculo.ticket_publico_min.ticket_bruto,
+        ticket_publico_max: calculo.ticket_publico_max.ticket_bruto
+    })
 }

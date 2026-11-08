@@ -16,6 +16,8 @@ router.delete('/vagas_servico/:id', organizadorController.deletarVagaServicoCont
 router.delete('/custos_manuais/:id', organizadorController.deletarCustoManualController)
 router.get('/:id/propostas', organizadorController.listarPropostasEventoController)
 router.get('/:id/custos_orcamento', organizadorController.listarCustosOrcamentoController)
+router.get('/:id/calcular_ticket', organizadorController.calcularTicketController)
+router.patch('/:id/orcamento', organizadorController.salvarOrcamentoController)
 router.patch('/propostas/:id/status', organizadorController.atualizarStatusPropostaController)
 
 export default router;

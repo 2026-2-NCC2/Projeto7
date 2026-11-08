@@ -15,7 +15,7 @@ const STATUS_PROPOSTA = {
 
 function PropostasOrganizador() {
     const { eventoId } = useParams()
-    const { recarregarEvento } = useOutletContext()
+    const { recarregarEvento, evento } = useOutletContext()
     const [propostas, setPropostas] = useState([])
     const [filtro, setFiltro] = useState('todas')
     const [modal, setModal] = useState(null)
@@ -110,7 +110,8 @@ function PropostasOrganizador() {
                     visiveis.map((proposta) => {
                         const podeMudar =
                             ['pendente', 'selecionada'].includes(proposta.status) &&
-                            proposta.status_vaga !== 'preenchida'
+                            proposta.status_vaga !== 'preenchida' &&
+                            evento.status !== 'encerrado'
                         const status = STATUS_PROPOSTA[proposta.status] || {
                             rotulo: proposta.status,
                             classe: '',

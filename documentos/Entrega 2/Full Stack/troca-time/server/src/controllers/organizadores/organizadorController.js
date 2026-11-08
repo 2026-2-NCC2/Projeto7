@@ -1,4 +1,5 @@
 import * as service from "../../services/organizadores/organizadorService.js"
+import * as eventoService from "../../services/eventos/eventoService.js"
 import { AppException } from "../../exceptions/appExceptions.js"
 import {
     criarEventoRequest,
@@ -7,6 +8,8 @@ import {
     validateCriarVagaServicoRequest,
     criarCustoManualRequest,
     validateCriarCustoManualRequest,
+    calcularTicketRequest,
+    validateCalcularTicketRequest
 } from "../../domain/dtos/organizadores/organizadorDtos.js"
 
 export async function criarEventoController(req, res) {
@@ -34,6 +37,10 @@ export async function atualizarStatusEventoController(req, res) {
 
     if (novo_status === 'publicado') {
         await service.publicarEventoService(evento_id)
+    }
+
+    if (novo_status === 'encerrado') {
+        await service.encerrarEventoService(evento_id)
     }
 
     res.sendStatus(204)
@@ -152,4 +159,34 @@ export async function listarCustosOrcamentoController(req, res) {
     const custos = await service.listarCustosOrcamentoService(evento_id)
 
     res.status(200).json(custos)
+}
+
+export async function calcularTicketController(req, res) {
+    const evento_id = req.params.id
+    if (!evento_id || evento_id === ':id') {
+        throw new AppException('O ID do evento é obrigatório', 400)
+    }
+
+    const ticket_request = calcularTicketRequest(req.query, evento_id)
+
+    validateCalcularTicketRequest(ticket_request)
+
+    const calculoTicket = await service.calcularTicketService(ticket_request)
+
+    res.status(200).json(calculoTicket)
+}
+
+export async function salvarOrcamentoController(req, res) {
+    const evento_id = req.params.id
+    if (!evento_id) {
+        throw new AppException("O ID do evento é obrigatório", 400)
+    }
+
+    const orcamentoRequest = calcularTicketRequest(req.body, evento_id)
+
+    validateCalcularTicketRequest(orcamentoRequest)
+
+    await service.salvarOrcamentoService(orcamentoRequest)
+
+    res.sendStatus(204)
 }

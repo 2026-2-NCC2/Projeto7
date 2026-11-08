@@ -27,7 +27,8 @@ const valorBR = (valor) =>
 
 function ItensCustos() {
     const { eventoId } = useParams()
-    const { organizadorId } = useOutletContext()
+    const { organizadorId, evento } = useOutletContext()
+    const encerrado = evento.status === 'encerrado'
     const [vagas, setVagas] = useState([])
     const [custos, setCustos] = useState([])
     const [vaga, setVaga] = useState({
@@ -169,7 +170,7 @@ function ItensCustos() {
                                         </span>
                                     </td>
                                     <td>
-                                        {Number(item.quantidade_propostas) === 0 && (
+                                        {!encerrado && Number(item.quantidade_propostas) === 0 && (
                                             <button
                                                 className={styles.excluir}
                                                 type='button'
@@ -191,52 +192,54 @@ function ItensCustos() {
                         </tbody>
                     </table>
                 </div>
-                <form className={styles.formVaga} onSubmit={adicionarVaga}>
-                    <Campo
-                        id='itemServico'
-                        rotulo='*Item:'
-                        placeholder='ex.: Iluminação de palco'
-                        value={vaga.item}
-                        onChange={(e) => setVaga({ ...vaga, item: e.target.value })}
-                        required
-                    />
-                    <label>
-                        <span>*Categoria:</span>
-                        <select
-                            value={vaga.categoria}
-                            onChange={(e) => setVaga({ ...vaga, categoria: e.target.value })}
-                        >
-                            {CATEGORIAS.map(([value, label]) => (
-                                <option value={value} key={value}>
-                                    {label}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <Campo
-                        id='descricaoServico'
-                        rotulo='*Descrição:'
-                        placeholder='Quantidade, horário, especificações'
-                        value={vaga.descricao}
-                        onChange={(e) => setVaga({ ...vaga, descricao: e.target.value })}
-                        required
-                    />
-                    <Campo
-                        id='prazoCotacao'
-                        rotulo='*Cotação até:'
-                        placeholder='dd/mm/aaaa'
-                        inputMode='numeric'
-                        maxLength='10'
-                        value={vaga.cotacao_ate}
-                        onChange={(e) =>
-                            setVaga({ ...vaga, cotacao_ate: mascaraData(e.target.value) })
-                        }
-                        required
-                    />
-                    <Botao type='submit' disabled={enviando}>
-                        {enviando ? 'Adicionando…' : 'Adicionar →'}
-                    </Botao>
-                </form>
+                {!encerrado && (
+                    <form className={styles.formVaga} onSubmit={adicionarVaga}>
+                        <Campo
+                            id='itemServico'
+                            rotulo='*Item:'
+                            placeholder='ex.: Iluminação de palco'
+                            value={vaga.item}
+                            onChange={(e) => setVaga({ ...vaga, item: e.target.value })}
+                            required
+                        />
+                        <label>
+                            <span>*Categoria:</span>
+                            <select
+                                value={vaga.categoria}
+                                onChange={(e) => setVaga({ ...vaga, categoria: e.target.value })}
+                            >
+                                {CATEGORIAS.map(([value, label]) => (
+                                    <option value={value} key={value}>
+                                        {label}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        <Campo
+                            id='descricaoServico'
+                            rotulo='*Descrição:'
+                            placeholder='Quantidade, horário, especificações'
+                            value={vaga.descricao}
+                            onChange={(e) => setVaga({ ...vaga, descricao: e.target.value })}
+                            required
+                        />
+                        <Campo
+                            id='prazoCotacao'
+                            rotulo='*Cotação até:'
+                            placeholder='dd/mm/aaaa'
+                            inputMode='numeric'
+                            maxLength='10'
+                            value={vaga.cotacao_ate}
+                            onChange={(e) =>
+                                setVaga({ ...vaga, cotacao_ate: mascaraData(e.target.value) })
+                            }
+                            required
+                        />
+                        <Botao type='submit' disabled={enviando}>
+                            {enviando ? 'Adicionando…' : 'Adicionar →'}
+                        </Botao>
+                    </form>
+                )}
             </section>
             <section className={styles.painel}>
                 <h2>OUTROS CUSTOS DO EVENTO</h2>
@@ -265,13 +268,15 @@ function ItensCustos() {
                                     <td>{item.descricao}</td>
                                     <td>{valorBR(item.valor)}</td>
                                     <td>
-                                        <button
-                                            className={styles.excluir}
-                                            type='button'
-                                            onClick={() => excluirCusto(item.id)}
-                                        >
-                                            Deletar
-                                        </button>
+                                        {!encerrado && (
+                                            <button
+                                                className={styles.excluir}
+                                                type='button'
+                                                onClick={() => excluirCusto(item.id)}
+                                            >
+                                                Deletar
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
@@ -298,51 +303,53 @@ function ItensCustos() {
                         </tbody>
                     </table>
                 </div>
-                <form className={styles.formCusto} onSubmit={adicionarCusto}>
-                    <Campo
-                        id='itemCusto'
-                        rotulo='*Item:'
-                        placeholder='ex.: Seguro'
-                        value={custo.item}
-                        onChange={(e) => setCusto({ ...custo, item: e.target.value })}
-                        required
-                    />
-                    <label>
-                        <span>*Categoria:</span>
-                        <select
-                            value={custo.categoria}
-                            onChange={(e) => setCusto({ ...custo, categoria: e.target.value })}
-                        >
-                            {CATEGORIAS_CUSTO.map(([value, label]) => (
-                                <option value={value} key={value}>
-                                    {label}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                    <Campo
-                        id='descricaoCusto'
-                        rotulo='*Descrição:'
-                        placeholder='ex.: Seguro do evento'
-                        value={custo.descricao}
-                        onChange={(e) => setCusto({ ...custo, descricao: e.target.value })}
-                        required
-                    />
-                    <Campo
-                        id='valorCusto'
-                        rotulo='*Valor (R$):'
-                        type='number'
-                        min='0.01'
-                        step='0.01'
-                        placeholder='0,00'
-                        value={custo.valor}
-                        onChange={(e) => setCusto({ ...custo, valor: e.target.value })}
-                        required
-                    />
-                    <Botao type='submit' disabled={enviando}>
-                        Adicionar →
-                    </Botao>
-                </form>
+                {!encerrado && (
+                    <form className={styles.formCusto} onSubmit={adicionarCusto}>
+                        <Campo
+                            id='itemCusto'
+                            rotulo='*Item:'
+                            placeholder='ex.: Seguro'
+                            value={custo.item}
+                            onChange={(e) => setCusto({ ...custo, item: e.target.value })}
+                            required
+                        />
+                        <label>
+                            <span>*Categoria:</span>
+                            <select
+                                value={custo.categoria}
+                                onChange={(e) => setCusto({ ...custo, categoria: e.target.value })}
+                            >
+                                {CATEGORIAS_CUSTO.map(([value, label]) => (
+                                    <option value={value} key={value}>
+                                        {label}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        <Campo
+                            id='descricaoCusto'
+                            rotulo='*Descrição:'
+                            placeholder='ex.: Seguro do evento'
+                            value={custo.descricao}
+                            onChange={(e) => setCusto({ ...custo, descricao: e.target.value })}
+                            required
+                        />
+                        <Campo
+                            id='valorCusto'
+                            rotulo='*Valor (R$):'
+                            type='number'
+                            min='0.01'
+                            step='0.01'
+                            placeholder='0,00'
+                            value={custo.valor}
+                            onChange={(e) => setCusto({ ...custo, valor: e.target.value })}
+                            required
+                        />
+                        <Botao type='submit' disabled={enviando}>
+                            Adicionar →
+                        </Botao>
+                    </form>
+                )}
             </section>
         </div>
     )

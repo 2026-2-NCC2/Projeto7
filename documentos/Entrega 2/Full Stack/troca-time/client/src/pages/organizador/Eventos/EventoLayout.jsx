@@ -39,9 +39,10 @@ function EventoLayout() {
         carregar()
     }, [organizadorId, eventoId])
     const base = `/organizador/eventos/${eventoId}`
-    const orcamentoDisponivel = ['em_cotacao', 'publicado'].includes(evento?.status)
+    const orcamentoDisponivel = ['em_cotacao', 'publicado', 'encerrado'].includes(evento?.status)
     const rascunho = evento?.status === 'rascunho'
     const emCotacao = evento?.status === 'em_cotacao'
+    const publicado = evento?.status === 'publicado'
 
     async function disponibilizarParaCotacao() {
         try {
@@ -57,6 +58,18 @@ function EventoLayout() {
     async function publicarEvento() {
         try {
             await api(`/organizadores/${eventoId}/status?novo_status=publicado`, {
+                method: 'PATCH',
+            })
+            await carregar()
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    async function encerrarEvento() {
+        if (!confirm('Deseja encerrar este evento? Essa ação não pode ser desfeita.')) return
+        try {
+            await api(`/organizadores/${eventoId}/status?novo_status=encerrado`, {
                 method: 'PATCH',
             })
             await carregar()
@@ -99,9 +112,19 @@ function EventoLayout() {
                             Publicar evento
                         </button>
                     )}
-                    <Link className={styles.editar} to={`/organizador/eventos/${eventoId}/editar`}>
-                        Editar evento
-                    </Link>
+                    {publicado && (
+                        <button type='button' className={styles.encerrar} onClick={encerrarEvento}>
+                            Encerrar evento
+                        </button>
+                    )}
+                    {evento.status !== 'encerrado' && (
+                        <Link
+                            className={styles.editar}
+                            to={`/organizador/eventos/${eventoId}/editar`}
+                        >
+                            Editar evento
+                        </Link>
+                    )}
                 </div>
             </header>
             <nav className={styles.abas} aria-label='Abas do evento'>
@@ -153,7 +176,7 @@ function EventoLayout() {
                 ) : (
                     <span
                         className={`${styles.aba} ${styles.abaDesativada}`}
-                        title='Disponível para eventos em cotação ou publicados'
+                        title='Disponibilize o evento para cotação para liberar'
                     >
                         Orçamento e ticket
                     </span>

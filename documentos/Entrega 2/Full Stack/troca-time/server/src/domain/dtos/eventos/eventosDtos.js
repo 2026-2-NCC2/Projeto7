@@ -50,6 +50,7 @@ export function detalheEvento(evento, vagas_servico){
         status: evento.status,
         publico_min: evento.publico_min,
         publico_max: evento.publico_max,
+        publico_esperado: evento.publico_esperado,
         ticket_min: evento.ticket_estimado_min,
         ticket_max: evento.ticket_estimado_max,
         custo_total: evento.custo_total,

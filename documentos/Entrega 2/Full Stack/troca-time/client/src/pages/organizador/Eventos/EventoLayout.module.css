@@ -71,6 +71,15 @@
     font: inherit;
     cursor: pointer;
 }
+.encerrar {
+    padding: 10px 20px;
+    border: 1px solid var(--cor-escura-vinho);
+    border-radius: 22px;
+    color: #fff;
+    background: var(--cor-escura-vinho);
+    font: inherit;
+    cursor: pointer;
+}
 .editar {
     flex: none;
     padding: 10px 20px;

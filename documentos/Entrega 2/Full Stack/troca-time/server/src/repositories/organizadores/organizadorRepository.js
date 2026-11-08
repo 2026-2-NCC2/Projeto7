@@ -9,10 +9,6 @@ export async function criarEventoRepository(evento) {
             horario_inicio,
             horario_fim,
             organizador_id,
-            publico_min,
-            publico_max,
-            publico_esperado,
-            margem_lucro,
             nome_local,
             cep,
             rua,
@@ -23,7 +19,7 @@ export async function criarEventoRepository(evento) {
             estado
         )
         VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )
      `, [
         evento.nome,
@@ -32,10 +28,6 @@ export async function criarEventoRepository(evento) {
         evento.horario_inicio,
         evento.horario_fim,
         evento.organizador_id,
-        evento.publico_min,
-        evento.publico_max, 
-        evento.publico_esperado,
-        evento.margem_lucro,
         evento.nome_local,
         evento.cep,
         evento.rua,
@@ -93,6 +85,29 @@ export async function listarCustosManuaisRepository(evento_id) {
     `, [evento_id])
 
     return custos
+}
+
+export async function salvarOrcamentoRepository(evento_id, orcamento) {
+    await pool.execute(`
+        UPDATE evento SET
+            publico_min = ?,
+            publico_max = ?,
+            publico_esperado = ?,
+            margem_lucro = ?,
+            custo_total = ?,
+            ticket_publico_min = ?,
+            ticket_publico_max = ?
+        WHERE id = ?
+    `, [
+        orcamento.publico_min,
+        orcamento.publico_max,
+        orcamento.publico_esperado,
+        orcamento.margem_lucro,
+        orcamento.custo_total,
+        orcamento.ticket_publico_min,
+        orcamento.ticket_publico_max,
+        evento_id
+    ])
 }
 
 export async function atualizarStatusEventoRepository(novo_status, evento_id) {
