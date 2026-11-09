@@ -109,17 +109,8 @@ export async function listarOportunidadesRepository(fornecedor_id) {
                 WHERE p.vaga_servico_id = vs.id
                     AND p.fornecedor_id = ?
             )
-            AND NOT EXISTS (
-                SELECT 1
-                FROM proposta p
-                INNER JOIN vaga_servico v
-                    ON v.id = p.vaga_servico_id
-                WHERE v.evento_id = vs.evento_id
-                    AND p.fornecedor_id = ?
-                    AND p.status = 'aceita'
-            )
         ORDER BY e.data ASC, e.horario_inicio ASC
-    `, [fornecedor_id, fornecedor_id]);
+    `, [fornecedor_id]);
 
     return oportunidades;
 }

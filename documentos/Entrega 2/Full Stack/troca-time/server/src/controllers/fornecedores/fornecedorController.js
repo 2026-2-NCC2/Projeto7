@@ -9,7 +9,7 @@ export async function buscarDetalhesFornecedorController(req, res) {
         throw new AppException("ID do fornecedor inválido", 400)
     }
 
-    const fornecedor = await service.buscarDetalhesFornecedorService(usuario_id)
+    const fornecedor = await service.buscarDetalhesFornecedorService(usuario_id, req.usuario.tipo_usuario)
     return res.status(200).json(fornecedor)
 }
 
