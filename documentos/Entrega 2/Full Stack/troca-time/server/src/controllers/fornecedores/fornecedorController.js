@@ -14,10 +14,6 @@ export async function buscarDetalhesFornecedorController(req, res) {
         throw new AppException("ID do fornecedor inválido", 400)
     }
 
-    if (req.usuario.tipo_usuario === 'fornecedor' && req.usuario.id !== usuario_id) {
-        throw new AppException("Você não tem permissão para acessar este fornecedor.", 403)
-    }
-
     const fornecedor = await service.buscarDetalhesFornecedorService(usuario_id, req.usuario.tipo_usuario)
     return res.status(200).json(fornecedor)
 }
