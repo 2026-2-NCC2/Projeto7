@@ -3,6 +3,10 @@ import * as dto from '../../domain/dtos/fornecedores/fornecedorDtos.js'
 import { propostaEntity } from '../../domain/entities/fornecedor/fornecedorEntities.js'
 import { AppException } from '../../exceptions/appExceptions.js'
 
+export async function listarPropostasFornecedorService(usuario_id) {
+    return repository.buscarPropostasFornecedorRepository(usuario_id)
+}
+
 export async function buscarDetalhesFornecedorService(usuario_id, tipo_usuario) {
     const dadosFornecedor = await repository.buscarDetalhesFornecedorRepository(usuario_id)
 

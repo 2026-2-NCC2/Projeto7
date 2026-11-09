@@ -2,11 +2,20 @@ import * as service from "../../services/fornecedor/fornecedorService.js"
 import { AppException } from "../../exceptions/appExceptions.js"
 import { criarPropostaRequest, validarCriarPropostaRequest } from "../../domain/dtos/fornecedores/fornecedorDtos.js"
 
+export async function listarMinhasPropostasController(req, res) {
+    const propostas = await service.listarPropostasFornecedorService(req.usuario.id)
+    return res.status(200).json({ propostas })
+}
+
 export async function buscarDetalhesFornecedorController(req, res) {
     const usuario_id = Number(req.params.id)
 
     if (!usuario_id) {
         throw new AppException("ID do fornecedor inválido", 400)
+    }
+
+    if (req.usuario.tipo_usuario === 'fornecedor' && req.usuario.id !== usuario_id) {
+        throw new AppException("Você não tem permissão para acessar este fornecedor.", 403)
     }
 
     const fornecedor = await service.buscarDetalhesFornecedorService(usuario_id, req.usuario.tipo_usuario)

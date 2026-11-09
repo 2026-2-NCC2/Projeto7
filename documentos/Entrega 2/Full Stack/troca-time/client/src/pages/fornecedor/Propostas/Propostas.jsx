@@ -1,22 +1,46 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { api, dataBr } from '@/utils/api'
 import styles from './Propostas.module.css'
 
 const FILTROS = [
-    { id: 'enviada', label: 'Enviadas' },
-    { id: 'aprovada', label: 'Aprovadas' },
+    { id: 'pendente', label: 'Enviadas' },
+    { id: 'selecionada', label: 'Selecionadas' },
+    { id: 'aceita', label: 'Aceitas' },
     { id: 'recusada', label: 'Recusadas' },
     { id: 'todas', label: 'Todas' },
 ]
 const LABEL_STATUS = {
-    enviada: 'Enviada',
-    aprovada: 'Aprovada',
+    pendente: 'Enviada',
+    selecionada: 'Selecionada',
+    aceita: 'Aceita',
     recusada: 'Recusada',
-    cancelada: 'Cancelada',
 }
 
 function PropostasFornecedor() {
     const [filtro, setFiltro] = useState('todas')
-    const propostas = []
+    const [propostas, setPropostas] = useState([])
+    const [carregando, setCarregando] = useState(true)
+    const [erro, setErro] = useState('')
+
+    useEffect(() => {
+        let ativo = true
+
+        api('/fornecedores/me/propostas')
+            .then((resposta) => {
+                if (ativo) setPropostas(resposta.propostas ?? [])
+            })
+            .catch((erroApi) => {
+                if (ativo) setErro(erroApi.message)
+            })
+            .finally(() => {
+                if (ativo) setCarregando(false)
+            })
+
+        return () => {
+            ativo = false
+        }
+    }, [])
+
     const lista = useMemo(
         () => propostas.filter((p) => filtro === 'todas' || p.status === filtro),
         [propostas, filtro],
@@ -39,6 +63,8 @@ function PropostasFornecedor() {
                 ))}
             </div>
             <div className={styles.tabelaWrap}>
+                {erro && <p className={styles.erro} role='alert'>{erro}</p>}
+                {carregando && <p className={styles.vazio}>Carregando propostas...</p>}
                 <table>
                     <thead>
                         <tr>
@@ -53,16 +79,12 @@ function PropostasFornecedor() {
                     <tbody>
                         {lista.map((p) => (
                             <tr key={p.id}>
+                                <td><b>{p.nome_evento}</b></td>
+                                <td>{p.nome_vaga}</td>
+                                <td>{Number(p.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                <td>{dataBr(p.validade)}</td>
                                 <td>
-                                    <b>{p.evento}</b>
-                                </td>
-                                <td>{p.item}</td>
-                                <td>{p.valor}</td>
-                                <td>{p.validade}</td>
-                                <td>
-                                    <span
-                                        className={`${styles.status} ${styles[`status_${p.status}`]}`}
-                                    >
+                                    <span className={`${styles.status} ${styles[`status_${p.status}`]}`}>
                                         {LABEL_STATUS[p.status] ?? p.status}
                                     </span>
                                 </td>
@@ -71,7 +93,9 @@ function PropostasFornecedor() {
                         ))}
                     </tbody>
                 </table>
-                {lista.length === 0 && <p className={styles.vazio}>Nenhuma proposta disponível.</p>}
+                {!carregando && !erro && lista.length === 0 && (
+                    <p className={styles.vazio}>Nenhuma proposta disponível.</p>
+                )}
             </div>
             <p className={styles.nota}>
                 Propostas só podem ser editadas ou canceladas enquanto estiverem com status Enviada.
