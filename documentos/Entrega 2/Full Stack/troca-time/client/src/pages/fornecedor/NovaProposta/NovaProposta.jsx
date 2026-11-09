@@ -1,39 +1,75 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Botao from '@/components/Botao/Botao'
 import Campo from '@/components/Campo/Campo'
+import { api, dataBr } from '@/utils/api'
 import styles from './NovaProposta.module.css'
 
 function NovaProposta() {
     const { propostaId } = useParams()
+    const [searchParams] = useSearchParams()
+    const vagaId = searchParams.get('vaga')
+    const navigate = useNavigate()
+    const [vaga, setVaga] = useState(null)
     const [erro, setErro] = useState('')
+    const [enviando, setEnviando] = useState(false)
     const [form, setForm] = useState({ valor: '', validade: '', descricao: '', observacoes: '' })
     function atualizar(campo) {
         return (e) => setForm((atual) => ({ ...atual, [campo]: e.target.value }))
     }
-    function enviar(e) {
+
+    async function carregar() {
+        try {
+            const resposta = await api('/fornecedores/')
+            setVaga(
+                (resposta.oportunidades || []).find((item) => item.id === Number(vagaId)) || null,
+            )
+            setErro('')
+        } catch (error) {
+            setErro(error.message)
+        }
+    }
+    useEffect(() => {
+        carregar()
+    }, [vagaId])
+
+    async function enviar(e) {
         e.preventDefault()
-        setErro('O envio será conectado ao banco pelo servidor.')
+        setErro('')
+        setEnviando(true)
+        try {
+            await api('/fornecedores/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    ...form,
+                    vaga_servico_id: Number(vagaId),
+                    valor: Number(form.valor),
+                }),
+            })
+            navigate('/fornecedor/propostas')
+        } catch (error) {
+            setErro(error.message)
+        } finally {
+            setEnviando(false)
+        }
     }
 
     return (
         <main className={styles.pagina}>
             <h1>{propostaId ? 'Editar proposta' : 'Nova proposta'}</h1>
             <section className={styles.resumo}>
-                <span className={styles.dia}>—</span>
+                <span className={styles.dia}>{String(vaga?.data || '').split('-')[2] || '—'}</span>
                 <div>
                     <small>PARA O EVENTO</small>
-                    <b>—</b>
-                    <span>Data · Local · Organizador</span>
+                    <b>{vaga?.nome_evento ?? '—'}</b>
+                    <span>
+                        {vaga ? `${dataBr(vaga.data)} · ${vaga.nome_local}` : 'Data · Local'}
+                    </span>
                 </div>
             </section>
             <form className={styles.formulario} onSubmit={enviar}>
                 <div className={styles.camposTopo}>
-                    <Campo id='item' rotulo='*Item:'>
-                        <select id='item' value='' onChange={() => {}}>
-                            <option value=''>Serviços disponíveis serão carregados do banco</option>
-                        </select>
-                    </Campo>
+                    <Campo id='item' rotulo='*Item:' value={vaga?.item ?? '—'} readOnly />
                     <Campo
                         id='valor'
                         rotulo='*Valor (R$):'
@@ -79,7 +115,9 @@ function NovaProposta() {
                         {erro}
                     </p>
                 )}
-                <Botao type='submit'>Enviar proposta →</Botao>
+                <Botao type='submit' disabled={enviando}>
+                    Enviar proposta →
+                </Botao>
             </form>
         </main>
     )

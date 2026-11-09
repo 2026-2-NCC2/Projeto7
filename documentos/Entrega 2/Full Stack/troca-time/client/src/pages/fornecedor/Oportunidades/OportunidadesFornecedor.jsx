@@ -1,24 +1,50 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { api, dataBr, dataHoraBr } from '@/utils/api'
 import styles from './OportunidadesFornecedor.module.css'
 
-const CATEGORIAS = ['Todas', 'Iluminação', 'Alimentação', 'Bebidas', 'Segurança', 'Estrutura']
+const CATEGORIAS = [
+    ['todas', 'Todas'],
+    ['iluminacao', 'Iluminação'],
+    ['alimentacao', 'Alimentação'],
+    ['bebidas', 'Bebidas'],
+    ['seguranca', 'Segurança'],
+    ['estrutura', 'Estrutura'],
+]
+const MESES = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ']
 
 function OportunidadesFornecedor() {
-    const oportunidades = []
+    const [dados, setDados] = useState({ oportunidades: [] })
     const [busca, setBusca] = useState('')
-    const [categoria, setCategoria] = useState('Todas')
+    const [categoria, setCategoria] = useState('todas')
+    const [erro, setErro] = useState('')
+    const [carregando, setCarregando] = useState(true)
+
+    async function carregar() {
+        setCarregando(true)
+        setErro('')
+        try {
+            const resposta = await api('/fornecedores/')
+            setDados({ oportunidades: resposta.oportunidades || [] })
+        } catch (error) {
+            setErro(error.message)
+        } finally {
+            setCarregando(false)
+        }
+    }
+
+    useEffect(() => {
+        carregar()
+    }, [])
 
     const filtradas = useMemo(
         () =>
-            oportunidades.filter((item) => {
-                const correspondeCategoria =
-                    categoria === 'Todas' ||
-                    item.categoria?.toLowerCase() === categoria.toLowerCase()
-                const texto = `${item.nomeServico} ${item.evento} ${item.local}`.toLowerCase()
+            dados.oportunidades.filter((item) => {
+                const correspondeCategoria = categoria === 'todas' || item.categoria === categoria
+                const texto = `${item.item} ${item.nome_evento} ${item.nome_local}`.toLowerCase()
                 return correspondeCategoria && texto.includes(busca.toLowerCase())
             }),
-        [oportunidades, busca, categoria],
+        [dados.oportunidades, busca, categoria],
     )
 
     return (
@@ -40,59 +66,79 @@ function OportunidadesFornecedor() {
                 role='group'
                 aria-label='Filtrar por categoria de serviço'
             >
-                {CATEGORIAS.map((item) => (
+                {CATEGORIAS.map(([valor, rotulo]) => (
                     <button
-                        key={item}
+                        key={valor}
                         type='button'
-                        aria-pressed={categoria === item}
-                        className={`${styles.filtro} ${categoria === item ? styles.filtroAtivo : ''}`}
-                        onClick={() => setCategoria(item)}
+                        aria-pressed={categoria === valor}
+                        className={`${styles.filtro} ${categoria === valor ? styles.filtroAtivo : ''}`}
+                        onClick={() => setCategoria(valor)}
                     >
-                        {item}
+                        {rotulo}
                     </button>
                 ))}
             </div>
             <section className={styles.lista} aria-label='Oportunidades de serviço'>
-                {filtradas.map((item) => (
-                    <article key={item.id} className={styles.cartao}>
-                        <div className={styles.data}>
-                            <strong>{item.data.split('/')[0] || '—'}</strong>
-                            <span>{item.data.split('/')[1]?.slice(0, 3) ?? ''}</span>
-                        </div>
-                        <div className={styles.info}>
-                            <h2>{item.nomeServico}</h2>
-                            <p className={styles.evento}>{item.evento}</p>
-                            <p>
-                                <b>DATA E HORA:</b> {item.data}
-                            </p>
-                            <p>
-                                <b>LOCAL:</b> {item.local}
-                            </p>
-                            <p>
-                                <b>COTAÇÃO ATÉ:</b> {item.cotacaoAte}
-                            </p>
-                        </div>
-                        <div className={styles.descricao}>
-                            <b>Descrição</b>
-                            <p>{item.descricao}</p>
-                            <div className={styles.acoes}>
-                                <Link
-                                    className={styles.secundario}
-                                    to={`/fornecedores/eventos/${item.eventoId}`}
-                                >
-                                    Ver mais
-                                </Link>
-                                <Link
-                                    className={styles.primario}
-                                    to={`/fornecedores/eventos/${item.eventoId}/propostas/nova`}
-                                >
-                                    Fazer proposta
-                                </Link>
-                            </div>
-                        </div>
-                    </article>
-                ))}
-                {filtradas.length === 0 && (
+                {carregando && <p className={styles.vazio}>Carregando oportunidades…</p>}
+                {erro && (
+                    <p className={styles.vazio} role='alert'>
+                        {erro}{' '}
+                        <button type='button' onClick={carregar}>
+                            Tentar novamente
+                        </button>
+                    </p>
+                )}
+                {!carregando &&
+                    !erro &&
+                    filtradas.map((item) => {
+                        const inicio = String(item.data || '').split('-')
+                        const dia = inicio[2] || '—'
+                        const mes = inicio[1] ? MESES[Number(inicio[1]) - 1] : ''
+                        return (
+                            <article key={item.id} className={styles.cartao}>
+                                <div className={styles.data}>
+                                    <strong>{dia}</strong>
+                                    <span>{mes}</span>
+                                </div>
+                                <div className={styles.info}>
+                                    <h2>{item.item}</h2>
+                                    <p className={styles.evento}>{item.nome_evento}</p>
+                                    <p>
+                                        <b>DATA E HORA:</b>{' '}
+                                        {dataHoraBr(`${item.data} ${item.horario_inicio}`)}
+                                    </p>
+                                    <p>
+                                        <b>LOCAL:</b>{' '}
+                                        {[item.nome_local, item.cidade, item.estado]
+                                            .filter(Boolean)
+                                            .join(', ')}
+                                    </p>
+                                    <p>
+                                        <b>COTAÇÃO ATÉ:</b> {dataBr(item.cotacao_ate)}
+                                    </p>
+                                </div>
+                                <div className={styles.descricao}>
+                                    <b>Descrição</b>
+                                    <p>{item.descricao}</p>
+                                    <div className={styles.acoes}>
+                                        <Link
+                                            className={styles.secundario}
+                                            to={`/fornecedor/eventos/${item.evento_id}`}
+                                        >
+                                            Ver mais
+                                        </Link>
+                                        <Link
+                                            className={styles.primario}
+                                            to={`/fornecedor/eventos/${item.evento_id}/propostas/nova?vaga=${item.id}`}
+                                        >
+                                            Fazer proposta
+                                        </Link>
+                                    </div>
+                                </div>
+                            </article>
+                        )
+                    })}
+                {!carregando && !erro && filtradas.length === 0 && (
                     <p className={styles.vazio}>Nenhuma oportunidade disponível.</p>
                 )}
             </section>
