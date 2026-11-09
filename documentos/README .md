@@ -43,16 +43,16 @@
 | **Trechos ou entregas afetadas** | **Giovanna:** servidor e arquivo SQL de inicialização; branch `pages_Fornecedor` e arquivos em conflito no client; execução local do front-end (servidor Vite); Chamada de login ao back-end e redirecionamento por perfil; <br>**Pedro:** definição da fonte do projeto (Space Grotesk) e importação via Google Fonts/Fontsource e CSS/Tailwind; trechos do front-end em que os erros ocorreram e foram corrigidos [indicar os arquivos/componentes].<br<br>**Olivia:** Arquitetura do back-end: organização das pastas e separação entre Routes, Controllers, Services, Repositories e DTOs. Banco de dados, conexão MySQL, pool de conexões, consultas SQL e integração com a Aiven.Autenticação: cadastro, login, bcrypt, JWT, cookies e middlewares de autenticação e autorização. Eventos: listagem e detalhes de eventos, relacionamento com organizadores, vagas de serviço e propostas Administrativo:resumo da plataforma, listagem de usuários e atualização do status dos cadastros.Fornecedores:dados dos fornecedores e listagem de suas propostas.Validação e erros: DTOs, validação de requisições, exceções personalizadas e middleware centralizado de erros.Documentação: endpoints da API com métodos HTTP, parâmetros e exemplos de requisição e resposta.Infraestrutura: Docker, variáveis de ambiente, conexão com o banco remoto e problemas de Git e do ambiente de desenvolvimento. |
 
 
-### Disciplina 2
+### Disciplina 2 - Cálculo
 
-| **Aluno(s) Responsável(veis)** |[preencher] |
+| **Aluno(s) Responsável(veis)** | Pedro |
 | :--- | :--- |
-| **Ferramenta utilizada** | [preencher] |
-| **Versão/modelo** | [preencher] |
-| **Disciplina / Trabalho** | [preencher] |
-| **Finalidade de uso** | [preencher] |
-| ***Prompts* principais utilizados** | [preencher] |
-| **Trechos ou entregas afetadas** | [preencher] |
+| **Ferramenta utilizada** |  Claude (Anthropic) |
+| **Versão/modelo** | Versão/modelo:** Claude Sonnet 5.5 |
+| **Disciplina / Trabalho** |  Cálculo  |
+| **Finalidade de uso** | Orientação sobre como integrar a ideia de cálculo (valor esperado do fornecedor) ao contexto e à lógica do projeto |
+| ***Prompts* principais utilizados** | 1. "Como posso integrar essa ideia de cálculo no meu projeto?"<br> 2. "Corrija esse cálculo e veja se está de acordo com o projeto." <br> 3. "Faça os gráficos e as tabelas das funções." <br> "Formate o documento para uma linguagem mais clara e formal." |
+| **Trechos ou entregas afetadas** | Seção da documentação que descreve a aplicação do cálculo no projeto; Desenvolvimento matemático e fórmulas da documentação; Gráficos e tabelas das funções; formatação geral da documentação de cálculo |
 
 
 
