@@ -5,6 +5,13 @@ import { autenticar, autorizar } from '../middlewares/authMiddleware.js';
 const router = Router();
 
 router.get(
+    '/me/propostas',
+    autenticar,
+    autorizar('fornecedor'),
+    fornecedorController.listarMinhasPropostasController
+);
+
+router.get(
     '/:id',
     autenticar,
     autorizar('adm', 'fornecedor', 'organizador'),

@@ -30,6 +30,7 @@ export async function buscarPropostasFornecedorRepository(usuario_id) {
             e.nome AS nome_evento,
             e.organizador_id,
             p.valor,
+            p.validade,
             p.status,
             p.descricao
         FROM proposta p

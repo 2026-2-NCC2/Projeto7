@@ -23,11 +23,14 @@
     font-weight: 700;
 }
 
+.pendente,
 .enviada {
     color: white;
     background: var(--cor-escura-azul);
 }
 
+.selecionada,
+.aceita,
 .aprovada {
     background: var(--cor-clara-verde);
 }
@@ -84,6 +87,9 @@
     white-space: nowrap;
 }
 
+.status_pendente,
+.status_selecionada,
+.status_aceita,
 .status_enviada {
     color: white;
     background: var(--cor-escura-azul);
