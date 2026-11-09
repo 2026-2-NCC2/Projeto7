@@ -62,7 +62,7 @@ O foco do MVP é criar um Web Site responsivo, intuitivo e que ajude no planejam
 ## 📄​ Entregas
 | Disciplina | Entrega 1 | Entrega 2 |
 | :--- | :--- | :--- |
-| **Banco de Dados** | [DER](<documentos/Entrega 1/Banco de Dados/DER - Entrega 1 - BD.pdf>) | - | 
+| **Banco de Dados** | [DER](<documentos/Entrega 1/Banco de Dados/DER - Entrega 1 - BD.pdf>) | [Tabelas do projeto](</Users/giovanna/Projeto7/documentos/Entrega 2/Banco de Dados/README.md>) | 
 | **Cálculo II** | [Aplicação Teorema de Tylor](<documentos/Entrega 1/Cálculo II/Entrega1-CálculoII.docx.pdf>) | - |
 | **Full Stack** | [Primeira parte do FrontEnd](<documentos/Entrega 1/Full Stack/troca-time>) | - |
 | **Gestão Empresarial** | [Entrega Geral do grupo](<documentos/Entrega 1/Gestão Empresárial/TrocaTicket_Entrega1_Gestao_Empresarial.pdf>) <br>*(As entregas individuais encontram-se na mesma pasta)* | [Fluxo Empresarial](</Users/giovanna/Projeto7/documentos/Entrega 2/Gestão Empresarial/TrocaTicketFluxo.pdf>) e [Documentação do Fluxo](</Users/giovanna/Projeto7/documentos/Entrega 2/Gestão Empresarial/TrocaTicketFluxoDocs.pdf>) *(As entregas individuais encontram-se na mesma pasta)* |
