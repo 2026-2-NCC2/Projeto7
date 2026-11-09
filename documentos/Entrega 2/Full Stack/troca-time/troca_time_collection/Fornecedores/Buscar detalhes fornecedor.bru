@@ -5,7 +5,16 @@ meta {
 }
 
 get {
-  url: http://localhost:3000/fornecedores/5
+  url: http://localhost:3000/fornecedores/9/
   body: none
   auth: inherit
+}
+
+body:json {
+  {
+    "categoria": "iluminação",
+    "valor":  "6000",
+    "validade": "10/11/2026",
+    "descricao": "vdvdsvsvscsD"
+  }
 }

@@ -11,4 +11,9 @@ router.get(
     fornecedorController.buscarDetalhesFornecedorController
 );
 
+router.use(autenticar, autorizar('fornecedor'));
+
+router.get('/', fornecedorController.listarOportunidadesController);
+router.post('/', fornecedorController.criarPropostaController);
+
 export default router;
