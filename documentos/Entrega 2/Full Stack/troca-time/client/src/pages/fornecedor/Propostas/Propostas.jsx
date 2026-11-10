@@ -25,7 +25,7 @@ function PropostasFornecedor() {
     useEffect(() => {
         let ativo = true
 
-        api('/fornecedores/me/propostas')
+        api('/fornecedores/propostas')
             .then((resposta) => {
                 if (ativo) setPropostas(resposta.propostas ?? [])
             })

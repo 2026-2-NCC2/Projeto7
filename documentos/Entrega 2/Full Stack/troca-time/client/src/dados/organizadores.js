@@ -1,4 +1,5 @@
 import { responder } from './simularApi.js'
+import { api } from '@/utils/api'
 
 // status possíveis: 'pendente' | 'aprovado' | 'rejeitado'
 let organizadores = [
@@ -110,6 +111,8 @@ let organizadores = [
 ]
 
 export function buscarOrganizador(id) {
+    
+
     const organizador = organizadores.find((item) => item.id === Number(id))
     return responder(organizador ?? null)
 }

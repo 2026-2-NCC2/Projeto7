@@ -7,6 +7,7 @@ const router = Router();
 router.use(autenticar, autorizar('organizador'));
 
 router.post('/', organizadorController.criarEventoController);
+router.put('/:id', organizadorController.editarEventoController);
 router.patch('/:id/status', organizadorController.atualizarStatusEventoController)
 router.get('/vagas_servico/', organizadorController.listarVagasServicoController)
 router.get('/:id/custos_manuais', organizadorController.listarCustosManuaisController)

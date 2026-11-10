@@ -14,6 +14,18 @@ export async function criarEventoService(criarEventoRequest) {
     }
 }
 
+export async function editarEventoService(evento_id, editarEventoRequest) {
+    const evento = await eventoRepository.buscarDetalheEventoRepository(evento_id)
+
+    if (evento?.status !== 'rascunho') {
+        throw new AppException("Apenas eventos em rascunho podem ser editados.", 400)
+    }
+
+    const eventoEditado = eventoEntity(editarEventoRequest)
+
+    await repository.editarEventoRepository(evento_id, eventoEditado)
+}
+
 export async function disponibilizarParaCotacaoService(evento_id) {
     const evento = await eventoRepository.buscarDetalheEventoRepository(evento_id)
 

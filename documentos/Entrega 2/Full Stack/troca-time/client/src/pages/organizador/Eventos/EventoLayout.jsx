@@ -117,7 +117,7 @@ function EventoLayout() {
                             Encerrar evento
                         </button>
                     )}
-                    {evento.status !== 'encerrado' && (
+                    {rascunho && (
                         <Link
                             className={styles.editar}
                             to={`/organizador/eventos/${eventoId}/editar`}

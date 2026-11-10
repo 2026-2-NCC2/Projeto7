@@ -9,6 +9,19 @@ export async function buscarResumoPlataformaService() {
     return resumoResponse;
 }
 
+export async function buscarDetalheOrganizadorService(organizador_id) {
+    const organizador = await repository.buscarDetalheOrganizadorRepository(organizador_id);
+
+    if (!organizador) {
+        throw new AppException("Organizador não encontrado.", 404);
+    }
+
+    const eventos = await repository.listarProximosEventosOrganizadorRepository(organizador_id);
+
+    const organizadorResponse = dto.detalheOrganizadorResponse(organizador, eventos);
+    return organizadorResponse;
+}
+
 async function verificarReprovacao(usuario_id) {
     const usuario = await repository.buscarTipoUsuarioRepository(usuario_id);
 
