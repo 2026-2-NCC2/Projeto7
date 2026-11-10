@@ -9,6 +9,8 @@ export async function criarEventoRepository(evento) {
             horario_inicio,
             horario_fim,
             organizador_id,
+            publico_min,
+            publico_max,
             nome_local,
             cep,
             rua,
@@ -19,7 +21,7 @@ export async function criarEventoRepository(evento) {
             estado
         )
         VALUES (
-            ?,?,?,?,?,?,?,?,?,?,?,?,?,?
+            ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
         )
      `, [
         evento.nome,
@@ -28,6 +30,8 @@ export async function criarEventoRepository(evento) {
         evento.horario_inicio,
         evento.horario_fim,
         evento.organizador_id,
+        evento.publico_min,
+        evento.publico_max,
         evento.nome_local,
         evento.cep,
         evento.rua,
@@ -39,6 +43,45 @@ export async function criarEventoRepository(evento) {
     ])
 
     return resultado.insertId
+}
+
+export async function editarEventoRepository(evento_id, evento) {
+    await pool.execute(`
+        UPDATE evento SET
+            nome = ?,
+            descricao = ?,
+            data = ?,
+            horario_inicio = ?,
+            horario_fim = ?,
+            publico_min = ?,
+            publico_max = ?,
+            nome_local = ?,
+            cep = ?,
+            rua = ?,
+            numero = ?,
+            complemento = ?,
+            bairro = ?,
+            cidade = ?,
+            estado = ?
+        WHERE id = ?
+    `, [
+        evento.nome,
+        evento.descricao,
+        evento.data,
+        evento.horario_inicio,
+        evento.horario_fim,
+        evento.publico_min,
+        evento.publico_max,
+        evento.nome_local,
+        evento.cep,
+        evento.rua,
+        evento.numero,
+        evento.complemento,
+        evento.bairro,
+        evento.cidade,
+        evento.estado,
+        evento_id
+    ])
 }
 
 export async function listarVagasServicoRepository() {

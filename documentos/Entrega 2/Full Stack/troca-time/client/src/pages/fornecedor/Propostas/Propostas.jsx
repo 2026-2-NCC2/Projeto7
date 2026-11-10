@@ -4,7 +4,6 @@ import styles from './Propostas.module.css'
 
 const FILTROS = [
     { id: 'pendente', label: 'Enviadas' },
-    { id: 'selecionada', label: 'Selecionadas' },
     { id: 'aceita', label: 'Aceitas' },
     { id: 'recusada', label: 'Recusadas' },
     { id: 'todas', label: 'Todas' },
@@ -25,7 +24,7 @@ function PropostasFornecedor() {
     useEffect(() => {
         let ativo = true
 
-        api('/fornecedores/me/propostas')
+        api('/fornecedores/propostas')
             .then((resposta) => {
                 if (ativo) setPropostas(resposta.propostas ?? [])
             })

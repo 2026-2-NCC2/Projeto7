@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Botao from '@/components/Botao/Botao'
 import Campo from '@/components/Campo/Campo'
-import { api, mascaraData, usuarioId } from '@/utils/api'
+import { api, mascaraData } from '@/utils/api'
 import styles from './NovoEvento.module.css'
 
 const vazio = {
@@ -11,6 +11,8 @@ const vazio = {
     data: '',
     horaInicio: '',
     horaFim: '',
+    publico_min: '',
+    publico_max: '',
     nome_local: '',
     cep: '',
     rua: '',
@@ -32,25 +34,25 @@ function dataParaBanco(value) {
 function NovoEvento() {
     const { eventoId } = useParams()
     const navigate = useNavigate()
-    const organizadorId = usuarioId('organizador')
     const [form, setForm] = useState(vazio)
     const [erro, setErro] = useState('')
     const [salvando, setSalvando] = useState(false)
 
     useEffect(() => {
         if (!eventoId) return
-        api(`/organizadores/${organizadorId}/eventos/${eventoId}`)
+        api(`/eventos/${eventoId}`)
             .then((evento) => {
                 setForm({
                     ...vazio,
                     ...evento,
+                    complemento: evento.complemento || '',
                     data: dataMascaraDoBanco(evento.data),
                     horaInicio: String(evento.horario_inicio || '').slice(0, 5),
                     horaFim: String(evento.horario_fim || '').slice(0, 5),
                 })
             })
             .catch((error) => setErro(error.message))
-    }, [eventoId, organizadorId])
+    }, [eventoId])
 
     function atualizar(campo) {
         return (event) =>
@@ -68,12 +70,14 @@ function NovoEvento() {
             data: dataParaBanco(form.data),
             horario_inicio: form.horaInicio,
             horario_fim: form.horaFim,
+            publico_min: Number(form.publico_min),
+            publico_max: Number(form.publico_max),
             cep: form.cep.replace(/\D/g, ''),
         }
         setSalvando(true)
         try {
             if (eventoId) {
-                await api(`/organizadores/${organizadorId}/eventos/${eventoId}`, {
+                await api(`/organizadores/${eventoId}`, {
                     method: 'PUT',
                     body: JSON.stringify(dados),
                 })
@@ -140,6 +144,29 @@ function NovoEvento() {
                         type='time'
                         value={form.horaFim}
                         onChange={atualizar('horaFim')}
+                        required
+                    />
+                </div>
+                <h2>Público</h2>
+                <div className={styles.duasColunas}>
+                    <Campo
+                        id='publico_min'
+                        rotulo='*Público mínimo:'
+                        type='number'
+                        min='1'
+                        placeholder='ex.: 2000'
+                        value={form.publico_min}
+                        onChange={atualizar('publico_min')}
+                        required
+                    />
+                    <Campo
+                        id='publico_max'
+                        rotulo='*Público máximo:'
+                        type='number'
+                        min='1'
+                        placeholder='ex.: 6000'
+                        value={form.publico_max}
+                        onChange={atualizar('publico_max')}
                         required
                     />
                 </div>

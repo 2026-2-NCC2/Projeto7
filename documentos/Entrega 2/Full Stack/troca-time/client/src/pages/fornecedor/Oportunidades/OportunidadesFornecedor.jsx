@@ -24,7 +24,7 @@ function OportunidadesFornecedor() {
         setCarregando(true)
         setErro('')
         try {
-            const resposta = await api('/fornecedores/')
+            const resposta = await api('/fornecedores/oportunidades')
             setDados({ oportunidades: resposta.oportunidades || [] })
         } catch (error) {
             setErro(error.message)
@@ -125,7 +125,7 @@ function OportunidadesFornecedor() {
                                             className={styles.secundario}
                                             to={`/fornecedor/eventos/${item.evento_id}`}
                                         >
-                                            Ver mais
+                                            Ver Evento
                                         </Link>
                                         <Link
                                             className={styles.primario}

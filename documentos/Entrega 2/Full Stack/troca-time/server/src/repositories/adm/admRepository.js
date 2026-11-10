@@ -29,6 +29,46 @@ export async function buscarResumoPlataformaRepository() {
     return resumo[0];
 }
 
+export async function buscarDetalheOrganizadorRepository(organizador_id) {
+    const [organizador] = await pool.query(`
+        SELECT
+            u.id,
+            u.nome,
+            u.status_cadastro,
+            u.cpf,
+            u.cnpj,
+            u.telefone,
+            u.email,
+            u.descricao,
+            u.criado_em
+        FROM usuario u
+        WHERE u.id = ?
+            AND u.tipo_usuario = 'organizador'
+    `, [organizador_id])
+
+    return organizador[0]
+}
+
+export async function listarProximosEventosOrganizadorRepository(organizador_id) {
+    const [eventos] = await pool.query(`
+        SELECT
+            e.id,
+            e.nome,
+            e.data,
+            e.horario_inicio,
+            e.nome_local,
+            e.cidade,
+            e.estado
+        FROM evento e
+        WHERE e.organizador_id = ?
+            AND e.status = 'publicado'
+            AND e.data >= CURDATE()
+        ORDER BY e.data, e.horario_inicio
+    `, [organizador_id])
+
+    return eventos
+}
+
 export async function atualizarStatusCadastroRepository(usuario_id, novo_status) {
     await pool.execute(`UPDATE usuario SET status_cadastro = ? WHERE id = ?`,[novo_status, usuario_id])
 }

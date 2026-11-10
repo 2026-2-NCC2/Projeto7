@@ -8,6 +8,8 @@ export function criarEventoRequest(evento, organizador_id) {
         horario_inicio: evento.horario_inicio,
         horario_fim: evento.horario_fim,
         organizador_id: organizador_id,
+        publico_min: evento.publico_min,
+        publico_max: evento.publico_max,
         nome_local: evento.nome_local,
         cep: evento.cep,
         rua: evento.rua,
@@ -26,6 +28,8 @@ export function validateCriarEventoRequest(criarEventoRequest) {
         'horario_inicio',
         'horario_fim',
         'organizador_id',
+        'publico_min',
+        'publico_max',
         'nome_local',
         'cep',
         'rua',
@@ -43,6 +47,22 @@ export function validateCriarEventoRequest(criarEventoRequest) {
         ) {
             throw new AppException(`O campo ${campo} é obrigatório.`, 400);
         }
+    }
+
+    if (String(criarEventoRequest.cep).trim().length !== 8) {
+        throw new AppException('CEP inválido', 400)
+    }
+
+    if (String(criarEventoRequest.estado).trim().length !== 2) {
+        throw new AppException('Estado inválido', 400)
+    }
+
+    if (Number(criarEventoRequest.publico_min) <= 0) {
+        throw new AppException('O público mínimo deve ser maior que zero.', 400);
+    }
+
+    if (Number(criarEventoRequest.publico_max) <= Number(criarEventoRequest.publico_min)) {
+        throw new AppException('O público máximo deve ser maior que o público mínimo.', 400);
     }
 }
 
