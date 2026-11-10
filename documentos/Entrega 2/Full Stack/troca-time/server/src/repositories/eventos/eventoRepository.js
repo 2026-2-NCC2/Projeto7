@@ -52,6 +52,7 @@ export async function buscarDetalheEventoRepository(evento_id){
             e.cidade,
             e.estado,
             e.numero,
+            e.complemento,
             e.criado_em,
             e.atualizado_em,
             e.custo_total,

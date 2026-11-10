@@ -20,7 +20,7 @@ function NovaProposta() {
 
     async function carregar() {
         try {
-            const resposta = await api('/fornecedores/')
+            const resposta = await api('/fornecedores/oportunidades')
             setVaga(
                 (resposta.oportunidades || []).find((item) => item.id === Number(vagaId)) || null,
             )

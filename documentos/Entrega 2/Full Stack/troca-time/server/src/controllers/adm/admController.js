@@ -6,6 +6,17 @@ export async function buscarResumoPlataformaController(req, res) {
     return res.status(200).json(resumo);
 }
 
+export async function buscarDetalheOrganizadorController(req, res) {
+    const organizador_id = req.params.id
+    if (!organizador_id || organizador_id == ':id') {
+        throw new AppException("O id do organizador é obrigatório", 400)
+    }
+
+    const organizador = await service.buscarDetalheOrganizadorService(organizador_id)
+
+    res.status(200).json(organizador)
+}
+
 export async function atualizarStatusCadastroController(req, res) {
 
     const usuario_id = req.params.id

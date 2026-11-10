@@ -59,8 +59,8 @@ organizador precisa de CPF ou CNPJ; administrador não precisa de documento.
 | horario_inicio | TIME | obrigatório | Horário de início |
 | horario_fim | TIME | obrigatório | Horário de término |
 | organizador_id | INT | **FK → usuario.id**, obrigatório | Organizador dono do evento |
-| publico_min | INT | opcional | Menor público previsto |
-| publico_max | INT | opcional | Maior público previsto |
+| publico_min | INT | obrigatório | Menor público previsto |
+| publico_max | INT | obrigatório | Maior público previsto |
 | publico_esperado | INT | opcional | Público mais provável |
 | margem_lucro | DECIMAL(5,2) | opcional | Margem de lucro desejada pelo organizador, em % |
 | custo_total | DECIMAL(12,2) | opcional | Soma das propostas selecionadas/aceitas e dos custos manuais |
@@ -79,7 +79,7 @@ organizador precisa de CPF ou CNPJ; administrador não precisa de documento.
 | criado_em | DATETIME | automático | Data e hora de criação do evento |
 | atualizado_em | DATETIME | automático | Data e hora da última alteração |
 
-Os campos de público, margem, custo e ticket são preenchidos quando o organizador clica em **Salvar orçamento**.
+O público mínimo e o máximo são informados na criação do evento. O público esperado, a margem, o custo e os tickets são preenchidos quando o organizador clica em **Salvar orçamento**.
 O endereço é exigido quando o evento é disponibilizado para cotação.
 
 **Regras:** `publico_min > 0` e `publico_max > publico_min` (`ck_evento_publico`);

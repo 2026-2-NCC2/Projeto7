@@ -22,6 +22,21 @@ export async function criarEventoController(req, res) {
     res.status(200).json(eventoIdResponse)
 }
 
+export async function editarEventoController(req, res) {
+    const evento_id = req.params.id
+    if (!evento_id) {
+        throw new AppException("O ID do evento é obrigatório", 400)
+    }
+
+    const eventoRequest = criarEventoRequest(req.body, req.usuario.id)
+
+    validateCriarEventoRequest(eventoRequest)
+
+    await service.editarEventoService(evento_id, eventoRequest)
+
+    res.sendStatus(204)
+}
+
 export async function atualizarStatusEventoController(req, res) {
     const evento_id = req.params.id
     const novo_status = req.query.novo_status
