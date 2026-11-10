@@ -107,15 +107,14 @@ O back-end está na pasta `server`. Crie o arquivo `server/.env` usando `server/
 ```ini
 PORT=3000
 
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=SEU_USUARIO_MYSQL
-DB_PASSWORD=SUA_SENHA_MYSQL
+DB_HOST=mysql-1863a8de-oliviagithub9-5fca.k.aivencloud.com
+DB_PORT=28735
+DB_USER=avnadmin
+DB_PASSWORD=AVNS_xABoYB8FeaEYD4vjvTG
 DB_NAME=troca_time
 
-JWT_SECRET=CRIE_UM_SEGREDO_PARA_DESENVOLVIMENTO
+JWT_SECRET=sua_chave_secreta_muito_forte
 JWT_EXPIRES_IN=1d
-
 CLIENT_URL=http://localhost:5173
 ```
 
@@ -155,8 +154,20 @@ O front-end e o back-end devem continuar rodando em terminais separados. Se voc�
 
 ### 4. Faça login
 
-Use uma conta existente e aprovada. Cadastros pendentes não conseguem entrar. O perfil de administrador não é escolhido no cadastro comum; uma conta de administrador precisa ser criada ou autorizada no ambiente do projeto.
+Use uma conta existente e aprovada. Cadastros pendentes não conseguem entrar:
+```ini
+Login para teste do admin:
+admin@trocaticket.com
+Admin@123
 
+Login para teste do organizador:
+organizador_teste@gmail.com
+Senha123
+
+Login para teste do fornecedor:
+fornecedor_teste@gmail.com
+Senha123
+```
 
 ### 5. Comandos de verificação disponíveis
 
