@@ -1,0 +1,210 @@
+.pagina {
+    display: grid;
+    gap: 16px;
+    padding: 8px;
+}
+.pagina > h2 {
+    font-size: 0.85rem;
+}
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+.filtros button {
+    padding: 9px 16px;
+    border: 1px solid #161616;
+    border-radius: 22px;
+    background: var(--cor-clara);
+    cursor: pointer;
+}
+.filtros .ativo {
+    color: white;
+    background: #111;
+}
+.lista {
+    display: grid;
+    gap: 12px;
+    padding: 24px;
+    border-radius: 28px;
+    background: var(--azul-claro);
+}
+.lista > h2 {
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+}
+.linha {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        'titulo titulo'
+        'dados lateral'
+        'valor acoes';
+    gap: 12px 22px;
+    align-items: center;
+    padding: 18px 20px;
+    border-radius: 18px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-1);
+}
+.titulo {
+    grid-area: titulo;
+    font-size: 1.15rem;
+}
+.dados {
+    grid-area: dados;
+}
+.dados p {
+    margin: 5px 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+.lateral {
+    grid-area: lateral;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+}
+.lateral a {
+    color: var(--cor-escura-azul);
+    font-size: 0.8rem;
+}
+.valor {
+    grid-area: valor;
+    font-size: 0.8rem;
+}
+.valor strong {
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+.status {
+    padding: 7px 13px;
+    border-radius: 20px;
+    color: white;
+    background: var(--cor-escura-azul);
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+.statusSelecionada {
+    color: #111;
+    background: var(--cor-clara-verde);
+}
+.statusAceita {
+    color: #fff;
+    background: var(--cor-escura-vinho);
+}
+.statusRecusada {
+    color: #fff;
+    background: #777;
+}
+.acoes {
+    grid-area: acoes;
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+}
+.acoes button,
+.modal button {
+    padding: 9px 15px;
+    border: 1px solid var(--cor-escura-azul);
+    border-radius: 20px;
+    color: var(--cor-escura-azul);
+    background: transparent;
+    cursor: pointer;
+}
+.acoes button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.acoes .recusar {
+    border-color: var(--cor-escura-vinho);
+    color: var(--cor-escura-vinho);
+}
+.acoes .salvar {
+    color: white;
+    background: var(--cor-escura-azul);
+}
+.vazio,
+.erro {
+    padding: 24px;
+    text-align: center;
+}
+.erro {
+    color: var(--cor-erro);
+}
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.22);
+    backdrop-filter: blur(5px);
+}
+.modal {
+    width: min(500px, 100%);
+    padding: 30px;
+    border-radius: 24px;
+    background: var(--cor-clara);
+    box-shadow: 0 12px 36px #0003;
+}
+.modal h2 {
+    margin-bottom: 14px;
+}
+.modal p {
+    line-height: 1.55;
+}
+.modal > div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+@media (max-width: 800px) {
+    .linha {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            'titulo'
+            'dados'
+            'lateral'
+            'valor'
+            'acoes';
+    }
+    .acoes {
+        flex-wrap: wrap;
+    }
+    .acoes button {
+        flex: 1;
+    }
+}
+@media (max-width: 520px) {
+    .lista {
+        padding: 12px;
+    }
+    .linha {
+        padding: 14px;
+    }
+    .acoes {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+.direta {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 3px 10px;
+    border: 1.5px solid var(--cor-escura-vinho);
+    border-radius: 999px;
+    color: var(--cor-escura-vinho);
+    background: var(--cor-clara-vinho);
+    font-size: 0.7rem;
+    vertical-align: middle;
+}
+.aguardando {
+    align-self: center;
+    color: #55555f;
+    font-size: 0.8rem;
+}

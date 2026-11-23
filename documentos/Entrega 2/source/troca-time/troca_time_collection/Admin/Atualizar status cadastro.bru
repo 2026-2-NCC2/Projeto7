@@ -1,0 +1,15 @@
+meta {
+  name: Atualizar status cadastro
+  type: http
+  seq: 2
+}
+
+patch {
+  url: http://localhost:3000/admin/3?status_cadastro=aprovado
+  body: none
+  auth: inherit
+}
+
+params:query {
+  status_cadastro: aprovado
+}

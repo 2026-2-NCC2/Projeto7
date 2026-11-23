@@ -1,0 +1,16 @@
+meta {
+  name: Listar mensagens
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/conversas/8/mensagens?depois_de=0
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

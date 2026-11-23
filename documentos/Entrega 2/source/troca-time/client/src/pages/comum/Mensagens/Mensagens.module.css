@@ -1,0 +1,488 @@
+.pagina {
+    width: min(1160px, calc(100% - 48px));
+    margin: 34px auto 90px;
+    display: grid;
+    gap: 24px;
+}
+
+.topo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.topo h1 {
+    margin: 0 0 4px;
+    font-size: 1.75rem;
+}
+
+.topo p {
+    margin: 0;
+    color: #55555f;
+    font-size: 0.9rem;
+}
+
+.botaoPrincipal {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--cor-escura-azul);
+    color: var(--cor-clara);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: var(--sombra-2);
+}
+
+.layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.lista {
+    flex: 1 1 300px;
+    max-width: 380px;
+    max-height: 760px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 28px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.itemConversa {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+    padding: 12px;
+    border: 0;
+    border-radius: 18px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.itemConversa:hover {
+    background: var(--cor-fundo-4);
+}
+
+.itemAtivo,
+.itemAtivo:hover {
+    background: #e6f0a4;
+}
+
+.avatar {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cinza-claro);
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.itemTexto {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contexto {
+    color: var(--cor-escura-azul);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.itemLinha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.previa {
+    overflow: hidden;
+    color: #55555f;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.status,
+.direta {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.stAzul {
+    color: white;
+    background: var(--cor-escura-azul);
+}
+
+.stVerde {
+    color: var(--cor-texto-simples);
+    background: var(--cor-clara-verde);
+}
+
+.stVinho {
+    color: white;
+    background: var(--cor-escura-vinho);
+}
+
+.stCinza {
+    color: white;
+    background: #777;
+}
+
+.direta {
+    border: 1.5px solid var(--cor-escura-vinho);
+    color: var(--cor-escura-vinho);
+    background: var(--cor-clara-vinho);
+}
+
+.conversa {
+    flex: 999 1 520px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 28px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+}
+
+.conversaTopo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--cor-tracado-2);
+}
+
+.conversaTopo div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.conversaTopo div span {
+    font-size: 0.82rem;
+}
+
+.linkTopo {
+    color: var(--cor-escura-azul);
+    font-size: 0.82rem;
+}
+
+.proposta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 20px 28px 0;
+    padding: 18px 22px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 20px;
+    background: #efeff1;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.propostaLinha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.propostaTitulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.valor {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.vaga {
+    font-size: 0.82rem;
+}
+
+.ajuda {
+    color: #55555f;
+    font-size: 0.82rem;
+}
+
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.acoes button,
+.modal button {
+    min-height: 40px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 500;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.acoes button:disabled,
+.modal button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.aceitar {
+    border: 0;
+    color: var(--cor-clara);
+    background: var(--cor-escura-azul);
+}
+
+.recusar {
+    border: 1.5px solid var(--cor-erro);
+    color: var(--cor-erro);
+    background: transparent;
+}
+
+.aviso {
+    margin: 6px 0 0;
+    color: var(--cor-escura-azul);
+    font-weight: 700;
+}
+
+.mensagens {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 320px;
+    max-height: 460px;
+    overflow-y: auto;
+    padding: 20px 28px;
+}
+
+.bolha {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.bolha small {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.68rem;
+    opacity: 0.85;
+}
+
+.minha {
+    align-self: flex-end;
+    border-bottom-right-radius: 6px;
+    color: var(--cor-clara);
+    background: var(--cor-escura-azul);
+}
+
+.dele {
+    align-self: flex-start;
+    border: 1px solid var(--cor-tracado-2);
+    border-bottom-left-radius: 6px;
+    background: white;
+}
+
+.sistema {
+    align-self: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--cor-clara-vinho);
+    color: #3d3d47;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.envio {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 20px;
+    border-top: 1px solid var(--cor-tracado-2);
+}
+
+.envio input {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 1px solid var(--cor-tracado-1);
+    border-radius: 999px;
+    background: var(--cor-fundo-3);
+    font: inherit;
+    font-size: 0.9rem;
+}
+
+.envio button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--cor-clara);
+    background: var(--cor-escura-azul);
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--sombra-2);
+}
+
+.envio button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.encerrada {
+    margin: 0;
+    padding: 18px 20px;
+    border-top: 1px solid var(--cor-tracado-2);
+    color: #55555f;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.somenteLeitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.vazio {
+    margin: 0;
+    padding: 24px;
+    color: #55555f;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.semConversas {
+    padding: 40px 24px;
+    border-radius: 28px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+    text-align: center;
+}
+
+.semConversas p {
+    margin: 4px 0;
+}
+
+.erro {
+    margin: 0;
+    padding: 0 28px 8px;
+    color: var(--cor-erro);
+    font-size: 0.85rem;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.22);
+    backdrop-filter: blur(5px);
+}
+
+.modal {
+    width: min(480px, 100%);
+    padding: 30px;
+    border-radius: 24px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-1);
+}
+
+.modal h2 {
+    margin: 0 0 10px;
+}
+
+.modal p {
+    margin: 0 0 22px;
+    line-height: 1.45;
+}
+
+.modal div {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal button {
+    border: 1.5px solid var(--cor-escura-azul);
+    color: var(--cor-escura-azul);
+    background: transparent;
+}
+
+.modal .confirmar {
+    border-color: var(--cor-erro);
+    color: white;
+    background: var(--cor-erro);
+}
+
+@media (max-width: 700px) {
+    .pagina {
+        width: calc(100% - 28px);
+    }
+
+    .lista {
+        max-width: none;
+        max-height: 320px;
+    }
+
+    .proposta {
+        margin: 16px 16px 0;
+    }
+
+    .mensagens {
+        padding: 16px;
+    }
+
+    .bolha {
+        max-width: 90%;
+    }
+}

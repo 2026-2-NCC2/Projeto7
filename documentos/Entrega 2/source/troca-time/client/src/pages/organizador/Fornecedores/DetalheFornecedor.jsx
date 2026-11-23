@@ -1,0 +1,106 @@
+import { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { api, usuarioId } from '@/utils/api'
+import styles from './DetalheFornecedor.module.css'
+
+const STATUS = {
+    pendente: 'Pendente',
+    selecionada: 'Selecionada',
+    aceita: 'Aceita',
+    recusada: 'Recusada',
+    cancelada: 'Cancelada',
+}
+const dinheiro = (valor) =>
+    `R$ ${Number(valor || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
+function DetalheFornecedor() {
+    const { fornecedorId } = useParams()
+    const [fornecedor, setFornecedor] = useState(null)
+    const [erro, setErro] = useState('')
+    useEffect(() => {
+        api(`/fornecedores/${fornecedorId}`)
+            .then(setFornecedor)
+            .catch((error) => setErro(error.message))
+    }, [fornecedorId])
+    if (erro)
+        return (
+            <main className={styles.pagina}>
+                <p role='alert'>{erro}</p>
+            </main>
+        )
+    if (!fornecedor) return <main className={styles.pagina}>Carregando fornecedor…</main>
+    const propostas = fornecedor.propostas.filter(
+        (proposta) => proposta.organizador_id === usuarioId('organizador'),
+    )
+    return (
+        <main className={styles.pagina}>
+            <section className={styles.cabecalho}>
+                <span className={styles.avatar}>
+                    {fornecedor.nome
+                        .split(/\s+/)
+                        .map((p) => p[0])
+                        .slice(0, 2)
+                        .join('')
+                        .toUpperCase()}
+                </span>
+                <div className={styles.cabecalhoTexto}>
+                    <h1>{fornecedor.nome}</h1>
+                    <p>Fornecedor</p>
+                </div>
+                {fornecedor.status_cadastro === 'aprovado' && (
+                    <Link
+                        className={styles.botaoDireta}
+                        to={`/organizador/fornecedores/${fornecedor.id}/proposta`}
+                    >
+                        Fazer proposta direta →
+                    </Link>
+                )}
+            </section>
+            <div className={styles.duasColunas}>
+                <section>
+                    <h2>DADOS</h2>
+                    <p>
+                        <b>CNPJ:</b> {fornecedor.cnpj || '—'}
+                    </p>
+                    <p>
+                        <b>E-mail:</b> {fornecedor.email || '—'}
+                    </p>
+                    <p>
+                        <b>Telefone:</b> {fornecedor.telefone || '—'}
+                    </p>
+                </section>
+                <section>
+                    <h2>DESCRIÇÃO</h2>
+                    <p>{fornecedor.descricao || 'Sem descrição cadastrada.'}</p>
+                </section>
+            </div>
+            <h2 className={styles.rotulo}>PROPOSTAS COM VOCÊ:</h2>
+            <section className={styles.propostas}>
+                {propostas.map((p) => (
+                    <article key={p.id}>
+                        <div>
+                            <b>{p.nome_evento}</b>
+                            <span> · {p.nome_vaga}</span>
+                            {p.origem === 'organizador' && (
+                                <span className={styles.direta}>Direta</span>
+                            )}
+                            <Link
+                                className={styles.conversa}
+                                to={`/organizador/mensagens?proposta=${p.id}`}
+                            >
+                                Abrir conversa
+                            </Link>
+                        </div>
+                        <strong>{dinheiro(p.valor)}</strong>
+                        <span
+                            className={`${styles.status} ${p.status === 'cancelada' || p.status === 'recusada' ? styles.statusCinza : ''}`}
+                        >
+                            {STATUS[p.status] || p.status}
+                        </span>
+                    </article>
+                ))}
+                {!propostas.length && <p>Nenhuma proposta deste fornecedor com você.</p>}
+            </section>
+        </main>
+    )
+}
+export default DetalheFornecedor

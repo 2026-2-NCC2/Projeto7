@@ -1,0 +1,19 @@
+meta {
+  name: Responder proposta direta
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:3000/fornecedores/propostas/8/resposta
+  body: json
+  auth: inherit
+}
+
+body:json {
+  { "resposta": "aceita" }
+}
+settings {
+  encodeUrl: true
+  timeout: 0
+}
