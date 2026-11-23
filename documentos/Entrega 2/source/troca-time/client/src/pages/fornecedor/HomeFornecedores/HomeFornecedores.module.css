@@ -1,0 +1,322 @@
+.app * {
+    box-sizing: border-box;
+}
+
+.app {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:
+        linear-gradient(to bottom, var(--cor-fundo-1), var(--cor-fundo-2)), var(--cor-clara);
+    color: var(--cor-texto-simples);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* =========================================================
+    PAGE / GREETING
+========================================================= */
+.page {
+    padding: 10px 40px 120px;
+}
+
+.greeting h1 {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.greeting p {
+    font-size: 12px;
+    color: var(--cor-texto-suave);
+    margin-top: 2px;
+}
+
+/* =========================================================
+    EVENTS PANEL
+========================================================= */
+.events-panel {
+    margin-top: 20px;
+    background: var(--cor-clara-vinho);
+    border-radius: 24px;
+    padding: 18px 26px 26px;
+}
+
+.events-panel-title {
+    display: inline-block;
+    background: var(--cor-escura-vinho);
+    color: var(--cor-clara);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 999px;
+}
+
+.events-panel-body {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.event-cards-viewport {
+    flex: 1;
+    overflow: hidden;
+}
+
+.event-cards-track {
+    display: flex;
+    will-change: transform;
+    transition: transform 0.45s ease;
+}
+
+.event-slot {
+    flex: 0 0 33.3333%;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.event-card {
+    background: var(--cor-clara);
+    border-radius: 16px;
+    padding: 16px 18px 20px;
+    height: 100%;
+}
+
+.event-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.event-card p {
+    font-size: 10.5px;
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+}
+
+.btn-pill {
+    display: block;
+    margin-top: 12px;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 0;
+    width: 100%;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-pill-lime {
+    background: var(--cor-clara-verde);
+    color: var(--cor-primaria);
+}
+
+.events-panel-next {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--cor-primaria);
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.events-panel-next-reset {
+    background: var(--cor-escura-azul);
+    border-color: var(--cor-escura-azul);
+    color: var(--cor-clara);
+}
+
+/* =========================================================
+    PROPOSALS TOGGLE
+========================================================= */
+.section-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 34px 0 26px;
+}
+
+.btn-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cor-clara-verde);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-toggle-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.btn-toggle-arrow-down {
+    transform: rotate(180deg);
+}
+
+/* =========================================================
+    PROPOSALS COLUMNS
+========================================================= */
+.proposals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.proposal-column {
+    border-radius: 24px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.proposal-column-aprovadas {
+    background: rgb(from var(--cor-clara-verde) r g b / 0.6);
+}
+.proposal-column-pendentes {
+    background: var(--azul-claro);
+}
+.proposal-column-reprovados {
+    background: rgb(from var(--cor-escura-vinho) r g b / 0.6);
+}
+
+.proposal-column-label {
+    display: flex;
+    justify-content: center;
+}
+
+.proposal-column-label span {
+    background: var(--cor-clara);
+    padding: 8px 26px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.proposal-column-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.proposal-card {
+    background: var(--cor-clara);
+    border-radius: 16px;
+    padding: 16px 18px 18px;
+}
+
+.proposal-card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.proposal-card p {
+    font-size: 11px;
+    color: var(--cor-texto-suave);
+    line-height: 1.5;
+}
+
+.btn-avaliar {
+    display: block;
+    margin-top: 12px;
+    margin-left: auto;
+    background: var(--cor-escura-azul);
+    color: var(--cor-clara);
+    border: none;
+    border-radius: 999px;
+    padding: 8px 24px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-avaliar-reject {
+    background: var(--cor-escura-vinho);
+}
+
+.empty {
+    font-size: 12px;
+    color: var(--cor-texto-suave);
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* =========================================================
+    MODAL
+========================================================= */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 20px;
+}
+
+.modal {
+    background: var(--cor-clara);
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 380px;
+    width: 100%;
+}
+
+.modal h2 {
+    font-size: 17px;
+    margin-bottom: 14px;
+}
+
+.modal p {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: var(--cor-texto-suave);
+}
+
+.modal .btn-pill {
+    margin-top: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.modal-actions .btn-avaliar {
+    flex: 1;
+    margin: 0;
+}
+
+/* =========================================================
+    RESPONSIVE
+========================================================= */
+@media (max-width: 900px) {
+    .page {
+        padding: 10px 20px 140px;
+    }
+
+    .event-slot {
+        flex-basis: 100%;
+    }
+
+    .events-panel-body {
+        flex-direction: column;
+    }
+
+    .events-panel-next {
+        align-self: center;
+    }
+
+    .proposals {
+        grid-template-columns: 1fr;
+    }
+}

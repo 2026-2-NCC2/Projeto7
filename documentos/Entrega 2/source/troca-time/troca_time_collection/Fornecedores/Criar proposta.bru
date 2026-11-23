@@ -1,0 +1,26 @@
+meta {
+  name: Criar proposta
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/fornecedores/
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "vaga_servico_id": 1,
+    "valor": 1800,
+    "validade": "2026-12-10",
+    "descricao": "Luz de palco",
+    "observacoes": "Inclui montagem"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

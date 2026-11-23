@@ -1,0 +1,19 @@
+meta {
+  name: Criar proposta direta
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:3000/organizadores/propostas
+  body: json
+  auth: inherit
+}
+
+body:json {
+  { "fornecedor_id": 5, "vaga_servico_id": 8, "valor": 19500, "validade": "2027-01-20", "descricao": "Equipe completa", "observacoes": null }
+}
+settings {
+  encodeUrl: true
+  timeout: 0
+}

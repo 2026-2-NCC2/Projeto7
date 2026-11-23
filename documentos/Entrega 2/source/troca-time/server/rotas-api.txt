@@ -1,0 +1,391 @@
+API TROCA TICKET - ROTAS
+========================
+
+URL base: http://localhost:3000
+Formato: JSON. Nenhuma rota recebe body.
+Datas: "AAAA-MM-DD HH:MM:SS"
+Valores em reais: numero (ex.: 8500)
+
+
+PADRAO DE ERRO
+--------------
+
+{
+  "status": number,
+  "erro": string
+}
+
+400 -> parametro invalido (mensagem da rota)
+404 -> recurso nao encontrado (mensagem da rota)
+500 -> "Erro interno do servidor"
+
+
+1) GET /fornecedores/:id
+------------------------
+
+Request:
+  path   id: integer (> 0, obrigatorio)
+  query  -
+  body   -
+
+Response 200:
+{
+  "id": number,
+  "nome": string,
+  "status_cadastro": string,        // pendente | aprovado | reprovado
+  "tipo_usuario": string,           // fornecedor
+  "cnpj": string,
+  "telefone": string | null,
+  "email": string,
+  "descricao": string | null,
+  "criado_em": string,
+  "propostas": [
+    {
+      "id": number,
+      "nome_vaga": string,
+      "categoria": string,
+      "evento_id": number,
+      "nome_evento": string,
+      "organizador_id": number,
+      "valor": number,
+      "status": string,             // enviada | em_negociacao | aceita | recusada
+      "descricao": string
+    }
+  ]
+}
+
+Erros:
+  400 { "status": 400, "erro": "ID do fornecedor inválido" }
+  404 { "status": 404, "erro": "Fornecedor não encontrado" }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+2) GET /admin/resumo
+--------------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "total_cadastros_pendentes": number,
+  "total_eventos_cotacao": number,
+  "total_propostas_recebidas": number
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+3) GET /usuarios
+----------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "usuarios": [
+    {
+      "id": number,
+      "nome": string,
+      "status_cadastro": string,    // pendente | aprovado | reprovado
+      "tipo_usuario": string,       // organizador | fornecedor
+      "cpf_cnpj": string,
+      "descricao": string | null,
+      "criado_em": string
+    }
+  ]
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+4) GET /eventos
+---------------
+
+Request:
+  path   -
+  query  -
+  body   -
+
+Response 200:
+{
+  "eventos": [
+    {
+      "id": number,
+      "nome": string,
+      "status": string,
+      "descricao": string | null,
+      "data": string,               // YYYY-MM-DD
+      "horario_inicio": string,     // HH:MM:SS
+      "horario_fim": string,        // HH:MM:SS
+      "nome_local": string | null,
+      "quantidade_propostas": number,
+      "ticket_estimado_min": number | null,
+      "ticket_estimado_max": number | null,
+      "nome_organizador": string,
+      "organizador_id": number
+    }
+  ]
+}
+
+Erros:
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+5) GET /organizadores/eventos/:id/custos
+----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body   -
+
+Response 200:
+{
+  "vagas_servico": [
+    {
+      "id": number,
+      "item": string,
+      "categoria": string,
+      "descricao": string | null,
+      "cotacao_ate": string,
+      "quantidade_propostas": number,
+      "status": string              // pendente | preenchida | vencida
+    }
+  ],
+  "custos": [
+    {
+      "id": number,
+      "descricao": string,
+      "tipo": string,               // Fiscal | Operacional | Variável
+      "valor": number
+    }
+  ]
+}
+
+Erros:
+  400 { "status": 400, "erro": "O ID do evento é obrigatório" }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+6) POST /organizadores/eventos/:id/vagas
+----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body
+{
+  "item": string,                   // obrigatorio
+  "categoria": string,              // obrigatorio
+  "descricao": string | null,
+  "cotacao_ate": string             // obrigatorio, YYYY-MM-DD
+}
+
+Response 200:
+{
+  "vaga_servico_id": number
+}
+
+Erros:
+  400 { "status": 400, "erro": "O campo <campo> é obrigatório." }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+7) POST /organizadores/eventos/:id/custos
+-----------------------------------------
+
+Request:
+  path   id: integer (id do evento, obrigatorio)
+  query  -
+  body
+{
+  "descricao": string,              // obrigatorio
+  "tipo": string,                   // obrigatorio
+  "valor": number                   // obrigatorio, > 0
+}
+
+Response 200:
+{
+  "custo_id": number
+}
+
+Erros:
+  400 { "status": 400, "erro": "O campo <campo> é obrigatório." }
+  500 { "status": 500, "erro": "Erro interno do servidor" }
+
+
+========================================================================
+DIFERENCIAL: PROPOSTA DIRETA E CHAT (MVP)
+========================================================================
+
+Todas as rotas abaixo exigem login (cookie "token").
+Status de proposta: pendente | selecionada | aceita | recusada | cancelada
+Origem da proposta: fornecedor (enviada pelo fornecedor) | organizador (proposta direta)
+
+Regras:
+- Cada proposta é uma conversa entre o organizador do evento e o fornecedor.
+- O chat não é em tempo real: o front consulta mensagens novas a cada 5 segundos.
+- Só dá para enviar mensagem enquanto a proposta está pendente ou selecionada.
+- Proposta direta: só o fornecedor aceita ou recusa; o organizador só cancela (enquanto pendente).
+- Quando uma proposta da vaga é aceita, a vaga vira "preenchida". As outras propostas
+  abertas da vaga viram "recusada", e as propostas diretas pendentes viram "cancelada".
+
+
+8) POST /organizadores/propostas  (proposta direta)
+---------------------------------------------------
+Perfil: organizador
+
+body
+{
+  "fornecedor_id": number,          // obrigatorio, fornecedor aprovado
+  "vaga_servico_id": number,        // obrigatorio, vaga de um evento seu em cotação
+  "valor": number,                  // obrigatorio, > 0
+  "validade": "AAAA-MM-DD",         // obrigatorio, hoje ou depois
+  "descricao": string,              // obrigatorio
+  "observacoes": string             // opcional
+}
+
+Response 201:
+{ "proposta_id": number }
+
+Erros:
+  400 campo obrigatório / valor / validade inválidos
+  400 { "erro": "Só é possível enviar proposta direta para fornecedores aprovados." }
+  400 { "erro": "O evento precisa estar em cotação para enviar proposta direta." }
+  403 { "erro": "Esta vaga de serviço não é de um evento seu." }
+  404 { "erro": "Fornecedor não encontrado" } | { "erro": "Vaga de serviço não encontrada" }
+  409 { "erro": "Esta vaga de serviço já foi preenchida." }
+  409 { "erro": "Este fornecedor já tem uma proposta para esta vaga. ..." }
+
+
+9) GET /organizadores/propostas/vagas_disponiveis?fornecedor_id=:id
+-------------------------------------------------------------------
+Perfil: organizador
+Vagas em aberto dos eventos em cotação do organizador logado, para as quais o
+fornecedor ainda não tem proposta. Usada no formulário de proposta direta.
+
+Response 200:
+{
+  "vagas": [
+    { "id": number, "item": string, "categoria": string, "cotacao_ate": string,
+      "evento_id": number, "nome_evento": string, "data": string }
+  ]
+}
+
+Erros:
+  400 { "erro": "ID do fornecedor inválido" }
+
+
+10) PATCH /organizadores/propostas/:id/cancelar
+-----------------------------------------------
+Perfil: organizador (o que enviou a proposta direta)
+
+Response 200:
+{ "id": number, "status": "cancelada" }
+
+Erros:
+  400 { "erro": "ID da proposta inválido" }
+  403 { "erro": "Só o organizador que enviou a proposta pode cancelá-la" }
+  404 { "erro": "Proposta não encontrada" }
+  409 { "erro": "Só propostas pendentes podem ser canceladas" }
+
+
+11) PATCH /fornecedores/propostas/:id/resposta
+----------------------------------------------
+Perfil: fornecedor (o que recebeu a proposta direta)
+
+body
+{ "resposta": "aceita" | "recusada" }
+
+Response 200:
+{ "id": number, "status": "aceita" | "recusada" }
+
+Ao aceitar, a vaga vira "preenchida" na hora.
+
+Erros:
+  400 { "erro": "A resposta deve ser 'aceita' ou 'recusada'." }
+  400 { "erro": "Só propostas diretas do organizador podem ser respondidas pelo fornecedor." }
+  403 { "erro": "Esta proposta não foi enviada para você." }
+  404 { "erro": "Proposta não encontrada" }
+  409 { "erro": "Esta proposta não está mais aguardando resposta." }
+  409 { "erro": "O evento não está mais em cotação." }
+  409 { "erro": "A validade desta proposta já passou." }
+  409 { "erro": "A vaga já foi preenchida por outro fornecedor. A proposta foi cancelada." }
+
+
+12) GET /conversas
+------------------
+Perfil: organizador ou fornecedor
+Lista as propostas do usuário como conversas, da mais recente para a mais antiga.
+Para o fornecedor, "selecionada" aparece como "pendente".
+
+Response 200:
+{
+  "conversas": [
+    {
+      "proposta_id": number, "status": string, "origem": string,
+      "valor": number, "descricao": string, "observacoes": string | null,
+      "validade": string, "vaga_servico_id": number, "item": string,
+      "categoria": string, "status_vaga": string,
+      "evento_id": number, "nome_evento": string, "data_evento": string,
+      "status_evento": string,
+      "participante": { "id": number, "nome": string, "tipo": string },
+      "ultima_mensagem": string | null, "ultima_mensagem_em": string | null,
+      "aberta": boolean               // true = ainda aceita mensagens
+    }
+  ]
+}
+
+
+13) GET /conversas/:propostaId/mensagens?depois_de=:ultimoId
+------------------------------------------------------------
+Perfil: participante da conversa
+depois_de é opcional (padrão 0): devolve só mensagens com id maior.
+
+Response 200:
+{
+  "mensagens": [
+    { "id": number, "proposta_id": number, "remetente_id": number | null,
+      "tipo": "texto" | "sistema", "conteudo": string, "criado_em": string,
+      "minha": boolean }
+  ]
+}
+
+Erros:
+  400 { "erro": "ID da proposta inválido" } | { "erro": "Parâmetro depois_de inválido" }
+  403 { "erro": "Você não participa desta conversa" }
+  404 { "erro": "Proposta não encontrada" }
+
+
+14) POST /conversas/:propostaId/mensagens
+-----------------------------------------
+Perfil: participante da conversa
+O remetente vem do token, nunca do body.
+
+body
+{ "conteudo": string }              // 1 a 1000 caracteres
+
+Response 201: mesma estrutura de uma mensagem do item 13.
+
+Erros:
+  400 { "erro": "A mensagem não pode ser vazia" }
+  400 { "erro": "A mensagem deve ter no máximo 1000 caracteres" }
+  403 { "erro": "Você não participa desta conversa" }
+  404 { "erro": "Proposta não encontrada" }
+  409 { "erro": "Esta conversa está encerrada" }
+
+
+Mudança em rota existente:
+PATCH /organizadores/propostas/:id/status agora confere se a proposta é de um evento
+do organizador logado (403) e recusa propostas diretas (400): elas são respondidas
+pelo fornecedor.
+
+Banco já existente: rode server/.containers/mysql/migrations/001_proposta_direta.sql

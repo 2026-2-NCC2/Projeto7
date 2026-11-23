@@ -1,0 +1,16 @@
+meta {
+  name: Cancelar proposta direta
+  type: http
+  seq: 12
+}
+
+patch {
+  url: http://localhost:3000/organizadores/propostas/8/cancelar
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

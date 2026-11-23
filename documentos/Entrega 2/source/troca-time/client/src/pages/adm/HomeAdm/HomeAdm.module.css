@@ -1,0 +1,269 @@
+.painel {
+    width: min(100% - 48px, 1080px);
+    margin: 30px auto 56px;
+    font-family: var(--fonte-principal);
+}
+
+.boasVindas {
+    margin-bottom: 24px;
+}
+
+.boasVindas h1 {
+    color: #242424;
+    font-size: clamp(1.35rem, 2vw, 1.65rem);
+    margin-bottom: 4px;
+}
+
+.boasVindas p {
+    color: #555;
+    font-size: 0.88rem;
+}
+
+.eventos {
+    padding: 20px;
+    border-radius: 22px;
+    background: var(--cor-clara-vinho);
+}
+
+.cabecalhoEventos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.cabecalhoEventos h2 {
+    padding: 8px 22px;
+    border-radius: 999px;
+    background: var(--cor-escura-vinho);
+    color: white;
+    font-size: 0.9rem;
+}
+
+.controlesCarrossel {
+    display: flex;
+    gap: 6px;
+}
+
+.controlesCarrossel button {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 1px solid rgba(74, 24, 48, 0.3);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--cor-escura-vinho);
+    font-size: 1.45rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.controlesCarrossel button:hover,
+.controlesCarrossel button:focus-visible {
+    background: white;
+    outline: 2px solid var(--cor-escura-vinho);
+    outline-offset: 2px;
+}
+
+.trilha {
+    display: grid;
+    grid-auto-columns: calc((100% - 24px) / 3);
+    grid-auto-flow: column;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(74, 24, 48, 0.35) transparent;
+    padding: 0 0 8px;
+}
+
+.trilha::-webkit-scrollbar {
+    height: 6px;
+}
+
+.trilha::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(74, 24, 48, 0.35);
+}
+
+.cartaoEvento {
+    min-width: 0;
+    min-height: 184px;
+    padding: 20px;
+    border-radius: 14px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+    scroll-snap-align: start;
+}
+
+.cartaoEvento h3 {
+    overflow: hidden;
+    margin-bottom: 9px;
+    color: #242424;
+    font-size: 0.94rem;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.cartaoEvento p {
+    margin-top: 4px;
+    color: #292929;
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+
+.botaoVer,
+.botaoTodos {
+    display: block;
+    width: fit-content;
+    border-radius: 999px;
+    background: var(--cor-escura-1);
+    box-shadow: var(--sombra-2);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background 150ms ease,
+        transform 150ms ease;
+}
+
+.botaoVer:hover,
+.botaoTodos:hover {
+    background: var(--cor-escura-2);
+    transform: translateY(-1px);
+}
+
+.botaoVer:focus-visible,
+.botaoTodos:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 3px;
+}
+
+.botaoVer {
+    margin: 10px auto 0;
+    padding: 6px 20px;
+}
+
+.botaoTodos {
+    margin: 12px 0 0 auto;
+    padding: 9px 18px;
+}
+
+.vazio {
+    padding: 24px 8px;
+    color: #45313a;
+    font-size: 0.9rem;
+}
+
+.resumo {
+    margin-top: 28px;
+}
+
+.resumo > h2 {
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    padding: 16px;
+    border-radius: 22px;
+    background: #e8f1a4;
+}
+
+.indicador {
+    display: flex;
+    min-height: 118px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 12px;
+    border-radius: 14px;
+    background: var(--cor-clara);
+    box-shadow: var(--sombra-2);
+    text-align: center;
+}
+
+.indicador h3 {
+    margin-bottom: 4px;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+}
+
+.indicador strong {
+    color: #242424;
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    line-height: 1.05;
+}
+
+.indicador:last-child strong {
+    color: #514b35;
+    font-size: clamp(1.25rem, 2.6vw, 1.65rem);
+}
+
+.indicador p {
+    margin-top: 3px;
+    color: #645d45;
+    font-size: 0.68rem;
+}
+
+@media (max-width: 760px) {
+    .trilha {
+        grid-auto-columns: calc((100% - 12px) / 2);
+    }
+
+    .indicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .painel {
+        width: min(100% - 28px, 420px);
+        margin-top: 22px;
+    }
+
+    .eventos {
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .trilha {
+        grid-auto-columns: 88%;
+    }
+
+    .cartaoEvento {
+        min-height: 142px;
+    }
+
+    .indicadores {
+        gap: 9px;
+        padding: 11px;
+        border-radius: 18px;
+    }
+
+    .indicador {
+        min-height: 92px;
+        padding: 10px 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trilha {
+        scroll-behavior: auto;
+    }
+
+    .botaoVer,
+    .botaoTodos {
+        transition: none;
+    }
+}

@@ -1,0 +1,27 @@
+import { Router } from 'express';
+import * as organizadorController from '../controllers/organizadores/organizadorController.js';
+import { autenticar, autorizar } from '../middlewares/authMiddleware.js';
+
+const router = Router();
+
+router.use(autenticar, autorizar('organizador'));
+
+router.post('/', organizadorController.criarEventoController);
+router.post('/propostas', organizadorController.criarPropostaDiretaController)
+router.get('/propostas/vagas_disponiveis', organizadorController.listarVagasPropostaDiretaController)
+router.patch('/propostas/:id/cancelar', organizadorController.cancelarPropostaDiretaController)
+router.put('/:id', organizadorController.editarEventoController);
+router.patch('/:id/status', organizadorController.atualizarStatusEventoController)
+router.get('/vagas_servico/', organizadorController.listarVagasServicoController)
+router.get('/:id/custos_manuais', organizadorController.listarCustosManuaisController)
+router.post('/:id/vagas_servico', organizadorController.criarVagaServicoController)
+router.post('/:id/custos_manuais', organizadorController.criarCustoManualController)
+router.delete('/vagas_servico/:id', organizadorController.deletarVagaServicoController)
+router.delete('/custos_manuais/:id', organizadorController.deletarCustoManualController)
+router.get('/:id/propostas', organizadorController.listarPropostasEventoController)
+router.get('/:id/custos_orcamento', organizadorController.listarCustosOrcamentoController)
+router.get('/:id/calcular_ticket', organizadorController.calcularTicketController)
+router.patch('/:id/orcamento', organizadorController.salvarOrcamentoController)
+router.patch('/propostas/:id/status', organizadorController.atualizarStatusPropostaController)
+
+export default router;
